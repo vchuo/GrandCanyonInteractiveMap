@@ -1,0 +1,368 @@
+body {
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	background-color: rgba(0,0,0,0.8);
+	overflow: hidden;
+	margin: 0 auto;
+}
+/*CSS Preload*/
+body:after {
+	display: none;
+	content: url(../images/Grand-Canyon-Basemap.png) url(../images/StationPointPhotos/2-Station-Point-Photo.jpg) url(../images/StationPointPhotos/3-Station-Point-Photo.jpg) url(../images/StationPointPhotos/4-Station-Point-Photo.jpg) url(../images/StationPointPhotos/5-Station-Point-Photo.jpg) url(../images/StationPointPhotos/6-Station-Point-Photo.jpg) url(../images/StationPointPhotos/7-Station-Point-Photo.jpg) url(../images/StationPointPhotos/8-Station-Point-Photo.jpg) url(../images/StationPointPhotos/9-Station-Point-Photo.jpg) url(../images/StationPointPhotos/10-Station-Point-Photo.jpg) url(../images/StationPointPhotos/11-Station-Point-Photo.jpg) url(../images/StationPointPhotos/12-Station-Point-Photo.jpg) url(../images/StationPointPhotos/13-Station-Point-Photo.jpg) url(../images/StationPointPhotos/14-Station-Point-Photo.jpg) url(../images/StationPointPhotos/15-Station-Point-Photo.jpg) url(../images/StationPointPhotos/16-Station-Point-Photo.jpg) url(../images/StationPointPhotos/17-Station-Point-Photo.jpg) url(../images/StationPointPhotos/18-Station-Point-Photo.jpg) url(../images/StationPointPhotos/19-Station-Point-Photo.jpg) url(../images/StationPointPhotos/20-Station-Point-Photo.jpg) url(../images/StationPointPhotos/21-Station-Point-Photo.jpg) url(../images/StationPointPhotos/22-Station-Point-Photo.jpg) url(../images/StationPointPhotos/23-Station-Point-Photo.jpg) url(../images/StationPointPhotos/24-Station-Point-Photo.jpg) url(../images/StationPointPhotos/25-Station-Point-Photo.jpg) url(../images/StationPointPhotos/26-Station-Point-Photo.jpg) url(../images/StationPointPhotos/27-Station-Point-Photo.jpg) url(../images/StationPointPhotos/28-Station-Point-Photo.jpg) url(../images/StationPointPhotos/29-Station-Point-Photo.jpg) url(../images/StationPointPhotos/30-Station-Point-Photo.jpg) url(../images/StationPointPhotos/31-Station-Point-Photo.jpg) url(../images/StationPointPhotos/32-Station-Point-Photo.jpg) url(../images/StationPointPhotos/33-Station-Point-Photo.jpg) url(../images/StationPointPhotos/34-Station-Point-Photo.jpg) url(../images/StationPointPhotos/35-Station-Point-Photo.jpg) url(../images/StationPointPhotos/37-Station-Point-Photo.jpg) url(../images/StationPointPhotos/38-Station-Point-Photo.jpg) url(../images/StationPointPhotos/39-Station-Point-Photo.jpg) url(../images/StationPointPhotos/40-Station-Point-Photo.jpg) url(../images/StationPointPhotos/41-Station-Point-Photo.jpg) url(../images/StationPointPhotos/42-Station-Point-Photo.jpg) url(../images/StationPointPhotos/43-Station-Point-Photo.jpg);
+}
+
+#loading_gif {
+	position: relative;
+	display: block;
+	margin: 0 auto;
+	top: 40%;
+}
+#loading_screen {
+	position: absolute;
+	left: 0px; right: 0px;
+	width: 100%;
+	background-color: #F0F0F0;
+	margin: 0 auto;
+	z-index: 2000;
+	display: none;
+}
+
+#map_content_wrapper {
+	position: relative;
+	width:100%;
+	left: -99999px;
+	margin:0 auto;
+	background-color:#FFFFFF;
+}
+
+.zoomable_element a:visited { color:green; }
+.zoomable_element a:link { color:green; }
+
+#focal {
+	position: relative;
+	width:100%;
+	margin:0 auto;
+	user-select: none;
+	-webkit-user-select:none;
+	-moz-user-select: none;
+}
+
+#station_point_mode {
+	border-radius:10px;
+	z-index:1000;
+	opacity:0;
+	cursor:pointer;
+}
+#Mode_Button_One_Default { z-index:100; }
+#Mode_Button_One_Hover { z-index:110; }
+#Mode_Button_One_On { z-index:120; }
+.mode_button_one {
+	position:absolute;
+	left:15px;bottom:42px;
+	width:50px;height:25px;
+}
+
+#location_mode {
+	border-radius:10px;
+	z-index:1000;
+	opacity:0;
+	cursor:pointer;
+}
+#Mode_Button_All_Default { z-index:100; }
+#Mode_Button_All_Hover { z-index:110; }
+#Mode_Button_All_On { z-index:120; }
+.mode_button_all {
+	position:absolute;
+	left:15px;bottom:15px;
+	width:50px;height:25px;
+}
+
+.emphasized_text {
+	font-style: italic;
+	font-weight: 500;
+}
+
+.mode_button_hint_container {
+	position: absolute;
+	left: -99999px; width: 80%;
+	top: 35%; height: 150px;
+	border-radius: 5px;
+	z-index: 1000;
+	display: block;
+	background-color: rgba(256,256,256,0.9);
+	text-align: center;
+	font-size:17px;
+}
+.mode_button_hint {
+	margin-top: 25px; margin-bottom: 15px;
+	margin-left: 15px; margin-right: 15px;
+}
+.mode_hint_title {
+	font-size: 21px;
+}
+
+.checkbox_hint_container {
+	position: absolute;
+	left: -99999px; width: 80%;
+	top: 35%; height: 100px;
+	border-radius: 5px;
+	z-index: 1000;
+	display: block;
+	background-color: rgba(256,256,256,0.9);
+	text-align: center;
+	font-size: 21px;
+}
+.checkbox_hint {
+	margin-top: 35px; margin-bottom: 15px;
+	margin-left: 15px; margin-right: 15px;
+}
+
+#Zoom_In_Button {
+	z-index:1000;
+	opacity:0;
+	cursor:pointer;
+}
+#Zoom_In_Default { z-index:100; }
+#Zoom_In_Hover { z-index:110; }
+#Zoom_In_In_Use { z-index:120; }
+#Zoom_In_Max_Zoom { z-index:130; }
+.zoom_in_button {
+	position: absolute;
+	top: 15px; right: 10px;
+	width: 30px; height: 30px;
+}
+
+#Zoom_Out_Button {
+	z-index:1000;
+	opacity:0;
+	cursor:pointer;
+}
+#Zoom_Out_Default { z-index:100; }
+#Zoom_Out_Hover { z-index:110; }
+#Zoom_Out_In_Use { z-index:120; }
+#Zoom_Out_Max_Zoom { z-index:130; }
+.zoom_out_button {
+	position:absolute;
+	top:46px;right:10px;
+	width:30px;height:30px;
+}
+
+#landmarks_checkbox_unchecked {
+	position:absolute;
+	bottom:20px;left:80px;
+	width:12px;height:12px;
+	background-color:rgb(256,256,256);
+	z-index:300;
+}
+#landmarks_checkbox_checked {
+	position:absolute;
+	bottom:20px;left:80px;
+	width:12px;height:12px;
+	background-color:rgb(256,256,256);
+	z-index:299;
+}
+#landmarks_checkbox_label {
+	position:absolute;
+	font-size: 95%;
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	font-weight: normal;
+	left:98px; bottom:24px;
+	height:12px;
+	z-index:300;
+}
+#viewshedangles_checkbox_unchecked {
+	position:absolute;
+	bottom:20px;left:180px;
+	width:12px;height:12px;
+	background-color:rgb(256,256,256);
+	z-index:300;
+}
+#viewshedangles_checkbox_checked {
+	position: absolute;
+	bottom: 20px; left:180px;
+	width: 12px; height:12px;
+	background-color: rgb(256,256,256);
+	z-index: 300;
+}
+#viewshedangles_checkbox_label {
+	position: absolute;
+	font-size: 95%;
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	font-weight: normal;
+	left: 198px; bottom: 24px;
+	height: 12px;
+	z-index: 300;
+}
+#StationPointPopupDiv {
+	position: absolute;
+	width: 100%;
+	background-color: rgba(0,0,0,0.5);
+	display: none;
+	z-index: -1;
+}
+#StationPointPopup {
+	position: absolute;
+	cursor: pointer;
+	display: block;
+}
+#StationPointNotificationBox {
+	position: absolute;
+	width: 30%; height: 45px;
+	left: -99999px;
+	bottom: 10%;
+	background-color: rgba(256,256,256,0.7);
+	display: block;
+	text-align: center;
+	font-size: 20px;
+	line-height: 45px;
+	border-radius: 10px;
+	z-index: 1000;
+}
+
+#StationPointMode_InfoBox {
+	position: absolute;
+	top: 14px; left: -99999px;
+	width: 25%; height: 30%;
+	text-align: center;
+	border-radius: 5px;
+	padding-left: 10px; padding-right: 10px;
+	padding-bottom: 25px;
+	z-index: -1;
+	cursor: default;
+}
+#StationPointMode_InfoBoxImage {
+	position: relative;
+	float: right; clear: right;
+	margin-bottom: 8px;
+}
+#StationPointMode_StationPointLabel {
+	position: relative;
+	width: 300px; height: 50px;
+	float: right;
+	background-color: rgba(256,256,256,0.7);
+	border-radius: 10px;
+	padding-top: 10px; padding-bottom: 5px;
+	margin: 0px;
+	font-size: 13px;
+}
+.StationPointMode_StationPointLabelTitle {
+	font-size: 18px;
+}
+
+#LocationMode_InfoBox {
+	position:absolute;
+	top:14px; left:-99999px;
+	width:280px;
+	text-align:center;
+	background-color:rgba(256,256,256,0.7);
+	border-radius:5px;
+	padding-left: 10px; padding-right: 10px;
+	padding-bottom:25px;
+	z-index:-1;
+	cursor:default;
+}
+#LocationMode_InfoBoxIntro {
+	width: 100%;
+	height: 35px;
+	margin-bottom:10px; margin-top:0px;
+	font-weight: bold;
+}
+#LocationMode_StationPointLabelsDiv {
+	width: 100%;
+	text-align: center;
+	margin-top:0px; margin-bottom:0px;
+}
+.LocationMode_StationPointLabel {
+	width: 100%;
+	margin-top:0px; margin-bottom:0px;
+}
+
+#container {
+	position:relative;
+	width:100%;
+	top:0px;left:0px;
+	z-index:2;
+}
+#panzoom_parent {
+	position:relative;
+	width:100%;
+	display:block;
+	z-index: 3;
+}
+#basemap {
+	position: absolute;
+	top: 0px; left: 0px;
+	width: 100%;
+	z-index: 3;
+}
+#panzoom {
+	position: absolute;
+	margin: 0 auto;
+	top: 0px;left: 0px;
+	z-index: 3;
+}
+
+/* Set styles for viewsheds */
+.ViewshedDivs {
+	width:100%;
+	position: absolute;
+	top:0px;left:0px;
+	opacity:0;
+	user-select: none;
+	-webkit-user-select:none;
+	-moz-user-select: none;
+}
+.ViewshedPNG {
+	position: absolute;
+	top:0px;left:0px;
+	width: 100%;
+	display: none;
+	z-index: 10;
+}
+
+/* Station points */
+#StationPointSVGLayer {
+	width: 100%;
+	position: absolute;
+	top:0px;left:0px;
+	z-index: 501;
+}
+
+/* Div for station point labels' default and rollover icons */
+#StationPointIconsDiv {
+	width: 100%;
+	position: absolute;
+	top: 0px; left: 0px;
+	z-index: 150;
+}
+
+#LandmarksLayer {
+	position: absolute;
+	width: 100%;
+	top: 0px; left: -99999px;
+	display: block;
+	z-index: 3;
+}
+#ViewshedAnglesLayer {
+	position: absolute;
+	width: 100%;
+	top: 0px; left: -99999px;
+	display: block;
+	z-index: 3;
+}
+
+footer {
+	position: absolute;
+	width: 180px;
+	right: 0px; bottom: 0px;
+	background-color: rgba(256,256,256,0.9);
+	text-align: center;
+	padding: 6px;
+	font-size: 12px;
+	z-index: 3000;
+}
+footer a {
+	color: #4863A0;
+}
+footer a:visited {
+	color: #4863A0;
+}

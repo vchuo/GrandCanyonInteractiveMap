@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+		<title>Interactive Map of the Grand Canyon</title>
+		<link href="css/grand-canyon-interactive-map.css" rel="stylesheet" type="text/css">
+	</head>
+
+	<body>
+		<div id="loading_screen">
+			<img id="loading_gif" src="images/Loading-Icon.gif" alt=""/>
+		</div>
+
+		<div id="map_content_wrapper">
+  
+		    <div id="focal" oncontextmenu="return false">
+
+				<div id="container">
+				
+					<div id="panzoom_parent">
+						
+						<!-- 
+								********************  Interaction Mode Controls  ********************
+						-->
+
+						<!-- Station Point Mode Button -->
+						<div id="station_point_mode" class="mode_button_one control_element zoomable_element"></div>
+						<img id ="Mode_Button_One_Default" class="mode_button_one control_element zoomable_element" src="images/ModeButtons/Mode-Buttons-One-Default.png"/>
+						<img id ="Mode_Button_One_On" class="mode_button_one control_element" src="images/ModeButtons/Mode-Buttons-One-On.png"/>
+						<img id ="Mode_Button_One_Hover" class="mode_button_one control_element zoomable_element" src="images/ModeButtons/Mode-Buttons-One-Hover.png"/>
+
+						<!-- Heat Map Mode Controls -->
+						<div id="location_mode" class="mode_button_all control_element zoomable_element"></div>
+						<img id ="Mode_Button_All_Default" class="mode_button_all control_element zoomable_element" src="images/ModeButtons/Mode-Buttons-All-Default.png"/>
+						<img id ="Mode_Button_All_On" class="mode_button_all control_element zoomable_element" src="images/ModeButtons/Mode-Buttons-All-On.png"/>
+						<img id ="Mode_Button_All_Hover" class="mode_button_all control_element zoomable_element" src="images/ModeButtons/Mode-Buttons-All-Hover.png"/>
+						
+
+						<!-- 
+								********************  Interaction Mode Controls Hints  ********************
+						-->
+
+						<!-- Station Point Mode Button Hint -->
+						<div id="station_point_mode_button_hint_container" class="mode_button_hint_container zoomable_element">
+							<div class="mode_button_hint">
+								<span class="mode_hint_title">Explore By Station Point: Which parts of the Grand Canyon can I see in this <span class="emphasized_text">one</span> photo?</span>
+							</div>
+						</div>
+
+						<!-- Heat Map Mode Button Hint -->
+						<div id="location_mode_button_hint_container" class="mode_button_hint_container zoomable_element">
+							<div class="mode_button_hint">
+								<span class="mode_hint_title">Explore By Location: Show me <span class="emphasized_text">all</span> the photos where the location I am pointing to is visible?</span>
+								<br>
+								<p>Move your cursor around the map to see which locations are visible from photos, and click on any location that is visible from at least one photo to see links to the individual web modules created for these photos.</p>
+							</div>
+						</div>
+						
+
+						<!-- 
+								********************  Zoom Buttons  ********************
+						-->
+
+						<div id="Zoom_In_Button" class="zoom_in_button control_element zoomable_element"></div>
+						<img id = "Zoom_In_Default" class="zoom_in_button control_element zoomable_element" src="images/ZoomButtons/Zoom-In-Default.png"/>
+						<img id = "Zoom_In_Hover" class="zoom_in_button control_element zoomable_element" src="images/ZoomButtons/Zoom-In-Hover.png"/>
+						<img id = "Zoom_In_In_Use" class="zoom_in_button control_element zoomable_element" src="images/ZoomButtons/Zoom-In-In-Use.png"/>
+						<img id = "Zoom_In_Max_Zoom" class="zoom_in_button control_element zoomable_element" src="images/ZoomButtons/Zoom-In-Max-Zoom.png"/>
+						
+						<div id="Zoom_Out_Button" class="zoom_out_button control_element zoomable_element"></div>
+						<img id = "Zoom_Out_Default" class="zoom_out_button control_element zoomable_element" src="images/ZoomButtons/Zoom-Out-Default.png"/>
+						<img id = "Zoom_Out_Hover" class="zoom_out_button control_element zoomable_element" src="images/ZoomButtons/Zoom-Out-Hover.png"/>
+						<img id = "Zoom_Out_In_Use" class="zoom_out_button control_element zoomable_element" src="images/ZoomButtons/Zoom-Out-In-Use.png"/>
+						<img id = "Zoom_Out_Max_Zoom" class="zoom_out_button control_element zoomable_element" src="images/ZoomButtons/Zoom-Out-Max-Zoom.png"/>
+						
+
+						<!-- 
+								********************  Checkbox Toggles  ********************
+						-->
+
+						<!-- Landmarks Checkbox -->
+						<img id ="landmarks_checkbox_checked" class="control_element zoomable_element checkbox_element" src="images/CheckboxIcons/Checked-Checkbox-Icon.png"/>
+						<img id ="landmarks_checkbox_unchecked" class="control_element zoomable_element checkbox_element" src="images/CheckboxIcons/Unchecked-Checkbox-Icon.png"/>
+						<div id="landmarks_checkbox_label" class="control_element zoomable_element checkbox_element">Landmarks</div>
+						
+						<!-- View Angles Checkbox -->
+						<img id ="viewshedangles_checkbox_checked" class="control_element zoomable_element checkbox_element" src="images/CheckboxIcons/Checked-Checkbox-Icon.png"/>
+						<img id ="viewshedangles_checkbox_unchecked" class="control_element zoomable_element checkbox_element" src="images/CheckboxIcons/Unchecked-Checkbox-Icon.png"/>
+						<div id="viewshedangles_checkbox_label" class="control_element zoomable_element checkbox_element">Viewshed Angles</div>
+
+
+						<!-- 
+								********************  Checkbox Toggles Hints  ********************
+						-->
+
+						<div id="landmarks_toggle_checkbox_hint_container" class="checkbox_hint_container zoomable_element">
+							<div class="checkbox_hint">
+								<span class="toggle_hint_title">Toggle On/Off Landmarks: Show me where the popular landmarks are on this map.</span>
+							</div>
+						</div>
+
+						<div id="viewshedangles_toggle_checkbox_hint_container" class="checkbox_hint_container zoomable_element">
+							<div class="checkbox_hint">
+								<span class="toggle_hint_title">Toggle On/Off Viewshed Angles: Show me outlines of what I can see in each photo.</span>
+							</div>
+						</div>
+
+
+						<!-- 
+								********************  Information Boxes  ********************
+						-->
+
+						<!-- Station Point Mode Information Box -->
+						<div id='StationPointMode_InfoBox'>
+							<img id="StationPointMode_InfoBoxImage" src="" alt=""/>
+							<div id="StationPointMode_StationPointLabel"></div>
+						</div>
+
+						<!-- Heat Map Mode Information Box -->
+						<div id='LocationMode_InfoBox'>
+							<div id='LocationMode_InfoBoxIntro'>
+								<p>The location your cursor is pointing to is visible from:</p>
+							</div>
+							<div id='LocationMode_StationPointLabelsDiv'>
+								<p id='LocationMode_1stStationPoint' class='LocationMode_StationPointLabel'></p>
+								<p id='LocationMode_2ndStationPoint' class='LocationMode_StationPointLabel'></p>
+								<p id='LocationMode_3rdStationPoint' class='LocationMode_StationPointLabel'></p>
+								<p id='LocationMode_4thStationPoint' class='LocationMode_StationPointLabel'></p>
+								<p id='LocationMode_5thStationPoint' class='LocationMode_StationPointLabel'></p>
+								<p id='LocationMode_6thStationPoint' class='LocationMode_StationPointLabel'></p>
+								<p id='LocationMode_7thStationPoint' class='LocationMode_StationPointLabel'></p>
+								<p id='LocationMode_8thStationPoint' class='LocationMode_StationPointLabel'></p>
+							</div>
+						</div>
+						
+						
+						<!-- 
+								********************  Station Point Popup and Notification Box  ********************
+						-->
+						
+						<!-- Station Point Popup -->
+
+						<div id="StationPointPopupDiv">
+							<a id='StationPointPopupLink' href='http://www.google.com'><img id="StationPointPopup" src="" alt="Station Point Popup"/></a>
+						</div>
+
+						<!-- Station Point Notification Box for Station Points Without Viewsheds -->
+
+						<div id="StationPointNotificationBox">I don't have a viewshed!</div>
+						
+
+						<!-- 
+								********************  Map Element  ********************
+						-->  
+
+						<div id="panzoom" class="panzoom zoomable_element">
+
+							<!-- BaseMap -->
+							<img id="basemap" class="zoomable_element" src="images/Grand-Canyon-Basemap.png" alt=""/>
+							
+							<!-- 
+								********************  Viewshed 2  ********************
+							-->
+
+							<!-- Viewshed 2 SVG Layer -->
+							<div id="Viewshed2Div" class="ViewshedDivs zoomable_element"></div>
+
+							<!-- Viewshed 2 PNG Layer -->
+							<img id="Viewshed2PNG" class="ViewshedPNG zoomable_element" src="images/ViewshedPNGs/2-Viewshed-PNG.png"/>
+								
+							<!-- 
+								********************  Viewshed 3  ********************
+							-->
+
+							<!-- Viewshed 3 SVG Layer -->
+							<div id="Viewshed3Div" class="ViewshedDivs zoomable_element"></div>
+
+							<!-- Viewshed 3 PNG Layer -->
+							<img id="Viewshed3PNG" class="ViewshedPNG zoomable_element" src="images/ViewshedPNGs/3-Viewshed-PNG.png"/>
+							
+							<!-- 
+								********************  Viewshed 4  ********************
+							-->
+
+							<!-- Viewshed 4 SVG Layer -->
+							<div id="Viewshed4Div" class="ViewshedDivs zoomable_element"></div>
+
+							<!-- Viewshed 4 PNG Layer -->
+							<img id="Viewshed4PNG" class="ViewshedPNG zoomable_element" src="images/ViewshedPNGs/4-Viewshed-PNG.png"/>
+							
+							<!-- 
+								********************  Viewshed 5  ********************
+							-->
+
+							<!-- Viewshed 5 SVG Layer -->
+							<div id="Viewshed5Div" class="ViewshedDivs zoomable_element"></div>
+
+							<!-- Viewshed 5 PNG Layer -->
+							<img id="Viewshed5PNG" class="ViewshedPNG zoomable_element" src="images/ViewshedPNGs/5-Viewshed-PNG.png"/>
+								
+							<!-- 
+								********************  Viewshed 6  ********************
+							-->
+
+							<!-- Viewshed 6 SVG Layer -->
+							<div id="Viewshed6Div" class="ViewshedDivs zoomable_element"></div>
+
+							<!-- Viewshed 6 PNG Layer -->
+							<img id="Viewshed6PNG" class="ViewshedPNG zoomable_element" src="images/ViewshedPNGs/6-Viewshed-PNG.png"/>
+								
+							<!-- 
+								********************  Viewshed 7  ********************
+							-->
+
+							<!-- Viewshed 7 SVG Layer -->
+							<div id="Viewshed7Div" class="ViewshedDivs zoomable_element"></div>
+
+							<!-- Viewshed 7 PNG Layer -->
+							<img id="Viewshed7PNG" class="ViewshedPNG zoomable_element" src="images/ViewshedPNGs/7-Viewshed-PNG.png"/>
+							
+							<!-- 
+								********************  Viewshed 8  ********************
+							-->
+
+							<!-- Viewshed 8 SVG Layer -->
+							<div id="Viewshed8Div" class="ViewshedDivs zoomable_element"></div>
+
+							<!-- Viewshed 8 PNG Layer -->
+							<img id="Viewshed8PNG" class="ViewshedPNG zoomable_element" src="images/ViewshedPNGs/8-Viewshed-PNG.png"/>
+							
+							<!-- 
+								********************  Viewshed 9  ********************
+							-->
+
+							<!-- Viewshed 9 SVG Layer -->
+							<div id="Viewshed9Div" class="ViewshedDivs zoomable_element"></div>
+
+							<!-- Viewshed 9 PNG Layer -->
+							<img id="Viewshed9PNG" class="ViewshedPNG zoomable_element" src="images/ViewshedPNGs/9-Viewshed-PNG.png"/>
+							
+							<!-- 
+								********************  Viewshed 10  ********************
+							-->
+
+							<!-- Viewshed 10 SVG Layer -->
+							<div id="Viewshed10Div" class="ViewshedDivs zoomable_element"></div>
+
+							<!-- Viewshed 10 PNG Layer -->
+							<img id="Viewshed10PNG" class="ViewshedPNG zoomable_element" src="images/ViewshedPNGs/10-Viewshed-PNG.png"/>
+							
+							<!-- 
+								********************  Viewshed 11  ********************
+							-->
+
+							<!-- Viewshed 11 SVG Layer -->
+							<div id="Viewshed11Div" class="ViewshedDivs zoomable_element"></div>
+
+							<!-- Viewshed 11 PNG Layer -->
+							<img id="Viewshed11PNG" class="ViewshedPNG zoomable_element" src="images/ViewshedPNGs/11-Viewshed-PNG.png"/>
+							
+							<!-- 
+								********************  Viewshed 12  ********************
+							-->
+
+							<!-- Viewshed 12 SVG Layer -->
+							<div id="Viewshed12Div" class="ViewshedDivs zoomable_element"></div>
+
+							<!-- Viewshed 12 PNG Layer -->
+							<img id="Viewshed12PNG" class="ViewshedPNG zoomable_element" src="images/ViewshedPNGs/12-Viewshed-PNG.png"/>
+							
+							<!-- 
+								********************  Viewshed 13  ********************
+							-->
+
+							<!-- Viewshed 13 SVG Layer -->
+							<div id="Viewshed13Div" class="ViewshedDivs zoomable_element"></div>
+
+							<!-- Viewshed 13 PNG Layer -->
+							<img id="Viewshed13PNG" class="ViewshedPNG zoomable_element" src="images/ViewshedPNGs/13-Viewshed-PNG.png"/>
+							
+							<!-- 
+								********************  Viewshed 17  ********************
+							-->
+
+							<!-- Viewshed 17 SVG Layer -->
+							<div id="Viewshed17Div" class="ViewshedDivs zoomable_element"></div>
+
+							<!-- Viewshed 17 PNG Layer -->
+							<img id="Viewshed17PNG" class="ViewshedPNG zoomable_element" src="images/ViewshedPNGs/17-Viewshed-PNG.png"/>
+							
+							<!-- 
+								********************  Viewshed 18  ********************
+							-->
+
+							<!-- Viewshed 18 SVG Layer -->
+							<div id="Viewshed18Div" class="ViewshedDivs zoomable_element"></div>
+
+							<!-- Viewshed 18 PNG Layer -->
+							<img id="Viewshed18PNG" class="ViewshedPNG zoomable_element" src="images/ViewshedPNGs/18-Viewshed-PNG.png"/>
+							
+							<!-- 
+								********************  Viewshed 19  ********************
+							-->
+
+							<!-- Viewshed 19 SVG Layer -->
+							<div id="Viewshed19Div" class="ViewshedDivs zoomable_element"></div>
+
+							<!-- Viewshed 19 PNG Layer -->
+							<img id="Viewshed19PNG" class="ViewshedPNG zoomable_element" src="images/ViewshedPNGs/19-Viewshed-PNG.png"/>
+							
+							<!-- 
+								********************  Viewshed 20  ********************
+							-->
+
+							<!-- Viewshed 20 SVG Layer -->
+							<div id="Viewshed20Div" class="ViewshedDivs zoomable_element"></div>
+
+							<!-- Viewshed 20 PNG Layer -->
+							<img id="Viewshed20PNG" class="ViewshedPNG zoomable_element" src="images/ViewshedPNGs/20-Viewshed-PNG.png"/>
+							
+							<!-- 
+								********************  Viewshed 21  ********************
+							-->
+
+							<!-- Viewshed 21 SVG Layer -->
+							<div id="Viewshed21Div" class="ViewshedDivs zoomable_element"></div>
+
+							<!-- Viewshed 21 PNG Layer -->
+							<img id="Viewshed21PNG" class="ViewshedPNG zoomable_element" src="images/ViewshedPNGs/21-Viewshed-PNG.png"/>
+							
+							<!-- 
+								********************  Viewshed 22  ********************
+							-->
+
+							<!-- Viewshed 22 SVG Layer -->
+							<div id="Viewshed22Div" class="ViewshedDivs zoomable_element"></div>
+
+							<!-- Viewshed 22 PNG Layer -->
+							<img id="Viewshed22PNG" class="ViewshedPNG zoomable_element" src="images/ViewshedPNGs/22-Viewshed-PNG.png"/>
+							
+							<!-- 
+								********************  Viewshed 23  ********************
+							-->
+
+							<!-- Viewshed 23 SVG Layer -->
+							<div id="Viewshed23Div" class="ViewshedDivs zoomable_element"></div>
+
+							<!-- Viewshed 23 PNG Layer -->
+							<img id="Viewshed23PNG" class="ViewshedPNG zoomable_element" src="images/ViewshedPNGs/23-Viewshed-PNG.png"/>
+							
+							<!-- 
+								********************  Viewshed 24  ********************
+							-->
+
+							<!-- Viewshed 24 SVG Layer -->
+							<div id="Viewshed24Div" class="ViewshedDivs zoomable_element"></div>
+
+							<!-- Viewshed 24 PNG Layer -->
+							<img id="Viewshed24PNG" class="ViewshedPNG zoomable_element" src="images/ViewshedPNGs/24-Viewshed-PNG.png"/>
+							
+							<!-- 
+								********************  Viewshed 26  ********************
+							-->
+
+							<!-- Viewshed 26 SVG Layer -->
+							<div id="Viewshed26Div" class="ViewshedDivs zoomable_element"></div>
+
+							<!-- Viewshed 26 PNG Layer -->
+							<img id="Viewshed26PNG" class="ViewshedPNG zoomable_element" src="images/ViewshedPNGs/26-Viewshed-PNG.png"/>
+							
+							<!-- 
+								********************  Viewshed 28  ********************
+							-->
+
+							<!-- Viewshed 28 SVG Layer -->
+							<div id="Viewshed28Div" class="ViewshedDivs zoomable_element"></div>
+
+							<!-- Viewshed 28 PNG Layer -->
+							<img id="Viewshed28PNG" class="ViewshedPNG zoomable_element" src="images/ViewshedPNGs/28-Viewshed-PNG.png"/>
+							
+							<!-- 
+								********************  Viewshed 30  ********************
+							-->
+
+							<!-- Viewshed 30 SVG Layer -->
+							<div id="Viewshed30Div" class="ViewshedDivs zoomable_element"></div>
+
+							<!-- Viewshed 30 PNG Layer -->
+							<img id="Viewshed30PNG" class="ViewshedPNG zoomable_element" src="images/ViewshedPNGs/30-Viewshed-PNG.png"/>
+							
+							<!-- 
+								********************  Viewshed 32  ********************
+							-->
+
+							<!-- Viewshed 32 SVG Layer -->
+							<div id="Viewshed32Div" class="ViewshedDivs zoomable_element"></div>
+
+							<!-- Viewshed 32 PNG Layer -->
+							<img id="Viewshed32PNG" class="ViewshedPNG zoomable_element" src="images/ViewshedPNGs/32-Viewshed-PNG.png"/>
+							
+							<!-- 
+								********************  Viewshed 33  ********************
+							-->
+
+							<!-- Viewshed 33 SVG Layer -->
+							<div id="Viewshed33Div" class="ViewshedDivs zoomable_element"></div>
+
+							<!-- Viewshed 33 PNG Layer -->
+							<img id="Viewshed33PNG" class="ViewshedPNG zoomable_element" src="images/ViewshedPNGs/33-Viewshed-PNG.png"/>
+							
+							<!-- 
+								********************  Viewshed 35  ********************
+							-->
+
+							<!-- Viewshed 35 SVG Layer -->
+							<div id="Viewshed35Div" class="ViewshedDivs zoomable_element"></div>
+
+							<!-- Viewshed 35 PNG Layer -->
+							<img id="Viewshed35PNG" class="ViewshedPNG zoomable_element" src="images/ViewshedPNGs/35-Viewshed-PNG.png"/>
+							
+							<!-- 
+								********************  Viewshed 37  ********************
+							-->
+
+							<!-- Viewshed 37 SVG Layer -->
+							<div id="Viewshed37Div" class="ViewshedDivs zoomable_element"></div>
+
+							<!-- Viewshed 37 PNG Layer -->
+							<img id="Viewshed37PNG" class="ViewshedPNG zoomable_element" src="images/ViewshedPNGs/37-Viewshed-PNG.png"/>
+							
+							<!-- 
+								********************  Viewshed 38  ********************
+							-->
+
+							<!-- Viewshed 38 SVG Layer -->
+							<div id="Viewshed38Div" class="ViewshedDivs zoomable_element"></div>
+
+							<!-- Viewshed 38 PNG Layer -->
+							<img id="Viewshed38PNG" class="ViewshedPNG zoomable_element" src="images/ViewshedPNGs/38-Viewshed-PNG.png"/>
+							
+							<!-- 
+								********************  Viewshed 39  ********************
+							-->
+
+							<!-- Viewshed 39 SVG Layer -->
+							<div id="Viewshed39Div" class="ViewshedDivs zoomable_element"></div>
+
+							<!-- Viewshed 39 PNG Layer -->
+							<img id="Viewshed39PNG" class="ViewshedPNG zoomable_element" src="images/ViewshedPNGs/39-Viewshed-PNG.png"/>
+							
+							<!-- 
+								********************  Viewshed 40  ********************
+							-->
+
+							<!-- Viewshed 40 SVG Layer -->
+							<div id="Viewshed40Div" class="ViewshedDivs zoomable_element"></div>
+
+							<!-- Viewshed 40 PNG Layer -->
+							<img id="Viewshed40PNG" class="ViewshedPNG zoomable_element" src="images/ViewshedPNGs/40-Viewshed-PNG.png"/>
+							
+							<!-- 
+								********************  Viewshed 41  ********************
+							-->
+
+							<!-- Viewshed 41 SVG Layer -->
+							<div id="Viewshed41Div" class="ViewshedDivs zoomable_element"></div>
+
+							<!-- Viewshed 41 PNG Layer -->
+							<img id="Viewshed41PNG" class="ViewshedPNG zoomable_element" src="images/ViewshedPNGs/41-Viewshed-PNG.png"/>
+							
+							<!-- 
+								********************  Viewshed 42  ********************
+							-->
+
+							<!-- Viewshed 42 SVG Layer -->
+							<div id="Viewshed42Div" class="ViewshedDivs zoomable_element"></div>
+
+							<!-- Viewshed 42 PNG Layer -->
+							<img id="Viewshed42PNG" class="ViewshedPNG zoomable_element" src="images/ViewshedPNGs/42-Viewshed-PNG.png"/>
+							
+							<!-- 
+								********************  Viewshed 43  ********************
+							-->
+
+							<!-- Viewshed 43 SVG Layer -->
+							<div id="Viewshed43Div" class="ViewshedDivs zoomable_element"></div>
+
+							<!-- Viewshed 43 PNG Layer -->
+							<img id="Viewshed43PNG" class="ViewshedPNG zoomable_element" src="images/ViewshedPNGs/43-Viewshed-PNG.png"/>
+							
+							<!-- Div containing objects used in SVG Layer for Station Points -->
+							<div id="StationPointSVGLayer" class='zoomable_element'></div>
+
+							<!-- Div containing station points icons -->
+							<div id="StationPointIconsDiv" class='zoomable_element'></div>
+
+
+							<!-- 
+								********************  Layer Toggles  ********************
+							-->
+
+							<!-- Landmarks Layer -->
+							
+							<img id="LandmarksLayer" class="zoomable_element" src="images/Layers/Landmarks-Layer.png" alt=""/>
+							
+							<!--Viewshed Angles Layer-->
+							
+							<img id="ViewshedAnglesLayer" class="zoomable_element" src="images/Layers/Viewshed-Angles-Layer.png" alt=""/>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<footer>
+			Made by <a href="http://www.vernonchuo.com" target="_blank">Vernon Chuo</a>
+			| <a href="http://www.github.com/vchuo/GrandCanyonInteractiveMap" target="_blank">Github</a>
+		</footer>
+
+		<script src="libs/jquery.js"></script>
+		<script src="libs/jquery.panzoom.js"></script>
+		<script src="libs/jquery.mousewheel.js"></script>
+		<script src="libs/load-deferred-svg-code.js"></script>
+		<script src="libs/grand-canyon-interactive-map.js"></script>	
+	</body>
+  
+</html>
