@@ -1,5 +1,12 @@
+@font-face {
+	font-family: "Helvetica-Neue-Light";
+	src: url("../fonts/helvetica-neue-light-webfont.woff") format("woff"),
+		url("../fonts/helvetica-neue-light-webfont.ttf") format("truetype"),
+		url("../fonts/helvetica-neue-light-webfont.eot") format("eot");
+}
+
 body {
-	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	font-family: "Helvetica-Neue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
 	background-color: rgba(0,0,0,0.8);
 	overflow: hidden;
 	margin: 0 auto;
@@ -34,8 +41,12 @@ body:after {
 	background-color:#FFFFFF;
 }
 
-.zoomable_element a:visited { color:green; }
-.zoomable_element a:link { color:green; }
+.zoomable_element a:visited {
+	color: green;
+}
+.zoomable_element a:link {
+	color: green;
+}
 
 #focal {
 	position: relative;
@@ -163,7 +174,6 @@ body:after {
 #landmarks_checkbox_label {
 	position:absolute;
 	font-size: 95%;
-	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 	font-weight: normal;
 	left:98px; bottom:24px;
 	height:12px;
@@ -186,7 +196,6 @@ body:after {
 #viewshedangles_checkbox_label {
 	position: absolute;
 	font-size: 95%;
-	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 	font-weight: normal;
 	left: 198px; bottom: 24px;
 	height: 12px;
@@ -236,7 +245,7 @@ body:after {
 }
 #StationPointMode_StationPointLabel {
 	position: relative;
-	width: 300px; height: 50px;
+	width: 270px; height: 50px;
 	float: right;
 	background-color: rgba(256,256,256,0.7);
 	border-radius: 10px;

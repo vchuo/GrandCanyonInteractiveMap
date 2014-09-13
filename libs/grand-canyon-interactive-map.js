@@ -29,7 +29,7 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 			// resizes all content divs to fit window size
 			setContentDimensions();
 			
-			hideAllViewsheds();
+			hideAllViewshedPNGs();
 			hideAllRolloverIcons();
 			LandmarksToggle.hideLandmarksLayer();
 			ViewshedAnglesToggle.hideViewshedAnglesLayer();
@@ -48,11 +48,8 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 			$('#map_content_wrapper').css({left: "0px"});
 		}
 		
-		function hideAllViewsheds() {
-			var ViewshedPNGs = document.getElementsByClassName('ViewshedPNG'); // get all viewshed PNGs
-			for(var i = 0; i < ViewshedPNGs.length; i++) {
-				ViewshedPNGs[i].style.display = "none";
-			}
+		function hideAllViewshedPNGs() {
+			$(".ViewshedPNG").css({display: "none"});
 		}
 
 		function hideAllRolloverIcons()
@@ -788,7 +785,7 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"right"});
 				// display station point label
 				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 2</span> <br> On Grand View Point");
-				$('#StationPointMode_StationPointLabel').css({float:"right",marginRight:"5px"});
+				$('#StationPointMode_StationPointLabel').css({float: "right", height: "50px"});
 			},
 			deactivateStationPoint2Events : function() {
 				$('#Viewshed2PNG').css({display:"none"});
@@ -800,8 +797,8 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/3-Station-Point-Photo.jpg");
 				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"right"});
 				// display station point label
-				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 3</span> <br> Angles Wotans Vishnu");
-				$('#StationPointMode_StationPointLabel').css({float:"right",marginRight:"5px"});
+				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 3</span> <br> Angel's Gate, Wotan's Throne <br> and Vishnu Temple");
+				$('#StationPointMode_StationPointLabel').css({float: "right", height:"65px"});
 			},
 			deactivateStationPoint3Events : function() {
 				$('#Viewshed3PNG').css({display:"none"});
@@ -813,8 +810,8 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/4-Station-Point-Photo.jpg");
 				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"right"});
 				// display station point label
-				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 4</span> <br> Up Granite Gorge");
-				$('#StationPointMode_StationPointLabel').css({float:"right",marginRight:"5px"});
+				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 4</span> <br> Up Granite Gorge, from Grand View Trail");
+				$('#StationPointMode_StationPointLabel').css({float: "right", height:"50px"});
 			},
 			deactivateStationPoint4Events : function() {
 				$('#Viewshed4PNG').css({display:"none"});
@@ -826,8 +823,8 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/5-Station-Point-Photo.jpg");
 				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"right"});
 				// display station point label
-				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 5</span> <br> Down Granite Gorge");
-				$('#StationPointMode_StationPointLabel').css({float:"right",marginRight:"5px"});
+				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 5</span> <br> Down Granite Gorge, from Grand View Trail");
+				$('#StationPointMode_StationPointLabel').css({float: "right", height:"50px"});
 			},
 			deactivateStationPoint5Events : function() {
 				$('#Viewshed5PNG').css({display:"none"});
@@ -839,8 +836,8 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/6-Station-Point-Photo.jpg");
 				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"right"});
 				// display station point label
-				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 6</span> <br> Up From Moran");
-				$('#StationPointMode_StationPointLabel').css({float:"right",marginRight:"5px"});
+				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 6</span> <br> Up Grand Canyon, from Moran Point");
+				$('#StationPointMode_StationPointLabel').css({float: "right", height:"50px"});
 			},
 			deactivateStationPoint6Events : function() {
 				$('#Viewshed6PNG').css({display:"none"});
@@ -852,8 +849,8 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/7-Station-Point-Photo.jpg");
 				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"right"});
 				// display station point label
-				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 7</span> <br> Up GC From Zuni");
-				$('#StationPointMode_StationPointLabel').css({float:"right",marginRight:"5px"});
+				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 7</span> <br> Up Grand Canyon, from Zuni Point");
+				$('#StationPointMode_StationPointLabel').css({float: "right", height:"50px"});
 			},
 			deactivateStationPoint7Events : function() {
 				$('#Viewshed7PNG').css({display:"none"});
@@ -865,8 +862,8 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/8-Station-Point-Photo.jpg");
 				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"right"});
 				// display station point label
-				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 8</span> <br> Up to Marble From Lipan");
-				$('#StationPointMode_StationPointLabel').css({float:"right",marginRight:"5px"});
+				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 8</span> <br> Up to Marble Gorge and Painted Desert, <br> from Lipan Point");
+				$('#StationPointMode_StationPointLabel').css({float: "right", height:"65px"});
 			},
 			deactivateStationPoint8Events : function() {
 				$('#Viewshed8PNG').css({display:"none"});
@@ -878,8 +875,8 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/9-Station-Point-Photo.jpg");
 				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"right"});
 				// display station point label
-				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 9</span> <br> Up Marble From Desert View");
-				$('#StationPointMode_StationPointLabel').css({float:"right",marginRight:"5px"});
+				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 9</span> <br> Up to Marble Gorge and Painted Desert, <br> from Desert View");
+				$('#StationPointMode_StationPointLabel').css({float: "right", height:"65px"});
 			},
 			deactivateStationPoint9Events : function() {
 				$('#Viewshed9PNG').css({display:"none"});
@@ -891,8 +888,8 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/10-Station-Point-Photo.jpg");
 				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"right"});
 				// display station point label
-				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 10</span> <br> Down GC From Zuni");
-				$('#StationPointMode_StationPointLabel').css({float:"right",marginRight:"5px"});
+				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 10</span> <br> Down Grand Canyon, from Zuni Point");
+				$('#StationPointMode_StationPointLabel').css({float: "right", height:"50px"});
 			},
 			deactivateStationPoint10Events : function() {
 				$('#Viewshed10PNG').css({display:"none"});
@@ -904,8 +901,8 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/11-Station-Point-Photo.jpg");
 				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"right"});
 				// display station point label
-				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 11</span> <br> Across GC Near El Tovar");
-				$('#StationPointMode_StationPointLabel').css({float:"right",marginRight:"5px"});
+				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 11</span> <br> Across Grand Canyon, near El Tovar");
+				$('#StationPointMode_StationPointLabel').css({float: "right", height:"50px"});
 			},
 			deactivateStationPoint11Events : function() {
 				$('#Viewshed11PNG').css({display:"none"});
@@ -917,8 +914,8 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/12-Station-Point-Photo.jpg");
 				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"right"});
 				// display station point label
-				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 12</span> <br> Descending Zigzags");
-				$('#StationPointMode_StationPointLabel').css({float:"right",marginRight:"5px"});
+				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 12</span> <br> Descending the Zigzags, Bright Angel Trail");
+				$('#StationPointMode_StationPointLabel').css({float: "right", height:"50px"});
 			},
 			deactivateStationPoint12Events : function() {
 				$('#Viewshed12PNG').css({display:"none"});
@@ -930,8 +927,8 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/13-Station-Point-Photo.jpg");
 				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"right"});
 				// display station point label
-				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 13</span> <br> CO River");
-				$('#StationPointMode_StationPointLabel').css({float:"right",marginRight:"5px"});
+				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 13</span> <br> Colorado River and Zoroaster Temple, <br> Foot of Bright Angel Trail");
+				$('#StationPointMode_StationPointLabel').css({float: "right", height:"65px"});
 			},
 			deactivateStationPoint13Events : function() {
 				$('#Viewshed13PNG').css({display:"none"});
@@ -944,8 +941,8 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/14-Station-Point-Photo.jpg");
 				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"right"});
 				// display station point label
-				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 14</span> <br> Buffalo Dance");
-				$('#StationPointMode_StationPointLabel').css({float:"right",marginRight:"5px"});
+				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 14</span> <br> Hopi Indian Buffalo Dance at El Tovar");
+				$('#StationPointMode_StationPointLabel').css({float: "right", height:"50px"});
 				// display notification box stating that this station point does not have a viewshed
 				$('#StationPointNotificationBox').css({left:"35%",right:"35%"});
 			},
@@ -961,8 +958,8 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/15-Station-Point-Photo.jpg");
 				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"right"});
 				// display station point label
-				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 15</span> <br> Eagle Dance");
-				$('#StationPointMode_StationPointLabel').css({float:"right",marginRight:"5px"});
+				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 15</span> <br> Hopi Indian Eagle Dance at El Tovar");
+				$('#StationPointMode_StationPointLabel').css({float: "right", height:"50px"});
 				// display notification box stating that this station point does not have a viewshed
 				$('#StationPointNotificationBox').css({left:"35%",right:"35%"});
 			},
@@ -978,8 +975,8 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/16-Station-Point-Photo.jpg");
 				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"right"});
 				// display station point label
-				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 16</span> <br> War Dance");
-				$('#StationPointMode_StationPointLabel').css({float:"right",marginRight:"5px"});
+				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 16</span> <br> Hopi Indian War Dance at El Tovar");
+				$('#StationPointMode_StationPointLabel').css({float: "right", height:"50px"});
 				// display notification box stating that this station point does not have a viewshed
 				$('#StationPointNotificationBox').css({left:"35%",right:"35%"});
 			},
@@ -994,8 +991,8 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/17-Station-Point-Photo.jpg");
 				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"right"});
 				// display station point label
-				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 17</span> <br> Down GC from Hopi");
-				$('#StationPointMode_StationPointLabel').css({float:"right",marginRight:"5px"});
+				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 17</span> <br> Down Grand Canyon, from Hopi Point");
+				$('#StationPointMode_StationPointLabel').css({float: "right", height:"50px"});
 			},
 			deactivateStationPoint17Events : function() {
 				$('#Viewshed17PNG').css({display:"none"});
@@ -1007,8 +1004,8 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/18-Station-Point-Photo.jpg");
 				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"right"});
 				// display station point label
-				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 18</span> <br> Eastern Outlook Havasupai");
-				$('#StationPointMode_StationPointLabel').css({float:"right",marginRight:"5px"});
+				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 18</span> <br> Eastern Outlook, from Havasupai Point");
+				$('#StationPointMode_StationPointLabel').css({float: "right", height:"50px"});
 			},
 			deactivateStationPoint18Events : function() {
 				$('#Viewshed18PNG').css({display:"none"});
@@ -1020,8 +1017,8 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/19-Station-Point-Photo.jpg");
 				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"right"});
 				// display station point label
-				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 19</span> <br> Grand Scenic from Havasupai");
-				$('#StationPointMode_StationPointLabel').css({float:"right",marginRight:"5px"});
+				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 19</span> <br> Across Grand Scenic Divide, <br> from Havasupai Point");
+				$('#StationPointMode_StationPointLabel').css({float: "right", height:"65px"});
 			},
 			deactivateStationPoint19Events : function() {
 				$('#Viewshed19PNG').css({display:"none"});
@@ -1033,8 +1030,8 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/20-Station-Point-Photo.jpg");
 				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"right"});
 				// display station point label
-				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 20</span> <br> Havasupai from Grand Scenic");
-				$('#StationPointMode_StationPointLabel').css({float:"right",marginRight:"5px"});
+				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 20</span> <br> Havasupai Point, from Grand Scenic Divide");
+				$('#StationPointMode_StationPointLabel').css({float: "right", height:"50px"});
 			},
 			deactivateStationPoint20Events : function() {
 				$('#Viewshed20PNG').css({display:"none"});
@@ -1046,8 +1043,8 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/21-Station-Point-Photo.jpg");
 				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"right"});
 				// display station point label
-				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 21</span> <br> North Wall from Grand Scenic");
-				$('#StationPointMode_StationPointLabel').css({float:"right",marginRight:"5px"});
+				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 21</span> <br> North Wall of Canyon, <br> from Grand Scenic Divide");
+				$('#StationPointMode_StationPointLabel').css({float: "right", height:"65px"});
 			},
 			deactivateStationPoint21Events : function() {
 				$('#Viewshed21PNG').css({display:"none"});
@@ -1059,8 +1056,8 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/22-Station-Point-Photo.jpg");
 				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"right"});
 				// display station point label
-				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 22</span> <br> Up GC from Grand Scenic");
-				$('#StationPointMode_StationPointLabel').css({float:"right",marginRight:"5px"});
+				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 22</span> <br> Up Grand Canyon, from Grand Scenic Divide");
+				$('#StationPointMode_StationPointLabel').css({float: "right", height:"50px"});
 			},
 			deactivateStationPoint22Events : function() {
 				$('#Viewshed22PNG').css({display:"none"});
@@ -1072,8 +1069,8 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/23-Station-Point-Photo.jpg");
 				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"right"});
 				// display station point label
-				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 23</span> <br> Birds Eye");
-				$('#StationPointMode_StationPointLabel').css({float:"right",marginRight:"5px"});
+				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 23</span> <br> Bird's-eye View of Grand Canyon, <br> from an Airplane");
+				$('#StationPointMode_StationPointLabel').css({float: "right", height:"65px"});
 			},
 			deactivateStationPoint23Events : function() {
 				$('#Viewshed23PNG').css({display:"none"});
@@ -1085,8 +1082,8 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/24-Station-Point-Photo.jpg");
 				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"right"});
 				// display station point label
-				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 24</span> <br> Bright Angel from Yavapai");
-				$('#StationPointMode_StationPointLabel').css({float:"right",marginRight:"5px"});
+				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 24</span> <br> Bright Angel Canyon, from Yavapai Point");
+				$('#StationPointMode_StationPointLabel').css({float: "right", height:"50px"});
 			},
 			deactivateStationPoint24Events : function() {
 				$('#Viewshed24PNG').css({display:"none"});
@@ -1099,8 +1096,8 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/25-Station-Point-Photo.jpg");
 				$('#StationPointMode_InfoBoxImage').css({width:"auto",height:"100%",float:"right"});
 				// display station point label
-				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 25</span> <br> Down Kaibab Trail");
-				$('#StationPointMode_StationPointLabel').css({float:"right",marginRight:"5px"});
+				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 25</span> <br> Starting Down the Kaibab Trail, <br> from Yaki Point");
+				$('#StationPointMode_StationPointLabel').css({float: "right", height:"65px"});
 				// display notification box stating that this station point does not have a viewshed
 				$('#StationPointNotificationBox').css({left:"35%",right:"35%"});
 			},
@@ -1115,8 +1112,8 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/26-Station-Point-Photo.jpg");
 				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"right"});
 				// display station point label
-				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 26</span> <br> Kaibab Suspension");
-				$('#StationPointMode_StationPointLabel').css({float:"right",marginRight:"5px"});
+				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 26</span> <br> The Kaibab Suspension Bridge");
+				$('#StationPointMode_StationPointLabel').css({float: "right", height:"50px"});
 			},
 			deactivateStationPoint26Events : function() {
 				$('#Viewshed26PNG').css({display:"none"});
@@ -1129,8 +1126,8 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/27-Station-Point-Photo.jpg");
 				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"right"});
 				// display station point label
-				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 27</span> <br> Tunnel Approach");
-				$('#StationPointMode_StationPointLabel').css({float:"right",marginRight:"5px"});
+				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 27</span> <br> Tunnel Approach to Bridge");
+				$('#StationPointMode_StationPointLabel').css({float: "right", height:"50px"});
 				// display notification box stating that this station point does not have a viewshed
 				$('#StationPointNotificationBox').css({left:"35%",right:"35%"});
 			},
@@ -1145,8 +1142,8 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/28-Station-Point-Photo.jpg");
 				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"right"});
 				// display station point label
-				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 28</span> <br> Party Crossing Bridge");
-				$('#StationPointMode_StationPointLabel').css({float:"right",marginRight:"5px"});
+				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 28</span> <br> A Trail Party Crossing Bridge");
+				$('#StationPointMode_StationPointLabel').css({float: "right", height:"50px"});
 			},
 			deactivateStationPoint28Events : function() {
 				$('#Viewshed28PNG').css({display:"none"});
@@ -1159,8 +1156,8 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/29-Station-Point-Photo.jpg");
 				$('#StationPointMode_InfoBoxImage').css({width:"auto",height:"100%",float:"right"});
 				// display station point label
-				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 29</span> <br> Ribbon Falls");
-				$('#StationPointMode_StationPointLabel').css({float:"right",marginRight:"5px"});
+				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 29</span> <br> Ribbon Falls, Bright Angel Canyon");
+				$('#StationPointMode_StationPointLabel').css({float: "right", height:"50px"});
 				// display notification box stating that this station point does not have a viewshed
 				$('#StationPointNotificationBox').css({left:"35%",right:"35%"});
 			},
@@ -1175,8 +1172,8 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/30-Station-Point-Photo.jpg");
 				$('#StationPointMode_InfoBoxImage').css({width:"auto",height:"100%",float:"right"});
 				// display station point label
-				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 30</span> <br> Across to Roaring");
-				$('#StationPointMode_StationPointLabel').css({float:"right",marginRight:"5px"});
+				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 30</span> <br> Across to Roaring Springs, from Kaibab Trail");
+				$('#StationPointMode_StationPointLabel').css({float: "right", height:"50px"});
 			},
 			deactivateStationPoint30Events : function() {
 				$('#Viewshed30PNG').css({display:"none"});
@@ -1189,8 +1186,8 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/31-Station-Point-Photo.jpg");
 				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"right"});
 				// display station point label
-				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 31</span> <br> On Trail Above Springs");
-				$('#StationPointMode_StationPointLabel').css({float:"right",marginRight:"5px"});
+				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 31</span> <br> On the Kaibab Trail Above Roaring Springs");
+				$('#StationPointMode_StationPointLabel').css({float: "right", height:"50px"});
 				// display notification box stating that this station point does not have a viewshed
 				$('#StationPointNotificationBox').css({left:"35%",right:"35%"});
 			},
@@ -1205,8 +1202,8 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/32-Station-Point-Photo.jpg");
 				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"right"});
 				// display station point label
-				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 32</span> <br> Up GC from Bright Angel");
-				$('#StationPointMode_StationPointLabel').css({float:"right",marginRight:"5px"});
+				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 32</span> <br> Up Grand Canyon, from Bright Angel Point");
+				$('#StationPointMode_StationPointLabel').css({float: "right", height:"50px"});
 			},
 			deactivateStationPoint32Events : function() {
 				$('#Viewshed32PNG').css({display:"none"});
@@ -1218,8 +1215,8 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/33-Station-Point-Photo.jpg");
 				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"right"});
 				// display station point label
-				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 33</span> <br> Across Oza Butte");
-				$('#StationPointMode_StationPointLabel').css({float:"right",marginRight:"5px"});
+				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 33</span> <br> Across Oza Butte to South Rim");
+				$('#StationPointMode_StationPointLabel').css({float: "right", height:"50px"});
 			},
 			deactivateStationPoint33Events : function() {
 				$('#Viewshed33PNG').css({display:"none"});
@@ -1232,8 +1229,8 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/34-Station-Point-Photo.jpg");
 				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"right"});
 				// display station point label
-				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 34</span> <br> Grove of Pines");
-				$('#StationPointMode_StationPointLabel').css({float:"right",marginRight:"5px"});
+				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 34</span> <br> A Grove of Pines in the Kaibab Forest");
+				$('#StationPointMode_StationPointLabel').css({float: "right", height:"50px"});
 				// display notification box stating that this station point does not have a viewshed
 				$('#StationPointNotificationBox').css({left:"35%",right:"35%"});
 			},
@@ -1248,8 +1245,8 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/35-Station-Point-Photo.jpg");
 				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"right"});
 				// display station point label
-				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 35</span> <br> Across from Point Sublime");
-				$('#StationPointMode_StationPointLabel').css({float:"right",marginRight:"5px"});
+				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 35</span> <br> Across Canyon to Havasupai Point, <br> from Pt. Sublime");
+				$('#StationPointMode_StationPointLabel').css({float: "right", height:"65px"});
 			},
 			deactivateStationPoint35Events : function() {
 				$('#Viewshed35PNG').css({display:"none"});
@@ -1261,8 +1258,8 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/37-Station-Point-Photo.jpg");
 				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"right"});
 				// display station point label
-				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 37</span> <br> Up GC to Shiva");
-				$('#StationPointMode_StationPointLabel').css({float:"right",marginRight:"5px"});
+				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 37</span> <br> Up Canyon to Shiva Temple, <br> from Pt. Sublime");
+				$('#StationPointMode_StationPointLabel').css({float: "right", height:"65px"});
 			},
 			deactivateStationPoint37Events : function() {
 				$('#Viewshed37PNG').css({display:"none"});
@@ -1274,8 +1271,8 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/38-Station-Point-Photo.jpg");
 				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"right"});
 				// display station point label
-				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 38</span> <br> Down Canyon to Shiva Temple");
-				$('#StationPointMode_StationPointLabel').css({float:"right",marginRight:"5px"});
+				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 38</span> <br> Down Canyon to Shiva Temple, <br> from Cape Royal");
+				$('#StationPointMode_StationPointLabel').css({float: "right", height:"65px"});
 			},
 			deactivateStationPoint38Events : function() {
 				$('#Viewshed38PNG').css({display:"none"});
@@ -1287,8 +1284,8 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/39-Station-Point-Photo.jpg");
 				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"right"});
 				// display station point label
-				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 39</span> <br> Angels Window");
-				$('#StationPointMode_StationPointLabel').css({float:"right",marginRight:"5px"});
+				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 39</span> <br> Angel's Window, on Cape Royal");
+				$('#StationPointMode_StationPointLabel').css({float: "right", height:"50px"});
 			},
 			deactivateStationPoint39Events : function() {
 				$('#Viewshed39PNG').css({display:"none"});
@@ -1300,8 +1297,8 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/40-Station-Point-Photo.jpg");
 				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"left"});
 				// display station point label
-				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 40</span> <br> Across Marble Gorge to Painted Desert");
-				$('#StationPointMode_StationPointLabel').css({float:"left",marginLeft:"5px"});
+				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 40</span> <br> Across Marble Gorge to Painted Desert, <br> at Pt. Imperial");
+				$('#StationPointMode_StationPointLabel').css({float: "left", height:"65px"});
 			},
 			deactivateStationPoint40Events : function() {
 				$('#Viewshed40PNG').css({display:"none"});
@@ -1313,8 +1310,8 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/41-Station-Point-Photo.jpg");
 				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"left"});
 				// display station point label
-				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 41</span> <br> Toward Little High");
-				$('#StationPointMode_StationPointLabel').css({float:"left",marginLeft:"5px"});
+				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 41</span> <br> Toward Little Colorado River, <br> from Pt. Imperial");
+				$('#StationPointMode_StationPointLabel').css({float: "left", height:"65px"});
 			},
 			deactivateStationPoint41Events : function() {
 				$('#Viewshed41PNG').css({display:"none"});
@@ -1326,8 +1323,8 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/42-Station-Point-Photo.jpg");
 				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"right"});
 				// display station point label
-				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 42</span> <br> Storm High");
-				$('#StationPointMode_StationPointLabel').css({float:"right",marginRight:"5px"});
+				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 42</span> <br> A Storm in the Grand Canyon");
+				$('#StationPointMode_StationPointLabel').css({float: "right", height:"50px"});
 			},
 			deactivateStationPoint42Events : function() {
 				$('#Viewshed42PNG').css({display:"none"});
@@ -1339,8 +1336,8 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/43-Station-Point-Photo.jpg");
 				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"right"});
 				// display station point label
-				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 43</span> <br> After Storm");
-				$('#StationPointMode_StationPointLabel').css({float:"right",marginRight:"5px"});
+				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 43</span> <br> After the Storm");
+				$('#StationPointMode_StationPointLabel').css({float: "right", height:"50px"});
 			},
 			deactivateStationPoint43Events : function() {
 				$('#Viewshed43PNG').css({display:"none"});
@@ -2422,11 +2419,7 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 	 * 
 	 */
 	function setAllStationPointIconsOpacity(dimmed_opacity) {
-		var StationPointIcons = document.getElementsByClassName('StationPointIcon');
-		for(var i = 0; i < StationPointIcons.length; i++) {
-			StationPointIcons[i].style.opacity = dimmed_opacity;
-			StationPointIcons[i].style.zIndex = 3;
-		}
+		$(".StationPointIcon").css({opacity: dimmed_opacity, zIndex: "3"});
 	}
 	
 	var public_objects =
