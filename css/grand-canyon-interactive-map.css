@@ -217,7 +217,7 @@ body:after {
 	position: absolute;
 	width: 30%; height: 45px;
 	left: -99999px;
-	bottom: 10%;
+	top: 14px;
 	background-color: rgba(256,256,256,0.7);
 	display: block;
 	text-align: center;

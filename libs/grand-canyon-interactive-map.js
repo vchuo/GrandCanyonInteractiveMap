@@ -280,7 +280,7 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 			
 			MIN_ZOOM_LEVEL = 1,
 			
-			MAX_ZOOM_LEVEL = 5,
+			MAX_ZOOM_LEVEL = 4,
 
 			ZOOM_INCREMENT_MOUSEWHEEL = 0.01,
 
@@ -466,16 +466,23 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 		function setupPanZoomElement()
 		{
 			var panzoom = $("#focal").find(".panzoom").panzoom();
+			attachMouseWheelEventHandler(panzoom);
+			// set initial zoom level
+			panzoom.panzoom("zoom", MIN_ZOOM_LEVEL, { silent: false });
+			resetZoomLevelToDefault();
+
+		}
+
+		function attachMouseWheelEventHandler(panzoom) {
 			$("#panzoom_parent").mousewheel(function(event) {
-				clearTimeout($.data(this, "timer"));
-				displayLoadingScreenForZoomEvent();
-				$.data(this, "timer", setTimeout(function() {
-					hideLoadingScreenForZoomEvent();
-				}, 250));
+				if(isMouseWheelEventInvalid(event)) {
+					return;
+				}
+				handleMouseWheelZoomEventLoadingScreenDisplayTiming();
 				event.preventDefault();
-				var delta = event.delta || event.originalEvent.wheelDelta;
-				var zoomOut = delta ? delta < 0 : event.originalEvent.deltaY > 0;
-				// Set zoom settings and store current zoom level in a global variable
+				var delta = event.delta || event.originalEvent.wheelDelta,
+					zoomOut = delta ? delta < 0 : event.originalEvent.deltaY > 0;
+				// set zoom settings and update current zoom level
 				current_zoom_level = panzoom.panzoom("zoom", zoomOut, {
 					increment: ZOOM_INCREMENT_MOUSEWHEEL,
 					minScale: MIN_ZOOM_LEVEL,
@@ -484,9 +491,23 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 				});
 				displayCorrespondingZoomIconIfAtMaxOrMinZoomLevel();
 			});
-			// set initial zoom level
-			panzoom.panzoom("zoom", MIN_ZOOM_LEVEL, { silent: false });
-			resetZoomLevelToDefault();
+		}
+
+		function isMouseWheelEventInvalid(event) {
+			// mouse wheel event is "invalid" if user tries to zoom out past the
+			// minimum zoom level, or if the user tries to zoom in past the maximum
+			// zoom level
+			var isUserTryingToZoomOutPastMinZoomLevel = (current_zoom_level == MIN_ZOOM_LEVEL) && (event.originalEvent.deltaY > 0),
+				isUserTryingToZoomInPastMaxZoomLevel = (current_zoom_level == MAX_ZOOM_LEVEL) && (event.originalEvent.deltaY < 0);
+			return (isUserTryingToZoomOutPastMinZoomLevel || isUserTryingToZoomInPastMaxZoomLevel);
+		}
+
+		function handleMouseWheelZoomEventLoadingScreenDisplayTiming() {
+			clearTimeout($.data(this, "timer"));
+			displayLoadingScreenForZoomEvent();
+			$.data(this, "timer", setTimeout(function() {
+				hideLoadingScreenForZoomEvent();
+			}, 250));
 		}
 
 		function resetZoomLevelToDefault() {
@@ -831,52 +852,52 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 			},
 			activateStationPoint6Events : function() {
 				// position station point mode info box in map frame
-				$('#StationPointMode_InfoBox').css({left:"auto",right:"60px"});
+				$('#StationPointMode_InfoBox').css({left:"auto",left:"10px"});
 				// display photo associated with station point
 				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/6-Station-Point-Photo.jpg");
-				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"right"});
+				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"left"});
 				// display station point label
 				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 6</span> <br> Up Grand Canyon, from Moran Point");
-				$('#StationPointMode_StationPointLabel').css({float: "right", height:"50px"});
+				$('#StationPointMode_StationPointLabel').css({float: "left", height:"50px"});
 			},
 			deactivateStationPoint6Events : function() {
 				$('#Viewshed6PNG').css({display:"none"});
 			},
 			activateStationPoint7Events : function() {
 				// position station point mode info box in map frame
-				$('#StationPointMode_InfoBox').css({left:"auto",right:"60px"});
+				$('#StationPointMode_InfoBox').css({left:"auto",left:"10px"});
 				// display photo associated with station point
 				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/7-Station-Point-Photo.jpg");
-				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"right"});
+				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"left"});
 				// display station point label
 				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 7</span> <br> Up Grand Canyon, from Zuni Point");
-				$('#StationPointMode_StationPointLabel').css({float: "right", height:"50px"});
+				$('#StationPointMode_StationPointLabel').css({float: "left", height:"50px"});
 			},
 			deactivateStationPoint7Events : function() {
 				$('#Viewshed7PNG').css({display:"none"});
 			},
 			activateStationPoint8Events : function() {
 				// position station point mode info box in map frame
-				$('#StationPointMode_InfoBox').css({left:"auto",right:"60px"});
+				$('#StationPointMode_InfoBox').css({left:"auto",left:"10px"});
 				// display photo associated with station point
 				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/8-Station-Point-Photo.jpg");
-				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"right"});
+				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"left"});
 				// display station point label
 				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 8</span> <br> Up to Marble Gorge and Painted Desert, <br> from Lipan Point");
-				$('#StationPointMode_StationPointLabel').css({float: "right", height:"65px"});
+				$('#StationPointMode_StationPointLabel').css({float: "left", height:"65px"});
 			},
 			deactivateStationPoint8Events : function() {
 				$('#Viewshed8PNG').css({display:"none"});
 			},
 			activateStationPoint9Events : function() {
 				// position station point mode info box in map frame
-				$('#StationPointMode_InfoBox').css({left:"auto",right:"60px"});
+				$('#StationPointMode_InfoBox').css({left:"auto",left:"10px"});
 				// display photo associated with station point
 				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/9-Station-Point-Photo.jpg");
-				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"right"});
+				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"left"});
 				// display station point label
 				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 9</span> <br> Up to Marble Gorge and Painted Desert, <br> from Desert View");
-				$('#StationPointMode_StationPointLabel').css({float: "right", height:"65px"});
+				$('#StationPointMode_StationPointLabel').css({float: "left", height:"65px"});
 			},
 			deactivateStationPoint9Events : function() {
 				$('#Viewshed9PNG').css({display:"none"});
@@ -1064,26 +1085,26 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 			},
 			activateStationPoint23Events : function() {
 				// position station point mode info box in map frame
-				$('#StationPointMode_InfoBox').css({left:"auto",right:"60px"});
+				$('#StationPointMode_InfoBox').css({left:"auto",left:"10px"});
 				// display photo associated with station point
 				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/23-Station-Point-Photo.jpg");
-				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"right"});
+				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"left"});
 				// display station point label
 				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 23</span> <br> Bird's-eye View of Grand Canyon, <br> from an Airplane");
-				$('#StationPointMode_StationPointLabel').css({float: "right", height:"65px"});
+				$('#StationPointMode_StationPointLabel').css({float: "left", height:"65px"});
 			},
 			deactivateStationPoint23Events : function() {
 				$('#Viewshed23PNG').css({display:"none"});
 			},
 			activateStationPoint24Events : function() {
 				// position station point mode info box in map frame
-				$('#StationPointMode_InfoBox').css({left:"auto",right:"60px"});
+				$('#StationPointMode_InfoBox').css({left:"auto",left:"10px"});
 				// display photo associated with station point
 				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/24-Station-Point-Photo.jpg");
-				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"right"});
+				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"left"});
 				// display station point label
 				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 24</span> <br> Bright Angel Canyon, from Yavapai Point");
-				$('#StationPointMode_StationPointLabel').css({float: "right", height:"50px"});
+				$('#StationPointMode_StationPointLabel').css({float: "left", height:"50px"});
 			},
 			deactivateStationPoint24Events : function() {
 				$('#Viewshed24PNG').css({display:"none"});
@@ -1318,26 +1339,26 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 			},
 			activateStationPoint42Events : function() {
 				// position station point mode info box in map frame
-				$('#StationPointMode_InfoBox').css({left:"auto",right:"60px"});
+				$('#StationPointMode_InfoBox').css({left:"auto",left:"10px"});
 				// display photo associated with station point
 				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/42-Station-Point-Photo.jpg");
-				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"right"});
+				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"left"});
 				// display station point label
 				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 42</span> <br> A Storm in the Grand Canyon");
-				$('#StationPointMode_StationPointLabel').css({float: "right", height:"50px"});
+				$('#StationPointMode_StationPointLabel').css({float: "left", height:"50px"});
 			},
 			deactivateStationPoint42Events : function() {
 				$('#Viewshed42PNG').css({display:"none"});
 			},
 			activateStationPoint43Events : function() {
 				// position station point mode info box in map frame
-				$('#StationPointMode_InfoBox').css({left:"auto",right:"60px"});
+				$('#StationPointMode_InfoBox').css({left:"auto",left:"10px"});
 				// display photo associated with station point
 				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/43-Station-Point-Photo.jpg");
-				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"right"});
+				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"left"});
 				// display station point label
 				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 43</span> <br> After the Storm");
-				$('#StationPointMode_StationPointLabel').css({float: "right", height:"50px"});
+				$('#StationPointMode_StationPointLabel').css({float: "left", height:"50px"});
 			},
 			deactivateStationPoint43Events : function() {
 				$('#Viewshed43PNG').css({display:"none"});

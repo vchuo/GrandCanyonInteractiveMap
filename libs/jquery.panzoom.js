@@ -301,7 +301,7 @@
 		increment: 0.01,
 
 		minScale: 1,
-		maxScale: 5,
+		maxScale: 4,
 
 		// The default step for the range input
 		// Precendence: default < HTML attribute < option setting
