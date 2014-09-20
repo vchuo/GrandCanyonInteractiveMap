@@ -1391,166 +1391,207 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 				case "StationPoint2":
 					$("#StationPointPopup").css({width:"80%",height:"auto",left:"10%",right:"10%"});
 					$("#StationPointPopup").css({top: getStationPointPopupOffset("StationPoint2")+"px"});
+					$("#StationPointPopupLink").attr("href","http://enchantingthedesert.com/2-on-grand-view-point/");
 					break;
 				case "StationPoint3":
 					$("#StationPointPopup").css({width:"80%",height:"auto",left:"10%",right:"10%"});
 					$("#StationPointPopup").css({top: getStationPointPopupOffset("StationPoint3")+"px"});
+					$("#StationPointPopupLink").attr("href","http://enchantingthedesert.com/3-angels-gate-wotans-throne-and-vishnu-temple/");
 					break;
 				case "StationPoint4":
 					$("#StationPointPopup").css({width:"80%",height:"auto",left:"10%",right:"10%"});
 					$("#StationPointPopup").css({top: getStationPointPopupOffset("StationPoint4")+"px"});
+					$("#StationPointPopupLink").attr("href","http://enchantingthedesert.com/4-up-granite-gorge/");
 					break;
 				case "StationPoint5":
 					$("#StationPointPopup").css({width:"80%",height:"auto",left:"10%",right:"10%"});
 					$("#StationPointPopup").css({top: getStationPointPopupOffset("StationPoint5")+"px"});
+					$("#StationPointPopupLink").attr("href","http://enchantingthedesert.com/5-down-granite-gorge-from-grand-view-trail/");
 					break;
 				case "StationPoint6":
 					$("#StationPointPopup").css({width:"80%",height:"auto",left:"10%",right:"10%"});
 					$("#StationPointPopup").css({top: getStationPointPopupOffset("StationPoint6")+"px"});
+					$("#StationPointPopupLink").attr("href","http://enchantingthedesert.com/6-up-grand-canyon-from-moran-point/");
 					break;
 				case "StationPoint7":
 					$("#StationPointPopup").css({width:"80%",height:"auto",left:"10%",right:"10%"});
 					$("#StationPointPopup").css({top: getStationPointPopupOffset("StationPoint7")+"px"});
+					$("#StationPointPopupLink").attr("href","http://enchantingthedesert.com/7-up-grand-canyon-from-zuni-point/");
 					break;
 				case "StationPoint8":
 					$("#StationPointPopup").css({width:"80%",height:"auto",left:"10%",right:"10%"});
 					$("#StationPointPopup").css({top: getStationPointPopupOffset("StationPoint8")+"px"});
+					$("#StationPointPopupLink").attr("href","http://enchantingthedesert.com/8-up-to-marble-gorge-and-painted-desert-from-lipan-point/");
 					break;
 				case "StationPoint9":
 					$("#StationPointPopup").css({width:"80%",height:"auto",left:"10%",right:"10%"});
 					$("#StationPointPopup").css({top: getStationPointPopupOffset("StationPoint9")+"px"});
+					$("#StationPointPopupLink").attr("href","http://enchantingthedesert.com/9-up-to-marble-gorge-and-painted-desert-from-desert-view/");
 					break;
 				case "StationPoint10":
 					$("#StationPointPopup").css({width:"80%",height:"auto",left:"10%",right:"10%"});
 					$("#StationPointPopup").css({top: getStationPointPopupOffset("StationPoint10")+"px"});
+					$("#StationPointPopupLink").attr("href","http://enchantingthedesert.com/10-down-grand-canyon-from-zuni-point/");
 					break;
 				case "StationPoint11":
 					$("#StationPointPopup").css({width:"80%",height:"auto",left:"10%",right:"10%"});
 					$("#StationPointPopup").css({top: getStationPointPopupOffset("StationPoint11")+"px"});
+					$("#StationPointPopupLink").attr("href","http://enchantingthedesert.com/11-across-grand-canyon-near-el-tovar/");
 					break;
 				case "StationPoint12":
 					$("#StationPointPopup").css({width:"80%",height:"auto",left:"10%",right:"10%"});
 					$("#StationPointPopup").css({top: getStationPointPopupOffset("StationPoint12")+"px"});
+					$("#StationPointPopupLink").attr("href","http://enchantingthedesert.com/12-descending-the-zigzags-bright-angel-trail/");
 					break;
 				case "StationPoint13":
 					$("#StationPointPopup").css({width:"80%",height:"auto",left:"10%",right:"10%"});
 					$("#StationPointPopup").css({top: getStationPointPopupOffset("StationPoint13")+"px"});
+					$("#StationPointPopupLink").attr("href","http://enchantingthedesert.com/13-colorado-river-and-zoroaster-temple-foot-of-bright-angel-trail/");
 					break;
 				case "StationPoint14":
 					$("#StationPointPopup").css({width:"80%",height:"auto",left:"10%",right:"10%"});
 					$("#StationPointPopup").css({top: getStationPointPopupOffset("StationPoint14")+"px"});
+					$("#StationPointPopupLink").attr("href","http://enchantingthedesert.com/14-hopi-indian-buffalo-dance-at-el-tovar/");
 					break;
 				case "StationPoint15":
 					$("#StationPointPopup").css({width:"80%",height:"auto",left:"10%",right:"10%"});
 					$("#StationPointPopup").css({top: getStationPointPopupOffset("StationPoint15")+"px"});
+					$("#StationPointPopupLink").attr("href","http://enchantingthedesert.com/15-hopi-indian-eagle-dance-at-el-tovar/");
 					break;
 				case "StationPoint16":
 					$("#StationPointPopup").css({width:"80%",height:"auto",left:"10%",right:"10%"});
 					$("#StationPointPopup").css({top: getStationPointPopupOffset("StationPoint16")+"px"});
+					$("#StationPointPopupLink").attr("href","http://enchantingthedesert.com/16-hopi-indian-war-dance-at-el-tovar/");
 					break;
 				case "StationPoint17":
 					$("#StationPointPopup").css({width:"80%",height:"auto",left:"10%",right:"10%"});
 					$("#StationPointPopup").css({top: getStationPointPopupOffset("StationPoint17")+"px"});
+					$("#StationPointPopupLink").attr("href","http://enchantingthedesert.com/17-down-grand-canyon-from-hopi-point/");
 					break;
 				case "StationPoint18":
 					$("#StationPointPopup").css({width:"80%",height:"auto",left:"10%",right:"10%"});
 					$("#StationPointPopup").css({top: getStationPointPopupOffset("StationPoint18")+"px"});
+					$("#StationPointPopupLink").attr("href","http://enchantingthedesert.com/18-eastern-outlook-from-havasupai-point/");
 					break;
 				case "StationPoint19":
 					$("#StationPointPopup").css({width:"80%",height:"auto",left:"10%",right:"10%"});
 					$("#StationPointPopup").css({top: getStationPointPopupOffset("StationPoint19")+"px"});
+					$("#StationPointPopupLink").attr("href","http://enchantingthedesert.com/19-across-grand-scenic-divide-from-havasupai-point/");
 					break;
 				case "StationPoint20":
 					$("#StationPointPopup").css({width:"80%",height:"auto",left:"10%",right:"10%"});
 					$("#StationPointPopup").css({top: getStationPointPopupOffset("StationPoint20")+"px"});
+					$("#StationPointPopupLink").attr("href","http://enchantingthedesert.com/20-havasupai-point-from-grand-scenic-divide/");
 					break;
 				case "StationPoint21":
 					$("#StationPointPopup").css({width:"80%",height:"auto",left:"10%",right:"10%"});
 					$("#StationPointPopup").css({top: getStationPointPopupOffset("StationPoint21")+"px"});
+					$("#StationPointPopupLink").attr("href","http://enchantingthedesert.com/21-north-wall-of-canyon-from-grand-scenic-divide/");
 					break;
 				case "StationPoint22":
 					$("#StationPointPopup").css({width:"80%",height:"auto",left:"10%",right:"10%"});
 					$("#StationPointPopup").css({top: getStationPointPopupOffset("StationPoint22")+"px"});
+					$("#StationPointPopupLink").attr("href","http://enchantingthedesert.com/22-up-grand-canyon-from-grand-scenic-divide/");
 					break;
 				case "StationPoint23":
 					$("#StationPointPopup").css({width:"80%",height:"auto",left:"10%",right:"10%"});
 					$("#StationPointPopup").css({top: getStationPointPopupOffset("StationPoint23")+"px"});
+					$("#StationPointPopupLink").attr("href","http://enchantingthedesert.com/23-birds-eye-view-of-grand-canyon-from-an-airplane/");
 					break;
 				case "StationPoint24":
 					$("#StationPointPopup").css({width:"80%",height:"auto",left:"10%",right:"10%"});
 					$("#StationPointPopup").css({top: getStationPointPopupOffset("StationPoint24")+"px"});
+					$("#StationPointPopupLink").attr("href","http://enchantingthedesert.com/24-bright-angel-canyon-from-yavapai-point/");
 					break;
 				case "StationPoint25":
 					$("#StationPointPopup").css({width:"auto",height:"80%",top:"9%",bottom:"11%"});
 					$("#StationPointPopup").css({left: getStationPointPopupOffset("StationPoint25")+"px"});
+					$("#StationPointPopupLink").attr("href","http://enchantingthedesert.com/25-starting-down-the-kaibab-trail-from-yaki-point/");
 					break;
 				case "StationPoint26":
 					$("#StationPointPopup").css({width:"80%",height:"auto",left:"10%",right:"10%"});
 					$("#StationPointPopup").css({top: getStationPointPopupOffset("StationPoint26")+"px"});
+					$("#StationPointPopupLink").attr("href","http://enchantingthedesert.com/26-the-kaibab-suspension-bridge/");
 					break;
 				case "StationPoint27":
 					$("#StationPointPopup").css({width:"80%",height:"auto",left:"10%",right:"10%"});
 					$("#StationPointPopup").css({top: getStationPointPopupOffset("StationPoint27")+"px"});
+					$("#StationPointPopupLink").attr("href","http://enchantingthedesert.com/27-tunnel-approach-to-bridge/");
 					break;
 				case "StationPoint28":
 					$("#StationPointPopup").css({width:"80%",height:"auto",left:"10%",right:"10%"});
 					$("#StationPointPopup").css({top: getStationPointPopupOffset("StationPoint28")+"px"});
+					$("#StationPointPopupLink").attr("href","http://enchantingthedesert.com/28-a-trail-party-crossing-bridge/");
 					break;
 				case "StationPoint29":
 					$("#StationPointPopup").css({width:"auto",height:"80%",top:"9%",bottom:"11%"});
 					$("#StationPointPopup").css({left: getStationPointPopupOffset("StationPoint29")+"px"});
+					$("#StationPointPopupLink").attr("href","http://enchantingthedesert.com/29-ribbon-falls-bright-angel-canyon/");
 					break;
 				case "StationPoint30":
 					$("#StationPointPopup").css({width:"auto",height:"80%",top:"9%",bottom:"11%"});
 					$("#StationPointPopup").css({left: getStationPointPopupOffset("StationPoint30")+"px"});
+					$("#StationPointPopupLink").attr("href","http://enchantingthedesert.com/30-across-to-roaring-springs-from-kaibab-trail/");
 					break;
 				case "StationPoint31":
 					$("#StationPointPopup").css({width:"80%",height:"auto",left:"10%",right:"10%"});
 					$("#StationPointPopup").css({top: getStationPointPopupOffset("StationPoint31")+"px"});
+					$("#StationPointPopupLink").attr("href","http://enchantingthedesert.com/31-on-the-kaibab-trail-above-roaring-springs/");
 					break;
 				case "StationPoint32":
 					$("#StationPointPopup").css({width:"80%",height:"auto",left:"10%",right:"10%"});
 					$("#StationPointPopup").css({top: getStationPointPopupOffset("StationPoint32")+"px"});
+					$("#StationPointPopupLink").attr("href","http://enchantingthedesert.com/32-up-grand-canyon-from-bright-angel-point-2/");
 					break;
 				case "StationPoint33":
 					$("#StationPointPopup").css({width:"80%",height:"auto",left:"10%",right:"10%"});
 					$("#StationPointPopup").css({top: getStationPointPopupOffset("StationPoint33")+"px"});
+					$("#StationPointPopupLink").attr("href","http://enchantingthedesert.com/33-across-oza-butte-to-south-rim/");
 					break;
 				case "StationPoint34":
 					$("#StationPointPopup").css({width:"80%",height:"auto",left:"10%",right:"10%"});
 					$("#StationPointPopup").css({top: getStationPointPopupOffset("StationPoint34")+"px"});
+					$("#StationPointPopupLink").attr("href","http://enchantingthedesert.com/34-a-grove-of-pines-in-the-kaibab-forest/");
 					break;
 				case "StationPoint35":
 					$("#StationPointPopup").css({width:"80%",height:"auto",left:"10%",right:"10%"});
 					$("#StationPointPopup").css({top: getStationPointPopupOffset("StationPoint35")+"px"});
+					$("#StationPointPopupLink").attr("href","http://enchantingthedesert.com/35-across-canyon-to-havasupai-point-from-pt-sublime/");
 					break;
 				case "StationPoint37":
 					$("#StationPointPopup").css({width:"80%",height:"auto",left:"10%",right:"10%"});
 					$("#StationPointPopup").css({top: getStationPointPopupOffset("StationPoint37")+"px"});
+					$("#StationPointPopupLink").attr("href","http://enchantingthedesert.com/37-up-canyon-to-shiva-temple-from-pt-sublime/");
 					break;
 				case "StationPoint38":
 					$("#StationPointPopup").css({width:"80%",height:"auto",left:"10%",right:"10%"});
 					$("#StationPointPopup").css({top: getStationPointPopupOffset("StationPoint38")+"px"});
+					$("#StationPointPopupLink").attr("href","http://enchantingthedesert.com/38-down-canyon-to-shiva-temple-from-cape-royal/");
 					break;
 				case "StationPoint39":
 					$("#StationPointPopup").css({width:"80%",height:"auto",left:"10%",right:"10%"});
 					$("#StationPointPopup").css({top: getStationPointPopupOffset("StationPoint39")+"px"});
+					$("#StationPointPopupLink").attr("href","http://enchantingthedesert.com/39-angels-window-on-cape-royal/");
 					break;
 				case "StationPoint40":
 					$("#StationPointPopup").css({width:"80%",height:"auto",left:"10%",right:"10%"});
 					$("#StationPointPopup").css({top: getStationPointPopupOffset("StationPoint40")+"px"});
+					$("#StationPointPopupLink").attr("href","http://enchantingthedesert.com/40-across-marble-gorge-to-painted-desert-at-pt-imperial/");
 					break;
 				case "StationPoint41":
 					$("#StationPointPopup").css({width:"80%",height:"auto",left:"10%",right:"10%"});
 					$("#StationPointPopup").css({top: getStationPointPopupOffset("StationPoint41")+"px"});
+					$("#StationPointPopupLink").attr("href","http://enchantingthedesert.com/41-toward-little-colorado-river-from-point-imperial/");
 					break;
 				case "StationPoint42":
 					$("#StationPointPopup").css({width:"80%",height:"auto",left:"10%",right:"10%"});
 					$("#StationPointPopup").css({top: getStationPointPopupOffset("StationPoint42")+"px"});
+					$("#StationPointPopupLink").attr("href","http://enchantingthedesert.com/42-a-storm-in-the-grand-canyon/");
 					break;
 				case "StationPoint43":
 					$("#StationPointPopup").css({width:"80%",height:"auto",left:"10%",right:"10%"});
 					$("#StationPointPopup").css({top: getStationPointPopupOffset("StationPoint43")+"px"});
+					$("#StationPointPopupLink").attr("href","http://enchantingthedesert.com/43-after-the-storm/");
 					break;
 				default:
 					break;
@@ -2062,7 +2103,7 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 				case 34:
 					return 'http://enchantingthedesert.com/34-a-grove-of-pines-in-the-kaibab-forest/'; break;
 				case 35:
-					return 'http://enchantingthedesert.com/35-across-canyon-to-havasupai-point-from-point-sublime/'; break;
+					return 'http://enchantingthedesert.com/35-across-canyon-to-havasupai-point-from-pt-sublime/'; break;
 				case 37:
 					return 'http://enchantingthedesert.com/37-up-canyon-to-shiva-temple-from-pt-sublime/'; break;
 				case 38:
