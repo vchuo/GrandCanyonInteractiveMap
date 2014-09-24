@@ -104,6 +104,7 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 			attachEventHandlersForStationPointSVGs();
 			attachEventHandlerForStationPointPopupDiv();
 			attachEventHandlersForViewshedSVGs();
+			attachEventHandlerForWelcomeMessagePopupItems();
 			attachEventHandlerForWindowObject();
 			attachEventHandlerForDocumentObject();
 		}
@@ -210,6 +211,24 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 				$("#"+value.id).click(function() {
 					ExploreByLocationMode.displayLocationModePopup();
 				});
+			});
+		}
+		function attachEventHandlerForWelcomeMessagePopupItems() {
+			$("#welcome_message_popup").click(function() {
+				$("#welcome_message_popup_container").css({left: "-99999px", right: "auto",
+															backgroundColor: "transparent"});
+				$(".welcome_message_popup_hint").remove();
+				$("#welcome_message_popup_button").css({display: "block"});
+				$("#welcome_message_popup_button").animate({opacity: 1}, 1500);
+				$("#welcome_message_popup_content").css({marginTop: "35px", marginBottom: "40px"});
+			});
+			$("#welcome_message_popup_button").bind({
+				mouseover: function() {
+					$("#welcome_message_popup_container").css({left: "0px", right: "auto"});
+				},
+				mouseout: function() {
+					$("#welcome_message_popup_container").css({left: "-99999px", right: "auto"});
+				}
 			});
 		}
 		function attachEventHandlerForWindowObject() {
@@ -2454,11 +2473,11 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 			div_height,
 			div_width;
 
-		if(height < 700) {
-			height = 700;
+		if(height < 765) {
+			height = 765;
 		}
-		if(width < 915) {
-			width = 915;
+		if(width < 1000) {
+			width = 1000;
 		}
 		
 		/* Calculates new dimensions of divs to fit window size while maintaining aspect ratio
