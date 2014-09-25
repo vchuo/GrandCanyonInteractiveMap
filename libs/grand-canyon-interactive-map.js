@@ -1396,7 +1396,7 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 				$("#StationPointMode_InfoBoxImage").css({border:"0px"});
 				$("#StationPointNotificationBox").css({left:"-99999px",right:"auto"});
 				displayCorrespondingStationPointPopup(station_point_name);
-				$("#StationPointPopupDiv").css({display:"block",zIndex:1000});
+				$("#StationPointPopupDiv").css({display:"block",zIndex:4000});
 				$("#StationPointPopupLink").attr("target","_blank");
 			}
 		}
