@@ -94,14 +94,14 @@ body:after {
 }
 #welcome_message_popup_button {
 	position: absolute;
-	width: 130px; height: 30px;
+	width: 120px; height: 35px;
 	left: 0; right: 0;
-	top: 0;
+	bottom: 0;
 	margin: auto;
-	border-bottom-left-radius: 15px; border-bottom-right-radius: 15px;
+	border-top-left-radius: 5px; border-top-right-radius: 5px;
 	background-color: rgba(255,255,255,0.9);
 	text-align: center;
-	line-height: 30px;
+	line-height: 35px;
 	z-index: 3000;
 	cursor: pointer;
 	opacity: 0;
