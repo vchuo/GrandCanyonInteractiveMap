@@ -57,17 +57,17 @@ body:after {
 	-moz-user-select: none;
 }
 
-#welcome_message_popup_container {
+#introduction_popup_container {
 	position: absolute;
 	width: 100%; height: 100%;
 	background-color: rgba(0,0,0,0.4);
 	z-index: 2000;
 }
-#welcome_message_popup {
+#introduction_popup {
 	position: absolute;
 	height: auto;
 	left: 10%; right: 10%;
-	top: 15%;
+	top: 20%;
 	padding-left: 30px; padding-right: 30px;
 	border-radius: 10px;
 	background-color: rgba(255,255,255,0.9);
@@ -76,23 +76,30 @@ body:after {
 	text-align: center;
 	cursor: pointer;
 }
-#welcome_message_popup_content {
+#introduction_popup_content {
 	margin-top: 10px; margin-bottom: 10px;
 	margin-left: 25px; margin-right: 25px;
 }
-#welcome_message_popup_title {
+#introduction_popup_title {
 	font-size: 30px;
 	margin-top: 20px; margin-bottom: 15px;
 }
-.welcome_message_popup_hint {
+.introduction_popup_hint {
 	font-size: 12px;
 	line-height: 12px;
 	color: gray;
 }
-#welcome_message_popup_description {
+#introduction_popup_description {
 	margin-bottom: 20px;
 }
-#welcome_message_popup_button {
+.introduction_popup_red_text {
+	color: #7F1519;
+	font-weight: 700;
+}
+.introduction_popup_emphasized_text {
+	font-weight: 700;
+}
+#introduction_popup_button {
 	position: absolute;
 	width: 120px; height: 35px;
 	left: 0; right: 0;
@@ -146,7 +153,7 @@ body:after {
 .mode_button_hint_container {
 	position: absolute;
 	width: 80%;
-	left: -99999px; top: 15%; 
+	left: -99999px; top: 20%; 
 	overflow: auto;
 	border-radius: 5px;
 	background-color: rgba(255,255,255,0.9);

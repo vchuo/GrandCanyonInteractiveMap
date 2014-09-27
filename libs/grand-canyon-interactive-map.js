@@ -104,7 +104,7 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 			attachEventHandlersForStationPointSVGs();
 			attachEventHandlerForStationPointPopupDiv();
 			attachEventHandlersForViewshedSVGs();
-			attachEventHandlerForWelcomeMessagePopupItems();
+			attachEventHandlerForIntroductionPopupItems();
 			attachEventHandlerForWindowObject();
 			attachEventHandlerForDocumentObject();
 		}
@@ -213,21 +213,21 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 				});
 			});
 		}
-		function attachEventHandlerForWelcomeMessagePopupItems() {
-			$("#welcome_message_popup").click(function() {
-				$("#welcome_message_popup_container").css({left: "-99999px", right: "auto",
+		function attachEventHandlerForIntroductionPopupItems() {
+			$("#introduction_popup").click(function() {
+				$("#introduction_popup_container").css({left: "-99999px", right: "auto",
 															backgroundColor: "transparent"});
-				$(".welcome_message_popup_hint").remove();
-				$("#welcome_message_popup_button").css({display: "block"});
-				$("#welcome_message_popup_button").animate({opacity: 1}, 1500);
-				$("#welcome_message_popup_content").css({marginTop: "35px", marginBottom: "40px"});
+				$(".introduction_popup_hint").remove();
+				$("#introduction_popup_button").css({display: "block"});
+				$("#introduction_popup_button").animate({opacity: 1}, 1500);
+				$("#introduction_popup_content").css({marginTop: "35px", marginBottom: "40px"});
 			});
-			$("#welcome_message_popup_button").bind({
+			$("#introduction_popup_button").bind({
 				mouseover: function() {
-					$("#welcome_message_popup_container").css({left: "0px", right: "auto"});
+					$("#introduction_popup_container").css({left: "0px", right: "auto"});
 				},
 				mouseout: function() {
-					$("#welcome_message_popup_container").css({left: "-99999px", right: "auto"});
+					$("#introduction_popup_container").css({left: "-99999px", right: "auto"});
 				}
 			});
 		}
@@ -2473,11 +2473,11 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 			div_height,
 			div_width;
 
-		if(height < 765) {
-			height = 765;
+		if(height < 918) {
+			height = 918;
 		}
-		if(width < 1000) {
-			width = 1000;
+		if(width < 1200) {
+			width = 1200;
 		}
 		
 		/* Calculates new dimensions of divs to fit window size while maintaining aspect ratio
