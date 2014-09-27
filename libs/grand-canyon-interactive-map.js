@@ -20,24 +20,28 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 	{
 		function execute() {
 			hideMapElementWhileLoading();
-			// resizes loading screen to fit window size
-			setLoadingScreenDimensions();
-			displayLoadingScreen();
 
-			GrandCanyonInteractiveMapSVGCode.appendHTMLForStationPointAndViewshedSVGs();
-			
-			// resizes all content divs to fit window size
-			setContentDimensions();
-			
-			hideAllViewshedPNGs();
-			hideAllRolloverIcons();
-			LandmarksToggle.hideLandmarksLayer();
-			ViewshedAnglesToggle.hideViewshedAnglesLayer();
+			// only load map if device size meets minimum requirements
+			if(screen.width > 1000 && screen.height > 600) {
+				// resizes loading screen to fit window size
+				setLoadingScreenDimensions();
+				displayLoadingScreen();
 
-			ZoomControl.setupPanZoomElement();
-			ExploreByStationPointMode.activateMode();
-			displayMapElementAfterLoadingIsComplete();
-			EventHandlers.attachAllEventHandlers();
+				GrandCanyonInteractiveMapSVGCode.appendHTMLForStationPointAndViewshedSVGs();
+				
+				// resizes all content divs to fit window size
+				setContentDimensions();
+				
+				hideAllViewshedPNGs();
+				hideAllRolloverIcons();
+				LandmarksToggle.hideLandmarksLayer();
+				ViewshedAnglesToggle.hideViewshedAnglesLayer();
+
+				ZoomControl.setupPanZoomElement();
+				ExploreByStationPointMode.activateMode();
+				displayMapElementAfterLoadingIsComplete();
+				EventHandlers.attachAllEventHandlers();
+			}
 		}
 
 		function hideMapElementWhileLoading() {
