@@ -105,6 +105,7 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 			attachEventHandlerForStationPointPopupDiv();
 			attachEventHandlersForViewshedSVGs();
 			attachEventHandlerForIntroductionPopupItems();
+			attachEventHandlerForWindowSizeWarningPopup();
 			attachEventHandlerForWindowObject();
 			attachEventHandlerForDocumentObject();
 		}
@@ -230,6 +231,11 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 					$("#introduction_popup_container").css({left: "-99999px", right: "auto"});
 				}
 			});
+		}
+		function attachEventHandlerForWindowSizeWarningPopup() {
+			$("#window_size_warning_popup").click(function() {
+				$("#window_size_warning_popup").css({display: "none"});
+			})
 		}
 		function attachEventHandlerForWindowObject() {
 			$(window).bind({
@@ -2471,18 +2477,34 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 	 	var height = $(window).height(),
 			width = $(window).width(),
 			div_height,
-			div_width;
+			div_width,
+			MIN_WINDOW_HEIGHT = 918,
+			MIN_WINDOW_WIDTH = 1200;
 
-		if(height < 918) {
-			height = 918;
-		}
-		if(width < 1200) {
-			width = 1200;
+		if(height < MIN_WINDOW_HEIGHT || width < MIN_WINDOW_WIDTH) {
+			// restrict map from resizing to a size smaller than its
+			// minimum-allowed size, and display warning popup indicating
+			// that the map is not displayed in its entirety
+			if(height < MIN_WINDOW_HEIGHT && width < MIN_WINDOW_WIDTH) {
+				$("#window_size_warning_popup").html("Please expand your window to view this map in its entirety.");
+				height = MIN_WINDOW_HEIGHT;
+				width = MIN_WINDOW_WIDTH;
+			} else if (height < MIN_WINDOW_HEIGHT) {
+				$("#window_size_warning_popup").html("Please expand your window vertically to view this map in its entirety.");
+				height = MIN_WINDOW_HEIGHT;
+			} else if (width < MIN_WINDOW_WIDTH) {
+				$("#window_size_warning_popup").html("Please expand your window horizontally to view this map in its entirety.");
+				width = MIN_WINDOW_WIDTH;
+			}
+			$("#window_size_warning_popup").css({display: "block"});
+		} else {
+			// if map is displayed in its entirety, hide warning popup
+			$("#window_size_warning_popup").css({display: "none"});
 		}
 		
-		/* Calculates new dimensions of divs to fit window size while maintaining aspect ratio
-		 * aspect ratio is determined by original basemap image size
-		 */
+		// calculates new dimensions of divs to fit window size while
+		// maintaining aspect ratio; aspect ratio is determined
+		// by original basemap image size
 		if(width/height > MAP_WIDTH/MAP_HEIGHT) {
 			div_height = height;
 			div_width = div_height*MAP_WIDTH/MAP_HEIGHT;
