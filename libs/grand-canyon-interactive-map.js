@@ -2478,8 +2478,8 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 			width = $(window).width(),
 			div_height,
 			div_width,
-			MIN_WINDOW_HEIGHT = 918,
-			MIN_WINDOW_WIDTH = 1200;
+			MIN_WINDOW_HEIGHT = 765,
+			MIN_WINDOW_WIDTH = 1000;
 
 		if(height < MIN_WINDOW_HEIGHT || width < MIN_WINDOW_WIDTH) {
 			// restrict map from resizing to a size smaller than its
