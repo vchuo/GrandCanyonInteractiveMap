@@ -484,7 +484,7 @@ footer a:visited {
 	color: #4863A0;
 }
 
-@media all and (max-device-width: 1000px), (max-device-height: 600px) {
+@media (max-device-width: 1000px), (max-device-height: 600px) {
 	#screen_size_warning_popup { display: block; }
 	#map_content_wrapper { display: none; }
 	body { background-color: #F0F0F0; }
