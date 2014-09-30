@@ -90,7 +90,7 @@ body:after {
 	line-height: 12px;
 	color: gray;
 }
-#introduction_popup_description {
+.introduction_popup_description {
 	margin-bottom: 20px;
 }
 .introduction_popup_red_text {
