@@ -21,16 +21,16 @@
 						<div id="introduction_popup_container">
 							<div id="introduction_popup">
 								<div id="introduction_popup_content">
-									<div class="introduction_popup_hint">(click on this popup to close it)</div>
+									<div id="introduction_popup_hint_top" class="introduction_popup_hint">(click on this popup to close it)</div>
 									<div id="introduction_popup_title">Welcome</div>
 									<div class="introduction_popup_description">
-										What you will find here is an interactive map of the Grand Canyon, developed as a part of a parent project in a digital humanities lab to serve as a portal for readers to explore a slideshow of 41 landscape photographs of the Grand Canyon taken by Henry Peabody (a prominent commercial photographer during his time) circa 1905 and the essays written about these photographs for the parent project, all while spatially orienting themselves on a map of the Grand Canyon.
+										What you will find here is an <span class="introduction_popup_red_text">interactive map of the Grand Canyon</span>, developed as a part of a parent project in a digital humanities lab to serve as a portal for readers to explore a slideshow of 41 landscape photographs of the Grand Canyon taken by <span class="introduction_popup_red_text">Henry Peabody</span> (a prominent commercial photographer during his time) circa 1905 and the essays written about these photographs for the parent project, all while spatially orienting themselves on a map of the Grand Canyon.
 									</div>
 									<div class="introduction_popup_description">
 										This interactive map features <span class="introduction_popup_emphasized_text">two exploration modes</span> (which you can activate using the <span class="introduction_popup_red_text">One</span> and <span class="introduction_popup_red_text">All</span> buttons situated at the bottom-left of your window), <span class="introduction_popup_emphasized_text">two layers</span> (which you can toggle on/off using the <span class="introduction_popup_red_text">checkboxes</span> also situated at the bottom-left of your window), <span class="introduction_popup_emphasized_text">zoom functionality</span> (via <span class="introduction_popup_red_text">mousewheel</span> or the <span class="introduction_popup_red_text">zoom buttons</span> situated at the top-right of your window) and it is <span class="introduction_popup_emphasized_text">draggable</span>. To learn more about the exploration modes/layers, hover your cursor over their respective buttons/checkboxes.
 									</div>
 
-									<div class="introduction_popup_hint">(click on this popup to close it)</div>
+									<div id="introduction_popup_hint_bottom" class="introduction_popup_hint">(click on this popup to close it)</div>
 								</div>
 							</div>
 						</div>
@@ -60,8 +60,12 @@
 
 						<!-- Station Point Mode Button Hint -->
 						<div id="station_point_mode_button_hint_container" class="mode_button_hint_container zoomable_element">
-							<div class="mode_button_hint">
-								<div class="mode_hint_title">Explore By Station Point: Which parts of the Grand Canyon can I see in this <span class="mode_hint_title_emphasized_text">one</span> photo?</div>
+							<div id="station_point_mode_button_hint" class="mode_button_hint">
+								<span class="mode_hint_title">Explore By Station Point</span>
+								<br>
+								<span class="mode_hint_subtitle">
+									(Which parts of the Grand Canyon can I see in this <span id="station_point_mode_hint_title_emphasized_text" class="mode_hint_title_emphasized_text">one</span> photo?)
+								</span>
 
 								<div class="mode_hint_description_paragraph">
 									<div>
@@ -84,8 +88,12 @@
 
 						<!-- Heat Map Mode Button Hint -->
 						<div id="location_mode_button_hint_container" class="mode_button_hint_container zoomable_element">
-							<div class="mode_button_hint">
-								<div class="mode_hint_title">Explore By Location: Show me <span class="mode_hint_title_emphasized_text">all</span> the photos where the location I am pointing to is visible?</div>
+							<div id="location_mode_button_hint" class="mode_button_hint">
+								<span class="mode_hint_title">Explore By Location</span>
+								<br>
+								<span class="mode_hint_subtitle">
+									(Show me <span id="location_mode_hint_title_emphasized_text" class="mode_hint_title_emphasized_text">all</span> the photos where the location I am pointing to is visible?)
+								</span>
 
 								<div class="mode_hint_description_paragraph">
 									Move your cursor around the map to see which locations are visible from the photos taken by Henry Peabody, and click on any location that is visible from at least one photo to get links to the individual web modules created for these photos. If a location is visible from a photo, the viewshed of the photo will be displayed and the corresponding station point will be highlighted.
@@ -140,13 +148,17 @@
 
 						<div id="landmarks_toggle_checkbox_hint_container" class="checkbox_hint_container zoomable_element">
 							<div class="checkbox_hint">
-								<span class="toggle_hint_title">Toggle On/Off Landmarks: Show me where the popular landmarks are on this map.</span>
+								<span class="checkbox_hint_title">Toggle On/Off Landmarks</span>
+								<br>
+								Show me where the popular landmarks are on this map.
 							</div>
 						</div>
 
 						<div id="viewshedangles_toggle_checkbox_hint_container" class="checkbox_hint_container zoomable_element">
 							<div class="checkbox_hint">
-								<span class="toggle_hint_title">Toggle On/Off Viewshed Angles: Show me outlines of what I can see in each photo.</span>
+								<span class="checkbox_hint_title">Toggle On/Off Viewshed Angles</span>
+								<br>
+								Show me outlines of what I can see in each photo.
 							</div>
 						</div>
 
