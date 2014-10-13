@@ -21,7 +21,7 @@ body:after {
 	width: 100%;
 	left: -99999px;
 	margin: 0 auto;
-	background-color:#FFFFFF;
+	background-color: #FFFFFF;
 }
 
 .zoomable_element a:visited {
@@ -277,18 +277,18 @@ body:after {
 }
 
 #Zoom_Out_Button {
-	z-index:1000;
-	opacity:0;
-	cursor:pointer;
+	z-index: 1000;
+	opacity: 0;
+	cursor: pointer;
 }
 #Zoom_Out_Default { z-index:100; }
 #Zoom_Out_Hover { z-index:110; }
 #Zoom_Out_In_Use { z-index:120; }
 #Zoom_Out_Max_Zoom { z-index:130; }
 .zoom_out_button {
-	position:absolute;
-	top:46px;right:10px;
-	width:30px;height:30px;
+	position: absolute;
+	top: 46px; right: 10px;
+	width: 30px; height: 30px;
 }
 
 #landmarks_checkbox_unchecked {
@@ -421,15 +421,15 @@ body:after {
 }
 
 #container {
-	position:relative;
-	width:100%;
-	top:0px;left:0px;
-	z-index:2;
+	position: relative;
+	width: 100%;
+	top: 0px; left: 0px;
+	z-index: 2;
 }
 #panzoom_parent {
-	position:relative;
-	width:100%;
-	display:block;
+	position: relative;
+	width: 100%;
+	display: block;
 	z-index: 3;
 }
 #basemap {
@@ -441,20 +441,20 @@ body:after {
 #panzoom {
 	position: absolute;
 	margin: 0 auto;
-	top: 0px;left: 0px;
+	top: 0px; left: 0px;
 	z-index: 3;
 }
 
 /* Set styles for viewsheds */
 .ViewshedDivs {
-	width:100%;
+	width: 100%;
 	position: absolute;
-	top:0px;left:0px;
-	opacity:0;
+	top: 0px; left: 0px;
+	opacity: 0;
 }
 .ViewshedPNG {
 	position: absolute;
-	top:0px;left:0px;
+	top: 0px; left: 0px;
 	width: 100%;
 	display: none;
 	z-index: 10;
@@ -464,7 +464,7 @@ body:after {
 #StationPointSVGLayer {
 	width: 100%;
 	position: absolute;
-	top:0px;left:0px;
+	top: 0px; left: 0px;
 	z-index: 501;
 }
 
@@ -539,11 +539,21 @@ footer a:visited {
 }
 
 @media (max-device-width: 1000px), (max-device-height: 600px) {
-	#screen_size_warning_popup { display: block; }
-	#map_content_wrapper { display: none; }
-	body { background-color: #F0F0F0; }
+	#screen_size_warning_popup {
+		display: block;
+	}
+	#map_content_wrapper {
+		display: none;
+	}
+	body {
+		background-color: #F0F0F0;
+	}
 }
 @media all and (min-device-width: 1000px) and (min-device-height: 600px) {
-	footer { display: block; }
-	body { background-color: rgba(0,0,0,0.8); }
+	footer {
+		display: block;
+	}
+	body {
+		background-color: rgba(0,0,0,0.8);
+	}
 }

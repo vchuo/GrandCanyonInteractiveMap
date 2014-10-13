@@ -18,6 +18,9 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 
 	var init = function()
 	{
+		/**
+		 Initializes and loads map when document is ready.
+		 */
 		function execute() {
 			hideMapElementWhileLoading();
 
@@ -44,18 +47,30 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 			}
 		}
 
+		/**
+		 Helper function called when map is initially loaded.
+		 */
 		function hideMapElementWhileLoading() {
 			$('#map_content_wrapper').css({left: "-99999px"});
 		}
 		
+		/**
+		 Helper function called when map is initially loaded.
+		 */
 		function displayMapElementAfterLoadingIsComplete() {
 			$('#map_content_wrapper').css({left: "0px"});
 		}
 		
+		/**
+		 Helper function called when map is initially loaded.
+		 */
 		function hideAllViewshedPNGs() {
 			$(".ViewshedPNG").css({display: "none"});
 		}
 
+		/**
+		 Helper function called when map is initially loaded.
+		 */
 		function hideAllRolloverIcons()
 		{
 			hideAllModeButtonRolloverIcons();
@@ -63,6 +78,9 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 			hideAllStationPointRolloverIcons();
 		}
 
+		/**
+		 Helper function called when map is initially loaded.
+		 */
 		function hideAllModeButtonRolloverIcons()
 		{
 			$('#Mode_Button_One_On').css({display: "none"});
@@ -71,6 +89,9 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 			$('#Mode_Button_All_Hover').css({display: "none"});
 		}
 
+		/**
+		 Helper function called when map is initially loaded.
+		 */
 		function hideAllZoomButtonRolloverIcons()
 		{
 			$('#Zoom_In_Hover').css({display: "none"});
@@ -81,6 +102,9 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 			$('#Zoom_Out_Max_Zoom').css({display: "none"});
 		}
 
+		/**
+		 Helper function called when map is initially loaded.
+		 */
 		function hideAllStationPointRolloverIcons()
 		{
 			var StationPointRolloverIcons = document.getElementsByClassName("StationPointRollover");
@@ -99,6 +123,9 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 
 	var EventHandlers = function()
 	{
+		/**
+		 Called by init.execute() when document is ready.
+		 */
 		function attachAllEventHandlers() {
 			// Note: the event handler for mousewheel events is attached in the
 			// setupPanZoomElement function instead of here
@@ -113,6 +140,10 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 			attachEventHandlerForWindowObject();
 			attachEventHandlerForDocumentObject();
 		}
+		/**
+		 Attaches event handlers for the "station point" mode and
+		 "location" mode buttons.
+		 */
 		function attachEventHandlersForModeButtons() {
 			$("#station_point_mode").bind({
 				click: function(){
@@ -137,6 +168,9 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 				}
 			});
 		}
+		/**
+		 Attaches event handlers for the zoom in and zoom out buttons.
+		 */
 		function attachEventHandlersForZoomButtons() {
 			$("#Zoom_In_Button").bind({
 				mousedown: function() {
@@ -167,6 +201,10 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 				}
 			});
 		}
+		/**
+		 Attaches event handlers for the display landmarks checkbox and the
+		 display viewshed angles checkbox.
+		 */
 		function attachEventHandlersForCheckboxes() {
 			$("#landmarks_checkbox_unchecked").bind({
 				click: function() {
@@ -191,6 +229,10 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 				}
 			});
 		}
+		/**
+		 Attaches event handlers for all Station Point SVGs. Events will
+		 only be triggered in station point mode (and not location mode).
+		 */
 		function attachEventHandlersForStationPointSVGs() {
 			$.each($(".station_point_svg"), function(index, value) {
 				$("#"+value.id).bind({
@@ -206,11 +248,24 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 				});
 			});
 		}
+		/**
+		 Attaches event handler for the Station Point Popup Div. The popup div
+		 contains the photo corresponding to the station point that the user
+		 clicked on and has a dimmed background, so if the user clicks on
+		 the dimmed background (the popup div), the popup div will be hid
+		 and the user can return back to exploring other parts of the map.
+		 */
 		function attachEventHandlerForStationPointPopupDiv() {
 			$("#StationPointPopupDiv").click(function(event) {
 				ExploreByStationPointMode.hideStationPointPopup(event)
 			});
 		}
+		/**
+		 Attaches event handlers for all Viewshed SVGs. Events will only
+		 be triggered in location mode (and not station point mode),
+		 where the user can drag his cursor around the map to see all the
+		 photos in which the location the cursor is pointing to is visible.
+		 */
 		function attachEventHandlersForViewshedSVGs() {
 			$.each($(".ViewshedSVG"), function(index, value) {
 				$("#"+value.id).click(function() {
@@ -218,6 +273,16 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 				});
 			});
 		}
+		/**
+		 Attaches event handlers for all introduction popup items: the
+		 introduction popup itself and the button that displays the
+		 introduction popup when the cursor hovers over it. Initially
+		 when the map is loaded, the indroduction popup is displayed
+		 and the user is prompted to close the popup by clicking on the
+		 popup itself. Thereafter, if the user wants to revisit the
+		 introduction popup, he can mouse over the corresponding popup
+		 button.
+		 */
 		function attachEventHandlerForIntroductionPopupItems() {
 			$("#introduction_popup").click(function() {
 				$("#introduction_popup_container").css({left: "-99999px", right: "auto",
@@ -236,11 +301,29 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 				}
 			});
 		}
+		/**
+		 Attaches event handler for window size warning popup. The map
+		 has a minimum size under which it will no longer resize smaller
+		 as the window is resized smaller. When the window is resized small
+		 enough such that the map is not fully displayed (since it has already
+		 reached its minimum size and is no longer resizing smaller), a
+		 warning popup is displayed to prompt the user to expand the window
+		 to view the map in its entirety. The popup disappears when the user
+		 expands the window sufficiently to display the map in its entirety,
+		 when the user clicks on the popup.
+		 */
 		function attachEventHandlerForWindowSizeWarningPopup() {
 			$("#window_size_warning_popup").click(function() {
 				$("#window_size_warning_popup").css({display: "none"});
 			})
 		}
+		/**
+		 Attaches event handlers for the window object. The loading screen
+		 initially displayed is hid when the window is loaded, and the
+		 map is resized when the window is resized (check resizePageContents()
+		 and its helper functions to learn more about the minimum size set for
+		 the map).
+		 */
 		function attachEventHandlerForWindowObject() {
 			$(window).bind({
 				load : function() {		
@@ -251,12 +334,26 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 				}
 			});
 		}
+		/**
+		 Attaches event handlers for the document object. The mousemove event
+		 handler that updates the user's cursor coordinates to help determine
+		 location mode events (when location mode is activated) is attached to
+		 document object instead of the map element itself for better accuracy
+		 when the map is being dragged fast.
+		 */
 		function attachEventHandlerForDocumentObject() {
 			$(document).mousemove(function(event) {
 				trackMouseCoordsAndCheckForExploreByLocationModeEvents(event);
 			});
 		}
-
+		/**
+		 Helper function called by the resize event handler for the window object.
+		 It resets the zoom level of the map back to the minimum zoom level (there
+		 is a bug with the map not being contained inside its own viewport if the
+		 map is resized to a zoom level that is not its minimum zoom level) and calls
+		 the setContentDimensions() helper function which helps resize all the content
+		 divs of the map element accordingly.
+		 */
 		function resizePageContents() {
 			displayLoadingScreen();
 
@@ -274,7 +371,11 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 				hideLoadingScreen();
 			},2000);
 		}
-
+		/**
+		 Helper function called by the mousemove event handler for the document
+		 object. It updates the coordinates of the cursor and makes calls to
+		 a helper function to check for location mode mouseover events.
+		 */
 		function trackMouseCoordsAndCheckForExploreByLocationModeEvents(event) {
 			// store current mouse coordinates
 			current_mouse_x_coord = event.clientX;
