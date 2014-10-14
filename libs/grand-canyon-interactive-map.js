@@ -58,7 +58,7 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 		 Helper function called when map is initially loaded.
 		 */
 		function displayMapElementAfterLoadingIsComplete() {
-			$('#map_content_wrapper').css({left: "0px"});
+			$('#map_content_wrapper').css({left: "0"});
 		}
 		
 		/**
@@ -294,7 +294,7 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 			});
 			$("#introduction_popup_button").bind({
 				mouseover: function() {
-					$("#introduction_popup_container").css({left: "0px", right: "auto"});
+					$("#introduction_popup_container").css({left: "0", right: "auto"});
 				},
 				mouseout: function() {
 					$("#introduction_popup_container").css({left: "-99999px", right: "auto"});
@@ -400,28 +400,37 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 		// variable to store the current zoom level of the map
 		var current_zoom_level,
 		
-			// boolean variable stores whether the user is holding down the zoom in button
+		// boolean variable stores whether the user is holding down the zoom in button
 			zooming_in = false,
 			
-			// boolean variable stores whether the user is holding down the zoom out button
+		// boolean variable stores whether the user is holding down the zoom out button
 			zooming_out = false,
-			
+		
+		// zooming is executed recursively for zoom button initiated zoom events;
+		// this boolean variable is set to true when the user releases a zoom
+		// button, and recursive calls to the corresponding zoom function is halted
 			received_stop_zoom_signal = false,
-			
+		
+		// minimum zoom level of the map
 			MIN_ZOOM_LEVEL = 1,
 			
+		// maximum zoom level of the map
 			MAX_ZOOM_LEVEL = 4,
 
+		// increment at which the map zooms in/out when triggered by a mousewheel
+		// event
 			ZOOM_INCREMENT_MOUSEWHEEL = 0.01,
 
+		// increment at which the map zooms in/out when triggered by a zoom button
+		// event
 			ZOOM_INCREMENT_BUTTON = 0.2;
 
-		/*
-		 * Function: zoomButtonClicked
-		 * --------------
-		 * Called when user clicks on either of the zoom buttons (zoom in, zoom out).
-		 * This function then determines which of the zoom buttons was clicked through
-		 * 'which_button', which  is either 'zoom_in' or 'zoom_out'.
+		/**
+		 Called when the user clicks on either of the zoom buttons (zoom in, zoom out).
+		 This function determines which of the zoom buttons was clicked and makes
+		 the first call to the appropriate helper function (which would then recursively
+		 call itself until the user releases the mouse button or moves the cursor away
+		 from the pressed zoom button).
 		 */
 		function zoomButtonClicked(which_button) {
 			switch(which_button) {
@@ -432,13 +441,11 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 				default: break;
 			}
 		}
-		/*
-		 * Function: zoomButtonReleased
-		 * --------------
-		 * Called when user releases a mouse button on either of the zoom buttons (zoom in,
-		 * zoom out). This function then determines which of the zoom buttons was the cursor
-		 * was on when the mouse button was released through 'which_button', which  is either
-		 * 'zoom_in' or 'zoom_out'.
+		/**
+		 Called when the user releases a mouse button on either of the zoom buttons (zoom in,
+		 zoom out). If the map is zooming in/out, received_stop_zoom_signal is set to be
+		 true to halt the recursive calls to either the zoomInByClick() or zoomOutByClick()
+		 functions and therefore stop the previous zoom event.
 		 */
 		function zoomButtonReleased() {
 			// first conduct a simple check to see that the map is currently either zooming in
@@ -449,21 +456,19 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 				received_stop_zoom_signal = true;
 			}
 		}
-		/*
-		 * Function: zoomInByClick
-		 * --------------
-		 * Function that executes the zooming in process when the user clicks on the zoom in button.
-		 * It does so by calling itself at fixed time intervals (50 ms), and increases its zoom level
-		 * by .04 each time it is called. This process is exited either when (1) the user drags the
-		 * cursor off the zoom in button, (2) the user releases the mouse button and
-		 * "received_stop_zoom_signal" is set to be true by the zoomButtonReleased function, or (3) the
-		 * user has zoomed in to the MAX_ZOOM_LEVEL.
-		 * 
-		 * Also considered using setInterval and clearInterval to implement zoom button functionality, 
-		 * but doing so will require adding code to a mouseout or mousemove event handler to track
-		 * whether the user has dragged the cursor off the zoom in button. Using the method below
-		 * allows for all of the zoom in button functionality to be neatly encased in one function,
-		 * promoting code readability.
+		/**
+		 Function that executes the zooming in process when the user clicks on the zoom in button.
+		 It does so by calling itself at fixed time intervals (50 ms), and increases its zoom level
+		 by .04 each time it is called. This process is exited either when (1) the user drags the
+		 cursor off the zoom in button, (2) the user releases the mouse button and
+		 "received_stop_zoom_signal" is set to be true by the zoomButtonReleased function, or (3) the
+		 user has zoomed in to the MAX_ZOOM_LEVEL.
+		 
+		 Also considered using setInterval and clearInterval to implement zoom button functionality, 
+		 but doing so will require adding code to a mouseout or mousemove event handler to track
+		 whether the user has dragged the cursor off the zoom in button. Using the method below
+		 allows for all of the zoom in button functionality to be neatly encased in one function,
+		 promoting code readability.
 		 */
 		function zoomInByClick() {
 			displayCorrespondingZoomIconIfAtMaxOrMinZoomLevel();
@@ -487,21 +492,19 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 				zoomInByClick(); // recursive call
 			}
 		}
-		/*
-		 * Function: zoomOutByClick
-		 * --------------
-		 * Function that executes the zooming out process when the user clicks on the zoom out button.
-		 * It does so by calling itself at fixed time intervals (50 ms), and decreases its zoom level
-		 * by .04 each time it is called. This process is exited either when (1) the user drags the
-		 * cursor off the zoom out button, (2) the user releases the mouse button and
-		 * "received_stop_zoom_signal" is set to be true by the zoomButtonReleased function, or (3) the
-		 * user has zoomed out to the MIN_ZOOM_LEVEL.
-		 *
-		 * Also considered using setInterval and clearInterval to implement zoom button functionality, 
-		 * but doing so will require adding code to a mouseout or mousemove event handler to track
-		 * whether the user has dragged the cursor off of the zoom out button. Using the method below
-		 * allows for all of the zoom out button functionality to be neatly encased in one function,
-		 * promoting code readability.
+		/**
+		 Function that executes the zooming out process when the user clicks on the zoom out button.
+		 It does so by calling itself at fixed time intervals (50 ms), and decreases its zoom level
+		 by .04 each time it is called. This process is exited either when (1) the user drags the
+		 cursor off the zoom out button, (2) the user releases the mouse button and
+		 "received_stop_zoom_signal" is set to be true by the zoomButtonReleased function, or (3) the
+		 user has zoomed out to the MIN_ZOOM_LEVEL.
+		 
+		 Also considered using setInterval and clearInterval to implement zoom button functionality, 
+		 but doing so will require adding code to a mouseout or mousemove event handler to track
+		 whether the user has dragged the cursor off of the zoom out button. Using the method below
+		 allows for all of the zoom out button functionality to be neatly encased in one function,
+		 promoting code readability.
 		 */
 		function zoomOutByClick() {
 			displayCorrespondingZoomIconIfAtMaxOrMinZoomLevel();
@@ -525,6 +528,14 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 				zoomOutByClick(); // recursive call
 			}
 		}
+		/**
+		 Called by the zoomInByClick() and zoomOutByClick() functions when (1) the
+		 user drags the cursor off the zoom in/out button, (2) the user releases
+		 the mouse button and "received_stop_zoom_signal" is set to be true by the
+		 zoomButtonReleased function, or (3) the user has zoomed in/out to the
+		 MIN_ZOOM_LEVEL/MAX_ZOOM_LEVEL. See the zoomInByClick() and zoomOutByClick()
+		 functions for further explanation.
+		 */
 		function stopZoomAndResetZoomVariables(stopped_zoom_process) {
 			received_stop_zoom_signal = false;
 			switch(stopped_zoom_process) {
@@ -538,6 +549,13 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 					break;
 			}
 		}
+		/**
+		 Called by the zoomInByClick() and zoomOutByClick() functions to make the
+		 adjustments to the zoom level of the map given the current zoom process
+		 (zoom in / zoom out). If the updated zoom level is less than the MIN_ZOOM_LEVEL
+		 or is greater than the MAX_ZOOM_LEVEL, the zoom level is set to the corresponding
+		 zoom limit.
+		 */
 		function sustainZoom(sustained_zoom_process) {
 			switch(sustained_zoom_process) {
 				case "zoom_in":
@@ -556,23 +574,36 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 			var panzoom = $("#focal").find(".panzoom").panzoom();
 			panzoom.panzoom('zoom', current_zoom_level, { silent: true, transition: false });
 		}
-
+		/**
+		 Called when the user hovers the cursor over the zoom in button.
+		 */
 		function highlightZoomInButton() {
 			$('#Zoom_In_Hover').css({display: "block"});
 		}
-
+		/**
+		 Called when the user moves the cursor away from the zoom in button.
+		 */
 		function unhighlightZoomInButton() {
 			$('#Zoom_In_Hover').css({display: "none"});
 		}
-
+		/**
+		 Called when the user hovers the cursor over the zoom out button.
+		 */
 		function highlightZoomOutButton() {
 			$('#Zoom_Out_Hover').css({display: "block"});
 		}
-
+		/**
+		 Called when the user moves the cursor away from the zoom out button.
+		 */
 		function unhighlightZoomOutButton() {
 			$('#Zoom_Out_Hover').css({display: "none"});
 		}
-		
+		/**
+		 Called when the map's current zoom level is either at MIN_ZOOM_LEVEL
+		 or MAX_ZOOM_LEVEL and displays the corresponding grayed icon to indicate
+		 that further zoom in the direction that has attained the zoom limit is not
+		 allowed.
+		 */
 		function displayCorrespondingZoomIconIfAtMaxOrMinZoomLevel() {
 			// if at min zoom level, display min zoom level icon
 			if(current_zoom_level == MIN_ZOOM_LEVEL) {
@@ -588,10 +619,8 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 			}
 		}
 
-		/*
-		 * Function: setupPanZoomElement
-		 * --------------
-		 * Implements zoom and pan functionality using the PanZoom library.
+		/**
+		 Sets up the zoom and pan functionality using the PanZoom library.
 		 */
 		function setupPanZoomElement()
 		{
@@ -602,7 +631,14 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 			resetZoomLevelToDefault();
 
 		}
-
+		/**
+		 Attaches the mousewheel event handler to the parent div of the map
+		 element (panzoom). When a mousewheel event is triggered, a check is
+		 first done to determine whether the user is trying to zoom out past the
+		 minimum zoom level (MIN_ZOOM_LEVEL) or if the user is trying to zoom in
+		 past the maximum zoom levle (MAX_ZOOM_LEVEL). If so, nothing is done;
+		 otherwise, the map at the new zoom level is updated and displayed.
+		 */
 		function attachMouseWheelEventHandler(panzoom) {
 			$("#panzoom_parent").mousewheel(function(event) {
 				if(isMouseWheelEventInvalid(event)) {
@@ -622,16 +658,30 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 				displayCorrespondingZoomIconIfAtMaxOrMinZoomLevel();
 			});
 		}
-
+		/**
+		 Helper function to determine whether a mousewheel event is invalid, where
+		 such an event here is deemed invalid if the user tries to zoom out past the
+	     minimum zoom level (MIN_ZOOM_LEVEL) or if the user tries to zoom in past the
+	     maximum zoom level (MAX_ZOOM_LEVEL). Returns true if the mousewheel event
+	     is invalid, and false otherwise. Called by the
+		 attachMouseWheelEventHandler(...) function.
+		 */
 		function isMouseWheelEventInvalid(event) {
-			// mouse wheel event is "invalid" if user tries to zoom out past the
-			// minimum zoom level, or if the user tries to zoom in past the maximum
-			// zoom level
 			var isUserTryingToZoomOutPastMinZoomLevel = (current_zoom_level == MIN_ZOOM_LEVEL) && (event.originalEvent.deltaY > 0),
 				isUserTryingToZoomInPastMaxZoomLevel = (current_zoom_level == MAX_ZOOM_LEVEL) && (event.originalEvent.deltaY < 0);
 			return (isUserTryingToZoomOutPastMinZoomLevel || isUserTryingToZoomInPastMaxZoomLevel);
 		}
-
+		/**
+		 Called by the attachMouseWheelEventHandler(...) function to display a loading
+		 screen when the mousewheel event is active. Since there does not seem to be a
+		 way to detect when the user has stopped scrolling using the mousewheel, this
+		 function effectively checks every 250ms for whether a mousewheel event is
+		 active and therefore determines that the user has stopped scrolling using the
+		 mousewheel if a mousewheel event has not been active in the past 250ms. This
+		 function is called for all mousewheel events, so when a new mousewheel event
+		 is registered, any setTimeout functions to hide the loading screen is cleared
+		 and delayed for another 250ms.
+		 */
 		function handleMouseWheelZoomEventLoadingScreenDisplayTiming() {
 			clearTimeout($.data(this, "timer"));
 			displayLoadingScreenForZoomEvent();
@@ -639,23 +689,34 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 				hideLoadingScreenForZoomEvent();
 			}, 250));
 		}
-
+		/**
+		 Resets map zoom level to minimum zoom level for the initial load of the map
+		 or upon window resize. Map is reset to minimum zoom level when resized due
+		 to a bug that occurs when the map is resized not to the minimum zoom level
+		 (the map no longer stays contained in its viewport).
+		 */
 		function resetZoomLevelToDefault() {
-			// reset map zoom level to minimum zoom level upon window resize
 			current_zoom_level = MIN_ZOOM_LEVEL;
 			zooming_in = false;
 			zooming_out = false;
 			$('#Zoom_In_Max_Zoom').css({display: "none"});
 			$('#Zoom_Out_Max_Zoom').css({display: "block"});
 		}
-
+		/**
+		 Called by the handleMouseWheelZoomEventLoadingScreenDisplayTiming() function
+		 to display the loading screen for a mousewheel zoom event.
+		 */
 		function displayLoadingScreenForZoomEvent() {
 			$("#panzoom").css({left: "-99999px"});
 			$("#loading_screen").css({display:"block", zIndex:"1"});
 		}
-
+		/**
+		 Called by the handleMouseWheelZoomEventLoadingScreenDisplayTiming() function
+		 to hide the loading screen after the user has stopped scrolling to zoom in/out
+		 using the mousewheel.
+		 */
 		function hideLoadingScreenForZoomEvent() {
-			$("#panzoom").css({left: "0px"});
+			$("#panzoom").css({left: "0"});
 			$("#loading_screen").css({display:"none", zIndex:"2000"});
 		}
 
@@ -677,16 +738,16 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 
 	var ExploreByStationPointMode = function()
 	{
+		// boolean variable to store whether station point mode is active
+		var is_explore_by_station_point_mode_active = false,
+
 		// variable to store the current active station point; if no station point is
 		// currently active, variable stores 'none'; a station point is deemed active if
 		// the cursor is hovering it and its corresponding viewshed is displayed
-		var is_explore_by_station_point_mode_active = false,
 			current_active_station_point = "none";
 
-		/*
-		 * Function: activateMode
-		 * --------------
-		 * Called when user clicks on the station point mode button.
+		/**
+		 Called when user clicks on the station point mode button.
 		 */
 		function activateMode()
 		{
@@ -734,7 +795,7 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 			// hide photo associated with station point
 			$('#StationPointMode_InfoBox').css({left:"auto",right:"-999999px"});
 			$('#StationPointMode_InfoBoxImage').attr("src","");
-			$('#StationPointMode_InfoBoxImage').css({border:"0px"});
+			$('#StationPointMode_InfoBoxImage').css({border:"0"});
 			$('#StationPointMode_StationPointLabel').html("");
 			$('#StationPointMode_StationPointLabel').css({backgroundColor:"transparent"})
 			
@@ -1495,16 +1556,14 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 			}
 		};
 
-		/*
-		 * Function: displayStationPointPopup
-		 * --------------
+		/**
 		 * Displays popup when user clicks on station point
 		 */
 		function displayStationPointPopup(station_point_name) {
 			if(is_explore_by_station_point_mode_active) {
 				$("#StationPointMode_InfoBox").css({left:"auto",right:"-999999px"});
 				$("#StationPointMode_InfoBoxImage").attr("src","");
-				$("#StationPointMode_InfoBoxImage").css({border:"0px"});
+				$("#StationPointMode_InfoBoxImage").css({border:"0"});
 				$("#StationPointNotificationBox").css({left:"-99999px",right:"auto"});
 				displayCorrespondingStationPointPopup(station_point_name);
 				$("#StationPointPopupDiv").css({display:"block",zIndex:4000});
@@ -1727,10 +1786,8 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 					break;
 			}
 		}
-		/*
-		 * Function: getStationPointPopupOffset
-		 * --------------
-		 * 
+		/**
+		 
 		 */
 		 function getStationPointPopupOffset(active_station_point) {
 		 	// retrieve the station point popup image's aspect ratio
@@ -1892,10 +1949,8 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 			// popup has finished fading out and is removed
 			popup_fade_out_in_progress = false; 
 
-		/*
-		 * Function: activateMode
-		 * --------------
-		 * Called when user clicks on the location mode button.
+		/**
+		 Called when user clicks on the location mode button.
 		 */
 		function activateMode()
 		{
@@ -1917,10 +1972,8 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 			}
 		}
 
-		/*
-		 * Function: checkLocationModeMouseoverEvents
-		 * --------------
-		 * 
+		/**
+		 
 		 */
 		function checkLocationModeMouseoverEvents()
 		{
@@ -1946,10 +1999,8 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 			// reset z-index values for all viewsheds
 			setViewshedDivZIndexValues();
 		}
-		/*
-		 * Function: findActiveStationPoints
-		 * --------------
-		 * 
+		/**
+		 
 		 */
 		function findActiveStationPoints(active_station_points_arr) {
 			// array of z-indices used in this function to place the current viewshed div (in
@@ -1983,10 +2034,8 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 			}
 			return active_station_points_arr;
 		}
-		/*
-		 * Function: displayActiveStationPointsNames
-		 * --------------
-		 * 
+		/**
+
 		 */
 		function displayActiveStationPointsNames(active_station_points_arr)
 		{
@@ -2051,10 +2100,8 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 				}
 			}
 		}
-		/*
-		 * Function: setViewshedDivZIndexValues
-		 * --------------
-		 * This function resets z-index values for all viewshed divs to defaults.
+		/**
+		 This function resets z-index values for all viewshed divs to defaults.
 		 */
 		function setViewshedDivZIndexValues() {
 			var temp_ind = [];
@@ -2066,33 +2113,31 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 			}
 		}
 
-		/*
-		 * Function: displayLocationModePopup
-		 * --------------
-		 * Function displays popup when user clicks on viewshed and when location_mode is active.
+		/**
+		 Function displays popup when user clicks on viewshed and when location_mode is active.
 		 */
 		function displayLocationModePopup() {
-			/* If location mode is active, engage location functionality! */
+			// if location mode is active
 			if(!ExploreByStationPointMode.getExploreByStationPointModeStatus() && !popup_fade_out_in_progress) {
 				
-				/* Array to store which station points the location the user clicked on is visible */
+				// array to store which station points the location the user clicked on is visible
 				var stationpoints_visible = [];
 
 				stationpoints_visible = findActiveStationPoints(stationpoints_visible);
 				
-				/* If the user has clicked on a location with a viewshed */
+				// if the user has clicked on a location with a viewshed
 				if(stationpoints_visible.length > 0) {
-					/* If a popup already exists, remove the popup to allow the creation of a new one */
+					// if a popup already exists, remove the popup to allow the creation of a new one
 					if($("#popup_div").length > 0)
 						$('#popup_div').remove();
 					
-					/* Create new popup div */
+					// create new popup div
 					var popup_div = document.createElement("div");
 					popup_div.id = "popup_div";
 					popup_div.className = "zoomable_element"; //to identify as a popup element and as a zoomable element
 					popup_div.style.cssText = "position: absolute; left: 20%; right: 20%; bottom: 40px; border-radius: 25px; z-index: 600; background-color: rgba(256,256,256,0.75); text-align: center; color: black;";
 
-					/* Create exit button for popup div */
+					// create exit button for popup div
 					var exit_button = document.createElement("img");
 					exit_button.src = "./images/Popup-Window-Exit-Button.png";
 					exit_button.id = "exit_button";
@@ -2100,14 +2145,14 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 					exit_button.style.cssText = "position: absolute; top: 15px; right: 15px; width: 25px; height: 25px; border-radius:5px; background-color: rgba(150,150,150,0.8); cursor: pointer";
 					popup_div.appendChild(exit_button);
 			
-					/* Add intro text to popup div */
+					// add intro text to popup div
 					addIntroTextToLocationModePopup(popup_div,stationpoints_visible);
 					
-					/* Add links to popup div */
+					// add links to popup div
 					addLinksToLocationModePopup(popup_div,stationpoints_visible);
 
-					/* Use different heights for popup divs depending on how many links
-					will be displayed (stationpoints_visible.length == # of links) */
+					// Use different heights for popup divs depending on how many links
+					// will be displayed (stationpoints_visible.length == # of links)
 					switch(stationpoints_visible.length) {
 						case 1:
 							popup_div.style.height = '100px'; break;
@@ -2140,10 +2185,8 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 			}
 		}
 
-		/*
-		 * Function: addLinksToLocationModePopup
-		 * --------------
-		 * 
+		/**
+		 
 		 */
 		function addLinksToLocationModePopup(popup_div,stationpoints_visible) {
 			var stationpoint_link1, stationpoint_link2, stationpoint_link3, stationpoint_link4, stationpoint_link5, stationpoint_link6, stationpoint_link7, stationpoint_link8;
@@ -2159,10 +2202,8 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 				popup_div.appendChild(stationpoint_links[i]);
 			}
 		}
-		/*
-		 * Function: getLocationModePopupLink
-		 * --------------
-		 * 
+		/**
+
 		 */
 		function getLocationModePopupLink(stationpoint_index) {
 			switch(parseInt(stationpoint_index)) {
@@ -2252,33 +2293,31 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 					return 'http://enchantingthedesert.com/2-on-grand-view-point/'; break;
 			}
 		}
-		/*
-		 * Function: addIntroTextToLocationModePopup
-		 * --------------
-		 * 
+		/**
+
 		 */
 		function addIntroTextToLocationModePopup(popup_div,stationpoints_visible) {
-			/* Variable to store the sentence in the popup that describes which station points
-			the user-clicked location are visible from */
+			// variable to store the sentence in the popup that describes which station points
+			// the user-clicked location are visible from
 			var intro = document.createElement('p'), intro_text = '';
 			intro.className = 'zoomable_element'; //to identify as a popup element
-			/* Add the names of the station points to intro_text of the station points
-			the user-clicked location are visible from */
+			// add the names of the station points to intro_text of the station points
+			// the user-clicked location are visible from
 			if(stationpoints_visible.length != 0) { //if user has clicked on a viewshed
 				if(stationpoints_visible.length == 1) {
-					/* If there is only one station point to be included in the sentence */
+					// if there is only one station point to be included in the sentence
 					intro_text += 'The location you clicked is visible from station point ' + stationpoints_visible[0];
 				} else {
-					/* If there is more than one station point to be included in the sentence */
+					// if there is more than one station point to be included in the sentence
 					intro_text = 'The location you clicked is visible from station points ';
 					for(var i = 0; i < stationpoints_visible.length; i++) {
 						if(i == stationpoints_visible.length - 1) {
-							/* If this is the last station point to be added to the sentence */
+							// if this is the last station point to be added to the sentence
 							intro_text += ' and ' + stationpoints_visible[i];
 						} else {
 							if(stationpoints_visible.length == 2 && i == 0) {
-								/* If there is only two station points, don't add the comma before
-								the 'and' word */
+								// if there is only two station points, don't add the comma before
+								// the 'and' word
 								intro_text += stationpoints_visible[i];
 							} else {
 								intro_text += stationpoints_visible[i] + ', ';
@@ -2293,11 +2332,9 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 				popup_div.appendChild(intro);
 			}
 		}
-		/*
-		 * Function: destroyLocationModePopup
-		 * --------------
-		 * Function destroys active popup with id 'popup_div' by first executing a fadeout,
-		 * then removing the popup_div element
+		/**
+		 Function destroys active popup with id 'popup_div' by first executing a fadeout,
+		 then removing the popup_div element
 		 */
 		function destroyLocationModePopup() {
 			$('#popup_div').fadeOut(500);
@@ -2349,13 +2386,11 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 	{
 		var is_landmarks_layer_displayed = false;
 
-		/*
-		 * Function: triggerLandmarksToggleEvent
-		 * --------------
-		 * This function is called when the user clicks on the 'checkbox' for 'Landmarks'.
-		 * As this 'checkbox' is not actually a checkbox object, the internals of determining
-		 * what events to trigger following the clicking of the 'checkbox' is determined in this
-		 * function.
+		/**
+		 This function is called when the user clicks on the 'checkbox' for 'Landmarks'.
+		 As this 'checkbox' is not actually a checkbox object, the internals of determining
+		 what events to trigger following the clicking of the 'checkbox' is determined in this
+		 function.
 		 */
 		function triggerLandmarksToggleEvent() {
 			if(!is_landmarks_layer_displayed) {
@@ -2364,11 +2399,9 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 				deactivateLandmarksToggle();
 			}
 		}
-		/*
-		 * Function: activateLandmarksToggle
-		 * --------------
-		 * This function displays the landmarks and sets the corresponding global variable 
-		 * (is_landmarks_layer_displayed) to reflect that its status is "active".
+		/**
+		 This function displays the landmarks and sets the corresponding global variable 
+		 (is_landmarks_layer_displayed) to reflect that its status is "active".
 		 */
 		function activateLandmarksToggle() {
 			is_landmarks_layer_displayed = true;
@@ -2376,11 +2409,9 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 			displayLandmarksLayer();
 			setAllStationPointIconsOpacity(0.2);
 		}
-		/*
-		 * Function: deactivateLandmarksToggle
-		 * --------------
-		 * This function hides the landmarks and sets the corresponding global variable 
-		 * (is_landmarks_layer_displayed) to reflect that its status is "inactive".
+		/**
+		 This function hides the landmarks and sets the corresponding global variable 
+		 (is_landmarks_layer_displayed) to reflect that its status is "inactive".
 		 */
 		function deactivateLandmarksToggle() {
 			is_landmarks_layer_displayed = false;
@@ -2393,7 +2424,7 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 			}
 		}
 		function displayLandmarksLayer() {
-			$('#LandmarksLayer').css({left:"0px", right:"auto"});
+			$('#LandmarksLayer').css({left:"0", right:"auto"});
 		}
 		function hideLandmarksLayer() {
 			$('#LandmarksLayer').css({left:"-99999px", right:"auto"});
@@ -2431,13 +2462,11 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 	{
 		var is_viewshed_angles_layer_displayed = false;
 
-		/*
-		 * Function: triggerViewshedAnglesToggleEvent
-		 * --------------
-		 * This function is called when the user clicks on the 'checkbox' for 'View Angles'.
-		 * As this 'checkbox' is not actually a checkbox object, the internals of determining
-		 * what events to trigger following the clicking of the 'checkbox' is determined in this
-		 * function.
+		/**
+		 This function is called when the user clicks on the 'checkbox' for 'View Angles'.
+		 As this 'checkbox' is not actually a checkbox object, the internals of determining
+		 what events to trigger following the clicking of the 'checkbox' is determined in this
+		 function.
 		 */
 		function triggerViewshedAnglesToggleEvent() {
 			if(!is_viewshed_angles_layer_displayed) {
@@ -2446,22 +2475,18 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 				deactivateViewshedAnglesToggle();
 			}
 		}
-		/*
-		 * Function: activateViewshedAnglesToggle
-		 * --------------
-		 * This function displays the view angles and sets the corresponding global variable 
-		 * (is_viewshed_angles_layer_displayed) to reflect that its status is 'active'.
+		/**
+		 This function displays the view angles and sets the corresponding global variable 
+		 (is_viewshed_angles_layer_displayed) to reflect that its status is 'active'.
 		 */
 		function activateViewshedAnglesToggle() {
 			is_viewshed_angles_layer_displayed = true;
 			displayViewshedAnglesLayer();
 			document.getElementById('viewshedangles_checkbox_unchecked').style.opacity = 0;
 		}
-		/*
-		 * Function: deactivateViewshedAnglesToggle
-		 * --------------
-		 * This function hides the view angles and sets the corresponding global variable 
-		 * (is_viewshed_angles_layer_displayed) to reflect that its status is 'inactive'.
+		/**
+		 This function hides the view angles and sets the corresponding global variable 
+		 (is_viewshed_angles_layer_displayed) to reflect that its status is 'inactive'.
 		 */
 		function deactivateViewshedAnglesToggle() {
 			is_viewshed_angles_layer_displayed = false;
@@ -2469,7 +2494,7 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 			document.getElementById('viewshedangles_checkbox_unchecked').style.opacity = 1;
 		}
 		function displayViewshedAnglesLayer() {
-			$('#ViewshedAnglesLayer').css({left: "0px", right: "auto"});
+			$('#ViewshedAnglesLayer').css({left: "0", right: "auto"});
 		}
 		function hideViewshedAnglesLayer() {
 			$('#ViewshedAnglesLayer').css({left: "-99999px", right: "auto"});
@@ -2507,10 +2532,8 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 		$("#loading_screen").css({display:"none"});
 	}
 
-	/*
-	 * Function: setLoadingScreenDimensions
-	 * --------------
-	 * 
+	/**
+
 	 */
 	function setLoadingScreenDimensions() {
 	 	var div_dimensions = getWindowAdjustedDivDimensions(),
@@ -2524,11 +2547,9 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 		$('#loading_screen').css({top: offset_to_center_loading_screen_vertically, bottom: "auto"});
 	 }
 
-	/*
-	 * Function: setContentDimensions
-	 * --------------
-	 * This function resizes a selection of html objects to fit to the size of the browser
-	 * window.
+	/**
+	 This function resizes a selection of html objects to fit to the size of the browser
+	 window.
 	 */
 	function setContentDimensions() {
 		var div_dimensions = getWindowAdjustedDivDimensions(),
@@ -2573,10 +2594,8 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 		$('#map_content_wrapper').css({top: offset_to_center_map_viewport_vertically, bottom: "auto"});
 	}
 
-	/*
-	 * Function: getWindowAdjustedDivDimensions
-	 * --------------
-	 * 
+	/**
+
 	 */
 	 function getWindowAdjustedDivDimensions() {
 	 	var height = $(window).height(),
@@ -2621,10 +2640,8 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 		return [div_width,div_height];
 	 }
 
-	/*
-	 * Function: setAllStationPointIconsOpacity
-	 * --------------
-	 * 
+	/**
+	 
 	 */
 	function setAllStationPointIconsOpacity(dimmed_opacity) {
 		$(".StationPointIcon").css({opacity: dimmed_opacity, zIndex: "3"});
