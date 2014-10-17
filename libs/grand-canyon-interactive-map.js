@@ -14,18 +14,25 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 		MAP_WIDTH = 2700,
 
 	// constant for the height (in pixels) of the basemap image used
-		MAP_HEIGHT = 2066;
+		MAP_HEIGHT = 2066,
+
+	// constants for the minimum screen width/height (in pixels)
+	// under which the application is not displayed and a relevant
+	// message is displayed to prompt the user to use a device with
+	// a larger screen to view this application
+		MIN_SCREEN_WIDTH = 1000,
+		MIN_SCREEN_HEIGHT = 600;
 
 	var init = function()
 	{
 		/**
-		 Initializes and loads map when document is ready.
+		 * Initializes and loads map when document is ready.
 		 */
 		function execute() {
 			hideMapElementWhileLoading();
 
 			// only load map if device size meets minimum requirements
-			if(screen.width > 1000 && screen.height > 600) {
+			if(screen.width > MIN_SCREEN_WIDTH && screen.height > MIN_SCREEN_WIDTH) {
 				// resizes loading screen to fit window size
 				setLoadingScreenDimensions();
 				displayLoadingScreen();
@@ -48,28 +55,28 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 		}
 
 		/**
-		 Helper function called when map is initially loaded.
+		 * Helper function called when map is initially loaded.
 		 */
 		function hideMapElementWhileLoading() {
-			$('#map_content_wrapper').css({left: "-99999px"});
+			$("#map_content_wrapper").css({left: "-99999px"});
 		}
 		
 		/**
-		 Helper function called when map is initially loaded.
+		 * Helper function called when map is initially loaded.
 		 */
 		function displayMapElementAfterLoadingIsComplete() {
-			$('#map_content_wrapper').css({left: "0"});
+			$("#map_content_wrapper").css({left: "0"});
 		}
 		
 		/**
-		 Helper function called when map is initially loaded.
+		 * Helper function called when map is initially loaded.
 		 */
 		function hideAllViewshedPNGs() {
 			$(".ViewshedPNG").css({display: "none"});
 		}
 
 		/**
-		 Helper function called when map is initially loaded.
+		 * Helper function called when map is initially loaded.
 		 */
 		function hideAllRolloverIcons()
 		{
@@ -79,31 +86,31 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 		}
 
 		/**
-		 Helper function called when map is initially loaded.
+		 * Helper function called when map is initially loaded.
 		 */
 		function hideAllModeButtonRolloverIcons()
 		{
-			$('#Mode_Button_One_On').css({display: "none"});
-			$('#Mode_Button_One_Hover').css({display: "none"});
-			$('#Mode_Button_All_On').css({display: "none"});
-			$('#Mode_Button_All_Hover').css({display: "none"});
+			$("#Mode_Button_One_On").css({display: "none"});
+			$("#Mode_Button_One_Hover").css({display: "none"});
+			$("#Mode_Button_All_On").css({display: "none"});
+			$("#Mode_Button_All_Hover").css({display: "none"});
 		}
 
 		/**
-		 Helper function called when map is initially loaded.
+		 * Helper function called when map is initially loaded.
 		 */
 		function hideAllZoomButtonRolloverIcons()
 		{
-			$('#Zoom_In_Hover').css({display: "none"});
-			$('#Zoom_In_In_Use').css({display: "none"});
-			$('#Zoom_In_Max_Zoom').css({display: "none"});
-			$('#Zoom_Out_Hover').css({display: "none"});
-			$('#Zoom_Out_In_Use').css({display: "none"});
-			$('#Zoom_Out_Max_Zoom').css({display: "none"});
+			$("#Zoom_In_Hover").css({display: "none"});
+			$("#Zoom_In_In_Use").css({display: "none"});
+			$("#Zoom_In_Max_Zoom").css({display: "none"});
+			$("#Zoom_Out_Hover").css({display: "none"});
+			$("#Zoom_Out_In_Use").css({display: "none"});
+			$("#Zoom_Out_Max_Zoom").css({display: "none"});
 		}
 
 		/**
-		 Helper function called when map is initially loaded.
+		 * Helper function called when map is initially loaded.
 		 */
 		function hideAllStationPointRolloverIcons()
 		{
@@ -124,7 +131,7 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 	var EventHandlers = function()
 	{
 		/**
-		 Called by init.execute() when document is ready.
+		 * Called by init.execute() when document is ready.
 		 */
 		function attachAllEventHandlers() {
 			// Note: the event handler for mousewheel events is attached in the
@@ -141,8 +148,8 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 			attachEventHandlerForDocumentObject();
 		}
 		/**
-		 Attaches event handlers for the "station point" mode and
-		 "location" mode buttons.
+		 * Attaches event handlers for the "station point" mode and
+		 * "location" mode buttons.
 		 */
 		function attachEventHandlersForModeButtons() {
 			$("#station_point_mode").bind({
@@ -169,7 +176,7 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 			});
 		}
 		/**
-		 Attaches event handlers for the zoom in and zoom out buttons.
+		 * Attaches event handlers for the zoom in and zoom out buttons.
 		 */
 		function attachEventHandlersForZoomButtons() {
 			$("#Zoom_In_Button").bind({
@@ -202,8 +209,8 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 			});
 		}
 		/**
-		 Attaches event handlers for the display landmarks checkbox and the
-		 display viewshed angles checkbox.
+		 * Attaches event handlers for the display landmarks checkbox and the
+		 * display viewshed angles checkbox.
 		 */
 		function attachEventHandlersForCheckboxes() {
 			$("#landmarks_checkbox_unchecked").bind({
@@ -230,8 +237,8 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 			});
 		}
 		/**
-		 Attaches event handlers for all Station Point SVGs. Events will
-		 only be triggered in station point mode (and not location mode).
+		 * Attaches event handlers for all Station Point SVGs. Events will
+		 * only be triggered in station point mode (and not location mode).
 		 */
 		function attachEventHandlersForStationPointSVGs() {
 			$.each($(".station_point_svg"), function(index, value) {
@@ -249,11 +256,11 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 			});
 		}
 		/**
-		 Attaches event handler for the Station Point Popup Div. The popup div
-		 contains the photo corresponding to the station point that the user
-		 clicked on and has a dimmed background, so if the user clicks on
-		 the dimmed background (the popup div), the popup div will be hid
-		 and the user can return back to exploring other parts of the map.
+		 * Attaches event handler for the Station Point Popup Div. The popup div
+		 * contains the photo corresponding to the station point that the user
+		 * clicked on and has a dimmed background, so if the user clicks on
+		 * the dimmed background (the popup div), the popup div will be hid
+		 * and the user can return back to exploring other parts of the map.
 		 */
 		function attachEventHandlerForStationPointPopupDiv() {
 			$("#StationPointPopupDiv").click(function(event) {
@@ -261,10 +268,10 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 			});
 		}
 		/**
-		 Attaches event handlers for all Viewshed SVGs. Events will only
-		 be triggered in location mode (and not station point mode),
-		 where the user can drag his cursor around the map to see all the
-		 photos in which the location the cursor is pointing to is visible.
+		 * Attaches event handlers for all Viewshed SVGs. Events will only
+		 * be triggered in location mode (and not station point mode),
+		 * where the user can drag his cursor around the map to see all the
+		 * photos in which the location the cursor is pointing to is visible.
 		 */
 		function attachEventHandlersForViewshedSVGs() {
 			$.each($(".ViewshedSVG"), function(index, value) {
@@ -274,14 +281,14 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 			});
 		}
 		/**
-		 Attaches event handlers for all introduction popup items: the
-		 introduction popup itself and the button that displays the
-		 introduction popup when the cursor hovers over it. Initially
-		 when the map is loaded, the indroduction popup is displayed
-		 and the user is prompted to close the popup by clicking on the
-		 popup itself. Thereafter, if the user wants to revisit the
-		 introduction popup, he can mouse over the corresponding popup
-		 button.
+		 * Attaches event handlers for all introduction popup items: the
+		 * introduction popup itself and the button that displays the
+		 * introduction popup when the cursor hovers over it. Initially
+		 * when the map is loaded, the indroduction popup is displayed
+		 * and the user is prompted to close the popup by clicking on the
+		 * popup itself. Thereafter, if the user wants to revisit the
+		 * introduction popup, he can mouse over the corresponding popup
+		 * button.
 		 */
 		function attachEventHandlerForIntroductionPopupItems() {
 			$("#introduction_popup").click(function() {
@@ -302,15 +309,15 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 			});
 		}
 		/**
-		 Attaches event handler for window size warning popup. The map
-		 has a minimum size under which it will no longer resize smaller
-		 as the window is resized smaller. When the window is resized small
-		 enough such that the map is not fully displayed (since it has already
-		 reached its minimum size and is no longer resizing smaller), a
-		 warning popup is displayed to prompt the user to expand the window
-		 to view the map in its entirety. The popup disappears when the user
-		 expands the window sufficiently to display the map in its entirety,
-		 when the user clicks on the popup.
+		 * Attaches event handler for window size warning popup. The map
+		 * has a minimum size under which it will no longer resize smaller
+		 * as the window is resized smaller. When the window is resized small
+		 * enough such that the map is not fully displayed (since it has already
+		 * reached its minimum size and is no longer resizing smaller), a
+		 * warning popup is displayed to prompt the user to expand the window
+		 * to view the map in its entirety. The popup disappears when the user
+		 * expands the window sufficiently to display the map in its entirety,
+		 * when the user clicks on the popup.
 		 */
 		function attachEventHandlerForWindowSizeWarningPopup() {
 			$("#window_size_warning_popup").click(function() {
@@ -318,11 +325,11 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 			})
 		}
 		/**
-		 Attaches event handlers for the window object. The loading screen
-		 initially displayed is hid when the window is loaded, and the
-		 map is resized when the window is resized (check resizePageContents()
-		 and its helper functions to learn more about the minimum size set for
-		 the map).
+		 * Attaches event handlers for the window object. The loading screen
+		 * initially displayed is hid when the window is loaded, and the
+		 * map is resized when the window is resized (check resizePageContents()
+		 * and its helper functions to learn more about the minimum size set for
+		 * the map).
 		 */
 		function attachEventHandlerForWindowObject() {
 			$(window).bind({
@@ -335,11 +342,11 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 			});
 		}
 		/**
-		 Attaches event handlers for the document object. The mousemove event
-		 handler that updates the user's cursor coordinates to help determine
-		 location mode events (when location mode is activated) is attached to
-		 document object instead of the map element itself for better accuracy
-		 when the map is being dragged fast.
+		 * Attaches event handlers for the document object. The mousemove event
+		 * handler that updates the user's cursor coordinates to help determine
+		 * location mode events (when location mode is activated) is attached to
+		 * document object instead of the map element itself for better accuracy
+		 * when the map is being dragged fast.
 		 */
 		function attachEventHandlerForDocumentObject() {
 			$(document).mousemove(function(event) {
@@ -347,12 +354,12 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 			});
 		}
 		/**
-		 Helper function called by the resize event handler for the window object.
-		 It resets the zoom level of the map back to the minimum zoom level (there
-		 is a bug with the map not being contained inside its own viewport if the
-		 map is resized to a zoom level that is not its minimum zoom level) and calls
-		 the setContentDimensions() helper function which helps resize all the content
-		 divs of the map element accordingly.
+		 * Helper function called by the resize event handler for the window object.
+		 * It resets the zoom level of the map back to the minimum zoom level (there
+		 * is a bug with the map not being contained inside its own viewport if the
+		 * map is resized to a zoom level that is not its minimum zoom level) and calls
+		 * the setContentDimensions() helper function which helps resize all the content
+		 * divs of the map element accordingly.
 		 */
 		function resizePageContents() {
 			displayLoadingScreen();
@@ -372,9 +379,9 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 			},2000);
 		}
 		/**
-		 Helper function called by the mousemove event handler for the document
-		 object. It updates the coordinates of the cursor and makes calls to
-		 a helper function to check for location mode mouseover events.
+		 * Helper function called by the mousemove event handler for the document
+		 * object. It updates the coordinates of the cursor and makes calls to
+		 * a helper function to check for location mode mouseover events.
 		 */
 		function trackMouseCoordsAndCheckForExploreByLocationModeEvents(event) {
 			// store current mouse coordinates
@@ -426,26 +433,26 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 			ZOOM_INCREMENT_BUTTON = 0.2;
 
 		/**
-		 Called when the user clicks on either of the zoom buttons (zoom in, zoom out).
-		 This function determines which of the zoom buttons was clicked and makes
-		 the first call to the appropriate helper function (which would then recursively
-		 call itself until the user releases the mouse button or moves the cursor away
-		 from the pressed zoom button).
+		 * Called when the user clicks on either of the zoom buttons (zoom in, zoom out).
+		 * This function determines which of the zoom buttons was clicked and makes
+		 * the first call to the appropriate helper function (which would then recursively
+		 * call itself until the user releases the mouse button or moves the cursor away
+		 * from the pressed zoom button).
 		 */
 		function zoomButtonClicked(which_button) {
 			switch(which_button) {
-				case 'zoom_in':
+				case "zoom_in":
 					zoomInByClick(); break;
-				case 'zoom_out':
+				case "zoom_out":
 					zoomOutByClick(); break;
 				default: break;
 			}
 		}
 		/**
-		 Called when the user releases a mouse button on either of the zoom buttons (zoom in,
-		 zoom out). If the map is zooming in/out, received_stop_zoom_signal is set to be
-		 true to halt the recursive calls to either the zoomInByClick() or zoomOutByClick()
-		 functions and therefore stop the previous zoom event.
+		 * Called when the user releases a mouse button on either of the zoom buttons (zoom in,
+		 * zoom out). If the map is zooming in/out, received_stop_zoom_signal is set to be
+		 * true to halt the recursive calls to either the zoomInByClick() or zoomOutByClick()
+		 * functions and therefore stop the previous zoom event.
 		 */
 		function zoomButtonReleased() {
 			// first conduct a simple check to see that the map is currently either zooming in
@@ -457,18 +464,18 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 			}
 		}
 		/**
-		 Function that executes the zooming in process when the user clicks on the zoom in button.
-		 It does so by calling itself at fixed time intervals (50 ms), and increases its zoom level
-		 by .04 each time it is called. This process is exited either when (1) the user drags the
-		 cursor off the zoom in button, (2) the user releases the mouse button and
-		 "received_stop_zoom_signal" is set to be true by the zoomButtonReleased function, or (3) the
-		 user has zoomed in to the MAX_ZOOM_LEVEL.
-		 
-		 Also considered using setInterval and clearInterval to implement zoom button functionality, 
-		 but doing so will require adding code to a mouseout or mousemove event handler to track
-		 whether the user has dragged the cursor off the zoom in button. Using the method below
-		 allows for all of the zoom in button functionality to be neatly encased in one function,
-		 promoting code readability.
+		 * Function that executes the zooming in process when the user clicks on the zoom in button.
+		 * It does so by calling itself at fixed time intervals (50 ms), and increases its zoom level
+		 * by .04 each time it is called. This process is exited either when (1) the user drags the
+		 * cursor off the zoom in button, (2) the user releases the mouse button and
+		 * "received_stop_zoom_signal" is set to be true by the zoomButtonReleased function, or (3) the
+		 * user has zoomed in to the MAX_ZOOM_LEVEL.
+		 * 
+		 * Also considered using setInterval and clearInterval to implement zoom button functionality, 
+		 * but doing so will require adding code to a mouseout or mousemove event handler to track
+		 * whether the user has dragged the cursor off the zoom in button. Using the method below
+		 * allows for all of the zoom in button functionality to be neatly encased in one function,
+		 * promoting code readability.
 		 */
 		function zoomInByClick() {
 			displayCorrespondingZoomIconIfAtMaxOrMinZoomLevel();
@@ -488,23 +495,23 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 				// if not yet zooming in, begin zoom
 				zooming_in = true;
 				displayLoadingScreenForZoomEvent();
-				$('#Zoom_In_In_Use').css({display: "block"});
+				$("#Zoom_In_In_Use").css({display: "block"});
 				zoomInByClick(); // recursive call
 			}
 		}
 		/**
-		 Function that executes the zooming out process when the user clicks on the zoom out button.
-		 It does so by calling itself at fixed time intervals (50 ms), and decreases its zoom level
-		 by .04 each time it is called. This process is exited either when (1) the user drags the
-		 cursor off the zoom out button, (2) the user releases the mouse button and
-		 "received_stop_zoom_signal" is set to be true by the zoomButtonReleased function, or (3) the
-		 user has zoomed out to the MIN_ZOOM_LEVEL.
-		 
-		 Also considered using setInterval and clearInterval to implement zoom button functionality, 
-		 but doing so will require adding code to a mouseout or mousemove event handler to track
-		 whether the user has dragged the cursor off of the zoom out button. Using the method below
-		 allows for all of the zoom out button functionality to be neatly encased in one function,
-		 promoting code readability.
+		 * Function that executes the zooming out process when the user clicks on the zoom out button.
+		 * It does so by calling itself at fixed time intervals (50 ms), and decreases its zoom level
+		 * by .04 each time it is called. This process is exited either when (1) the user drags the
+		 * cursor off the zoom out button, (2) the user releases the mouse button and
+		 * "received_stop_zoom_signal" is set to be true by the zoomButtonReleased function, or (3) the
+		 * user has zoomed out to the MIN_ZOOM_LEVEL.
+		 * 
+		 * Also considered using setInterval and clearInterval to implement zoom button functionality, 
+		 * but doing so will require adding code to a mouseout or mousemove event handler to track
+		 * whether the user has dragged the cursor off of the zoom out button. Using the method below
+		 * allows for all of the zoom out button functionality to be neatly encased in one function,
+		 * promoting code readability.
 		 */
 		function zoomOutByClick() {
 			displayCorrespondingZoomIconIfAtMaxOrMinZoomLevel();
@@ -524,37 +531,37 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 				// if not yet zooming out, begin zoom
 				zooming_out = true;
 				displayLoadingScreenForZoomEvent();
-				$('#Zoom_Out_In_Use').css({display: "block"});
+				$("#Zoom_Out_In_Use").css({display: "block"});
 				zoomOutByClick(); // recursive call
 			}
 		}
 		/**
-		 Called by the zoomInByClick() and zoomOutByClick() functions when (1) the
-		 user drags the cursor off the zoom in/out button, (2) the user releases
-		 the mouse button and "received_stop_zoom_signal" is set to be true by the
-		 zoomButtonReleased function, or (3) the user has zoomed in/out to the
-		 MIN_ZOOM_LEVEL/MAX_ZOOM_LEVEL. See the zoomInByClick() and zoomOutByClick()
-		 functions for further explanation.
+		 * Called by the zoomInByClick() and zoomOutByClick() functions when (1) the
+		 * user drags the cursor off the zoom in/out button, (2) the user releases
+		 * the mouse button and "received_stop_zoom_signal" is set to be true by the
+		 * zoomButtonReleased function, or (3) the user has zoomed in/out to the
+		 * MIN_ZOOM_LEVEL/MAX_ZOOM_LEVEL. See the zoomInByClick() and zoomOutByClick()
+		 * functions for further explanation.
 		 */
 		function stopZoomAndResetZoomVariables(stopped_zoom_process) {
 			received_stop_zoom_signal = false;
 			switch(stopped_zoom_process) {
 				case "zoom_in":
 					zooming_in = false;
-					$('#Zoom_In_In_Use').css({display: "none"});
+					$("#Zoom_In_In_Use").css({display: "none"});
 					break;
 				case "zoom_out":
 					zooming_out = false;
-					$('#Zoom_Out_In_Use').css({display: "none"});
+					$("#Zoom_Out_In_Use").css({display: "none"});
 					break;
 			}
 		}
 		/**
-		 Called by the zoomInByClick() and zoomOutByClick() functions to make the
-		 adjustments to the zoom level of the map given the current zoom process
-		 (zoom in / zoom out). If the updated zoom level is less than the MIN_ZOOM_LEVEL
-		 or is greater than the MAX_ZOOM_LEVEL, the zoom level is set to the corresponding
-		 zoom limit.
+		 * Called by the zoomInByClick() and zoomOutByClick() functions to make the
+		 * adjustments to the zoom level of the map given the current zoom process
+		 * (zoom in / zoom out). If the updated zoom level is less than the MIN_ZOOM_LEVEL
+		 * or is greater than the MAX_ZOOM_LEVEL, the zoom level is set to the corresponding
+		 * zoom limit.
 		 */
 		function sustainZoom(sustained_zoom_process) {
 			switch(sustained_zoom_process) {
@@ -572,55 +579,55 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 					break;
 			}
 			var panzoom = $("#focal").find(".panzoom").panzoom();
-			panzoom.panzoom('zoom', current_zoom_level, { silent: true, transition: false });
+			panzoom.panzoom("zoom", current_zoom_level, { silent: true, transition: false });
 		}
 		/**
-		 Called when the user hovers the cursor over the zoom in button.
+		 * Called when the user hovers the cursor over the zoom in button.
 		 */
 		function highlightZoomInButton() {
-			$('#Zoom_In_Hover').css({display: "block"});
+			$("#Zoom_In_Hover").css({display: "block"});
 		}
 		/**
-		 Called when the user moves the cursor away from the zoom in button.
+		 * Called when the user moves the cursor away from the zoom in button.
 		 */
 		function unhighlightZoomInButton() {
-			$('#Zoom_In_Hover').css({display: "none"});
+			$("#Zoom_In_Hover").css({display: "none"});
 		}
 		/**
-		 Called when the user hovers the cursor over the zoom out button.
+		 * Called when the user hovers the cursor over the zoom out button.
 		 */
 		function highlightZoomOutButton() {
-			$('#Zoom_Out_Hover').css({display: "block"});
+			$("#Zoom_Out_Hover").css({display: "block"});
 		}
 		/**
-		 Called when the user moves the cursor away from the zoom out button.
+		 * Called when the user moves the cursor away from the zoom out button.
 		 */
 		function unhighlightZoomOutButton() {
-			$('#Zoom_Out_Hover').css({display: "none"});
+			$("#Zoom_Out_Hover").css({display: "none"});
 		}
 		/**
-		 Called when the map's current zoom level is either at MIN_ZOOM_LEVEL
-		 or MAX_ZOOM_LEVEL and displays the corresponding grayed icon to indicate
-		 that further zoom in the direction that has attained the zoom limit is not
-		 allowed.
+		 * Called when the map's current zoom level is either at MIN_ZOOM_LEVEL
+		 * or MAX_ZOOM_LEVEL and displays the corresponding grayed icon to indicate
+		 * that further zoom in the direction that has attained the zoom limit is not
+		 * allowed.
 		 */
 		function displayCorrespondingZoomIconIfAtMaxOrMinZoomLevel() {
 			// if at min zoom level, display min zoom level icon
 			if(current_zoom_level == MIN_ZOOM_LEVEL) {
-				$('#Zoom_Out_Max_Zoom').css({display: "block"});
-			} else if (document.getElementById('Zoom_Out_Max_Zoom').style.display != "none") {
-				$('#Zoom_Out_Max_Zoom').css({display: "none"});
+				$("#Zoom_Out_Max_Zoom").css({display: "block"});
+			} else if (document.getElementById("Zoom_Out_Max_Zoom").style.display != "none") {
+				$("#Zoom_Out_Max_Zoom").css({display: "none"});
 			}
 			// if at max zoom level, display max zoom level icon
 			if(current_zoom_level == MAX_ZOOM_LEVEL) {
-				$('#Zoom_In_Max_Zoom').css({display: "block"});
-			} else if (document.getElementById('Zoom_In_Max_Zoom').style.display != "none") {
-				$('#Zoom_In_Max_Zoom').css({display: "none"});
+				$("#Zoom_In_Max_Zoom").css({display: "block"});
+			} else if (document.getElementById("Zoom_In_Max_Zoom").style.display != "none") {
+				$("#Zoom_In_Max_Zoom").css({display: "none"});
 			}
 		}
 
 		/**
-		 Sets up the zoom and pan functionality using the PanZoom library.
+		 * Sets up the zoom and pan functionality using the PanZoom library.
 		 */
 		function setupPanZoomElement()
 		{
@@ -632,12 +639,12 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 
 		}
 		/**
-		 Attaches the mousewheel event handler to the parent div of the map
-		 element (panzoom). When a mousewheel event is triggered, a check is
-		 first done to determine whether the user is trying to zoom out past the
-		 minimum zoom level (MIN_ZOOM_LEVEL) or if the user is trying to zoom in
-		 past the maximum zoom levle (MAX_ZOOM_LEVEL). If so, nothing is done;
-		 otherwise, the map at the new zoom level is updated and displayed.
+		 * Attaches the mousewheel event handler to the parent div of the map
+		 * element (panzoom). When a mousewheel event is triggered, a check is
+		 * first done to determine whether the user is trying to zoom out past the
+		 * minimum zoom level (MIN_ZOOM_LEVEL) or if the user is trying to zoom in
+		 * past the maximum zoom levle (MAX_ZOOM_LEVEL). If so, nothing is done;
+		 * otherwise, the map at the new zoom level is updated and displayed.
 		 */
 		function attachMouseWheelEventHandler(panzoom) {
 			$("#panzoom_parent").mousewheel(function(event) {
@@ -659,12 +666,12 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 			});
 		}
 		/**
-		 Helper function to determine whether a mousewheel event is invalid, where
-		 such an event here is deemed invalid if the user tries to zoom out past the
-	     minimum zoom level (MIN_ZOOM_LEVEL) or if the user tries to zoom in past the
-	     maximum zoom level (MAX_ZOOM_LEVEL). Returns true if the mousewheel event
-	     is invalid, and false otherwise. Called by the
-		 attachMouseWheelEventHandler(...) function.
+		 * Helper function to determine whether a mousewheel event is invalid, where
+		 * such an event here is deemed invalid if the user tries to zoom out past the
+	     * minimum zoom level (MIN_ZOOM_LEVEL) or if the user tries to zoom in past the
+	     * maximum zoom level (MAX_ZOOM_LEVEL). Returns true if the mousewheel event
+	     * is invalid, and false otherwise. Called by the
+		 * attachMouseWheelEventHandler(...) function.
 		 */
 		function isMouseWheelEventInvalid(event) {
 			var isUserTryingToZoomOutPastMinZoomLevel = (current_zoom_level == MIN_ZOOM_LEVEL) && (event.originalEvent.deltaY > 0),
@@ -672,15 +679,15 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 			return (isUserTryingToZoomOutPastMinZoomLevel || isUserTryingToZoomInPastMaxZoomLevel);
 		}
 		/**
-		 Called by the attachMouseWheelEventHandler(...) function to display a loading
-		 screen when the mousewheel event is active. Since there does not seem to be a
-		 way to detect when the user has stopped scrolling using the mousewheel, this
-		 function effectively checks every 250ms for whether a mousewheel event is
-		 active and therefore determines that the user has stopped scrolling using the
-		 mousewheel if a mousewheel event has not been active in the past 250ms. This
-		 function is called for all mousewheel events, so when a new mousewheel event
-		 is registered, any setTimeout functions to hide the loading screen is cleared
-		 and delayed for another 250ms.
+		 * Called by the attachMouseWheelEventHandler(...) function to display a loading
+		 * screen when the mousewheel event is active. Since there does not seem to be a
+		 * way to detect when the user has stopped scrolling using the mousewheel, this
+		 * function effectively checks every 250ms for whether a mousewheel event is
+		 * active and therefore determines that the user has stopped scrolling using the
+		 * mousewheel if a mousewheel event has not been active in the past 250ms. This
+		 * function is called for all mousewheel events, so when a new mousewheel event
+		 * is registered, any setTimeout functions to hide the loading screen is cleared
+		 * and delayed for another 250ms.
 		 */
 		function handleMouseWheelZoomEventLoadingScreenDisplayTiming() {
 			clearTimeout($.data(this, "timer"));
@@ -690,30 +697,30 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 			}, 250));
 		}
 		/**
-		 Resets map zoom level to minimum zoom level for the initial load of the map
-		 or upon window resize. Map is reset to minimum zoom level when resized due
-		 to a bug that occurs when the map is resized not to the minimum zoom level
-		 (the map no longer stays contained in its viewport).
+		 * Resets map zoom level to minimum zoom level for the initial load of the map
+		 * or upon window resize. Map is reset to minimum zoom level when resized due
+		 * to a bug that occurs when the map is resized not to the minimum zoom level
+		 * (the map no longer stays contained in its viewport).
 		 */
 		function resetZoomLevelToDefault() {
 			current_zoom_level = MIN_ZOOM_LEVEL;
 			zooming_in = false;
 			zooming_out = false;
-			$('#Zoom_In_Max_Zoom').css({display: "none"});
-			$('#Zoom_Out_Max_Zoom').css({display: "block"});
+			$("#Zoom_In_Max_Zoom").css({display: "none"});
+			$("#Zoom_Out_Max_Zoom").css({display: "block"});
 		}
 		/**
-		 Called by the handleMouseWheelZoomEventLoadingScreenDisplayTiming() function
-		 to display the loading screen for a mousewheel zoom event.
+		 * Called by the handleMouseWheelZoomEventLoadingScreenDisplayTiming() function
+		 * to display the loading screen for a mousewheel zoom event.
 		 */
 		function displayLoadingScreenForZoomEvent() {
 			$("#panzoom").css({left: "-99999px"});
 			$("#loading_screen").css({display:"block", zIndex:"1"});
 		}
 		/**
-		 Called by the handleMouseWheelZoomEventLoadingScreenDisplayTiming() function
-		 to hide the loading screen after the user has stopped scrolling to zoom in/out
-		 using the mousewheel.
+		 * Called by the handleMouseWheelZoomEventLoadingScreenDisplayTiming() function
+		 * to hide the loading screen after the user has stopped scrolling to zoom in/out
+		 * using the mousewheel.
 		 */
 		function hideLoadingScreenForZoomEvent() {
 			$("#panzoom").css({left: "0"});
@@ -747,7 +754,7 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 			current_active_station_point = "none";
 
 		/**
-		 Called when user clicks on the station point mode button.
+		 * Called when user clicks on the station point mode button.
 		 */
 		function activateMode()
 		{
@@ -757,29 +764,38 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 				ExploreByLocationMode.setExploreByLocationModeStatus(false);
 				setAllStationPointIconsOpacity(1);
 				setContentDimensions();
-				// Pulls up relevant png
-				$('#Mode_Button_One_On').css({display: "block"});
-				$('#Mode_Button_All_On').css({display: "none"});
-				// Place StationPointSVGLayer at top layer so that mouseevents over station points are active
-				$('#StationPointSVGLayer').css({zIndex: 501});
+				// pulls up relevant png
+				$("#Mode_Button_One_On").css({display: "block"});
+				$("#Mode_Button_All_On").css({display: "none"});
+				// place StationPointSVGLayer at top layer so that mouseevents over station points are active
+				$("#StationPointSVGLayer").css({zIndex: 501});
 				
-				$('#StationPointMode_InfoBox').css({zIndex:1000});
-				$('#LocationMode_InfoBox').css({left:"auto",right:"-99999px",zIndex:-1});
+				$("#StationPointMode_InfoBox").css({zIndex:1000});
+				$("#LocationMode_InfoBox").css({left:"auto",right:"-99999px",zIndex:-1});
 				
-				// If a location popup is currently active, hide it
-				if($('#popup_div').length > 0)
+				// if a location popup is currently active, hide it
+				if($("#popup_div").length > 0) {
 					ExploreByLocationMode.destroyLocationModePopup();
+				}
 			}
 		}
 		
+		/**
+		 * Called when the user's cursor hovers over a station point. The number of this
+		 * station point is then determined by the id (curr_elem_id) passed in to display
+		 * the corresponding viewshed and station point rollover icon, and the id is
+		 * stored in the current_active_station_point variable. This function calls the
+		 * activateCorrespondingStationPointEvents() function, which accesses this variable
+		 * to activate the features that differ between station points.
+		 */
 		function activateStationPointMouseoverEvents(curr_elem_id) {
 			if(is_explore_by_station_point_mode_active) {
 				var current_station_point_number = curr_elem_id.substring("StationPoint".length).toString();
 				$("#Viewshed"+current_station_point_number+"PNG").css({display:"block"});
 				$("#StationPoint"+current_station_point_number+"RolloverIcon").css({display:"block"});
 				
-				$('#StationPointMode_InfoBoxImage').css({border:"6px solid white"});
-				$('#StationPointMode_StationPointLabel').css({backgroundColor:"rgba(256,256,256,0.8)"});
+				$("#StationPointMode_InfoBoxImage").css({border:"6px solid white"});
+				$("#StationPointMode_StationPointLabel").css({backgroundColor:"rgba(256,256,256,0.8)"});
 
 				current_active_station_point = curr_elem_id;
 				setAllStationPointIconsOpacity(0.2);
@@ -787,200 +803,216 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 			}
 		}	
 
+		/**
+		 * Called when the user's cursor moves away from a station point. This function
+		 * calls the deactivateCorrespondingStationPointEvents() function, which accesses
+		 * the current_active_station_point variable to determine which features to
+		 * deactivate.
+		 */
 		function deactivateStationPointMouseoverEvents() {
-		if(is_explore_by_station_point_mode_active) {
-			var current_station_point_number = current_active_station_point.substring("StationPoint".length).toString();
-			$("#StationPoint"+current_station_point_number+"RolloverIcon").css({display:"none"});
-			
-			// hide photo associated with station point
-			$('#StationPointMode_InfoBox').css({left:"auto",right:"-999999px"});
-			$('#StationPointMode_InfoBoxImage').attr("src","");
-			$('#StationPointMode_InfoBoxImage').css({border:"0"});
-			$('#StationPointMode_StationPointLabel').html("");
-			$('#StationPointMode_StationPointLabel').css({backgroundColor:"transparent"})
-			
-			if(LandmarksToggle.areLandmarksDisplayed()) {
-				setAllStationPointIconsOpacity(0.5);
-			} else {
-				setAllStationPointIconsOpacity(1);
+			if(is_explore_by_station_point_mode_active) {
+				var current_station_point_number = current_active_station_point.substring("StationPoint".length).toString();
+				$("#StationPoint"+current_station_point_number+"RolloverIcon").css({display:"none"});
+				
+				// hide photo associated with station point
+				$("#StationPointMode_InfoBox").css({left:"auto",right:"-999999px"});
+				$("#StationPointMode_InfoBoxImage").attr("src","");
+				$("#StationPointMode_InfoBoxImage").css({border:"0"});
+				$("#StationPointMode_StationPointLabel").html("");
+				$("#StationPointMode_StationPointLabel").css({backgroundColor:"transparent"})
+				
+				if(LandmarksToggle.areLandmarksDisplayed()) {
+					setAllStationPointIconsOpacity(0.5);
+				} else {
+					setAllStationPointIconsOpacity(1);
+				}
+				deactivateCorrespondingStationPointEvents();
+				current_active_station_point = "none";
 			}
-			deactivateCorrespondingStationPointEvents();
-			current_active_station_point = 'none';
 		}
-	}
 
+		/**
+		 * Called by the activateStationPointMouseoverEvents(...) function. Accesses
+		 * the current_active_station_point variable to determine which features to
+		 * activate.
+		 */
 		function activateCorrespondingStationPointEvents() {
 			switch(current_active_station_point) {
-				case 'StationPoint2':
+				case "StationPoint2":
 					StationPointMouseoverEvents.activateStationPoint2Events(); break;
-				case 'StationPoint3':
+				case "StationPoint3":
 					StationPointMouseoverEvents.activateStationPoint3Events(); break;
-				case 'StationPoint4':
+				case "StationPoint4":
 					StationPointMouseoverEvents.activateStationPoint4Events(); break;
-				case 'StationPoint5':
+				case "StationPoint5":
 					StationPointMouseoverEvents.activateStationPoint5Events(); break;
-				case 'StationPoint6':
+				case "StationPoint6":
 					StationPointMouseoverEvents.activateStationPoint6Events(); break;
-				case 'StationPoint7':
+				case "StationPoint7":
 					StationPointMouseoverEvents.activateStationPoint7Events(); break;
-				case 'StationPoint8':
+				case "StationPoint8":
 					StationPointMouseoverEvents.activateStationPoint8Events(); break;
-				case 'StationPoint9':
+				case "StationPoint9":
 					StationPointMouseoverEvents.activateStationPoint9Events(); break;
-				case 'StationPoint10':
+				case "StationPoint10":
 					StationPointMouseoverEvents.activateStationPoint10Events(); break;
-				case 'StationPoint11':
+				case "StationPoint11":
 					StationPointMouseoverEvents.activateStationPoint11Events(); break;
-				case 'StationPoint12':
+				case "StationPoint12":
 					StationPointMouseoverEvents.activateStationPoint12Events(); break;
-				case 'StationPoint13':
+				case "StationPoint13":
 					StationPointMouseoverEvents.activateStationPoint13Events(); break;
-				case 'StationPoint14':
+				case "StationPoint14":
 					StationPointMouseoverEvents.activateStationPoint14Events(); break;
-				case 'StationPoint15':
+				case "StationPoint15":
 					StationPointMouseoverEvents.activateStationPoint15Events(); break;
-				case 'StationPoint16':
+				case "StationPoint16":
 					StationPointMouseoverEvents.activateStationPoint16Events(); break;
-				case 'StationPoint17':
+				case "StationPoint17":
 					StationPointMouseoverEvents.activateStationPoint17Events(); break;
-				case 'StationPoint18':
+				case "StationPoint18":
 					StationPointMouseoverEvents.activateStationPoint18Events(); break;
-				case 'StationPoint19':
+				case "StationPoint19":
 					StationPointMouseoverEvents.activateStationPoint19Events(); break;
-				case 'StationPoint20':
+				case "StationPoint20":
 					StationPointMouseoverEvents.activateStationPoint20Events(); break;
-				case 'StationPoint21':
+				case "StationPoint21":
 					StationPointMouseoverEvents.activateStationPoint21Events(); break;
-				case 'StationPoint22':
+				case "StationPoint22":
 					StationPointMouseoverEvents.activateStationPoint22Events(); break;
-				case 'StationPoint23':
+				case "StationPoint23":
 					StationPointMouseoverEvents.activateStationPoint23Events(); break;
-				case 'StationPoint24':
+				case "StationPoint24":
 					StationPointMouseoverEvents.activateStationPoint24Events(); break;
-				case 'StationPoint25':
+				case "StationPoint25":
 					StationPointMouseoverEvents.activateStationPoint25Events(); break;
-				case 'StationPoint26':
+				case "StationPoint26":
 					StationPointMouseoverEvents.activateStationPoint26Events(); break;
-				case 'StationPoint27':
+				case "StationPoint27":
 					StationPointMouseoverEvents.activateStationPoint27Events(); break;
-				case 'StationPoint28':
+				case "StationPoint28":
 					StationPointMouseoverEvents.activateStationPoint28Events(); break;
-				case 'StationPoint29':
+				case "StationPoint29":
 					StationPointMouseoverEvents.activateStationPoint29Events(); break;
-				case 'StationPoint30':
+				case "StationPoint30":
 					StationPointMouseoverEvents.activateStationPoint30Events(); break;
-				case 'StationPoint31':
+				case "StationPoint31":
 					StationPointMouseoverEvents.activateStationPoint31Events(); break;
-				case 'StationPoint32':
+				case "StationPoint32":
 					StationPointMouseoverEvents.activateStationPoint32Events(); break;
-				case 'StationPoint33':
+				case "StationPoint33":
 					StationPointMouseoverEvents.activateStationPoint33Events(); break;
-				case 'StationPoint34':
+				case "StationPoint34":
 					StationPointMouseoverEvents.activateStationPoint34Events(); break;
-				case 'StationPoint35':
+				case "StationPoint35":
 					StationPointMouseoverEvents.activateStationPoint35Events(); break;
-				case 'StationPoint37':
+				case "StationPoint37":
 					StationPointMouseoverEvents.activateStationPoint37Events(); break;
-				case 'StationPoint38':
+				case "StationPoint38":
 					StationPointMouseoverEvents.activateStationPoint38Events(); break;
-				case 'StationPoint39':
+				case "StationPoint39":
 					StationPointMouseoverEvents.activateStationPoint39Events(); break;
-				case 'StationPoint40':
+				case "StationPoint40":
 					StationPointMouseoverEvents.activateStationPoint40Events(); break;
-				case 'StationPoint41':
+				case "StationPoint41":
 					StationPointMouseoverEvents.activateStationPoint41Events(); break;
-				case 'StationPoint42':
+				case "StationPoint42":
 					StationPointMouseoverEvents.activateStationPoint42Events(); break;
-				case 'StationPoint43':
+				case "StationPoint43":
 					StationPointMouseoverEvents.activateStationPoint43Events(); break;
 				default:
 					break;
 			}
 		}
 
+		/**
+		 * Called by the deactivateStationPointMouseoverEvents(...) function. Accesses
+		 * the current_active_station_point variable to determine which features to
+		 * deactivate.
+		 */
 		function deactivateCorrespondingStationPointEvents() {
 			switch(current_active_station_point) {
-				case 'StationPoint2':
+				case "StationPoint2":
 					StationPointMouseoverEvents.deactivateStationPoint2Events(); break;
-				case 'StationPoint3':
+				case "StationPoint3":
 					StationPointMouseoverEvents.deactivateStationPoint3Events(); break;
-				case 'StationPoint4':
+				case "StationPoint4":
 					StationPointMouseoverEvents.deactivateStationPoint4Events(); break;
-				case 'StationPoint5':
+				case "StationPoint5":
 					StationPointMouseoverEvents.deactivateStationPoint5Events(); break;
-				case 'StationPoint6':
+				case "StationPoint6":
 					StationPointMouseoverEvents.deactivateStationPoint6Events(); break;
-				case 'StationPoint7':
+				case "StationPoint7":
 					StationPointMouseoverEvents.deactivateStationPoint7Events(); break;
-				case 'StationPoint8':
+				case "StationPoint8":
 					StationPointMouseoverEvents.deactivateStationPoint8Events(); break;
-				case 'StationPoint9':
+				case "StationPoint9":
 					StationPointMouseoverEvents.deactivateStationPoint9Events(); break;
-				case 'StationPoint10':
+				case "StationPoint10":
 					StationPointMouseoverEvents.deactivateStationPoint10Events(); break;
-				case 'StationPoint11':
+				case "StationPoint11":
 					StationPointMouseoverEvents.deactivateStationPoint11Events(); break;
-				case 'StationPoint12':
+				case "StationPoint12":
 					StationPointMouseoverEvents.deactivateStationPoint12Events(); break;
-				case 'StationPoint13':
+				case "StationPoint13":
 					StationPointMouseoverEvents.deactivateStationPoint13Events(); break;
-				case 'StationPoint14':
+				case "StationPoint14":
 					StationPointMouseoverEvents.deactivateStationPoint14Events(); break;
-				case 'StationPoint15':
+				case "StationPoint15":
 					StationPointMouseoverEvents.deactivateStationPoint15Events(); break;
-				case 'StationPoint16':
+				case "StationPoint16":
 					StationPointMouseoverEvents.deactivateStationPoint16Events(); break;
-				case 'StationPoint17':
+				case "StationPoint17":
 					StationPointMouseoverEvents.deactivateStationPoint17Events(); break;
-				case 'StationPoint18':
+				case "StationPoint18":
 					StationPointMouseoverEvents.deactivateStationPoint18Events(); break;
-				case 'StationPoint19':
+				case "StationPoint19":
 					StationPointMouseoverEvents.deactivateStationPoint19Events(); break;
-				case 'StationPoint20':
+				case "StationPoint20":
 					StationPointMouseoverEvents.deactivateStationPoint20Events(); break;
-				case 'StationPoint21':
+				case "StationPoint21":
 					StationPointMouseoverEvents.deactivateStationPoint21Events(); break;
-				case 'StationPoint22':
+				case "StationPoint22":
 					StationPointMouseoverEvents.deactivateStationPoint22Events(); break;
-				case 'StationPoint23':
+				case "StationPoint23":
 					StationPointMouseoverEvents.deactivateStationPoint23Events(); break;
-				case 'StationPoint24':
+				case "StationPoint24":
 					StationPointMouseoverEvents.deactivateStationPoint24Events(); break;
-				case 'StationPoint25':
+				case "StationPoint25":
 					StationPointMouseoverEvents.deactivateStationPoint25Events(); break;
-				case 'StationPoint26':
+				case "StationPoint26":
 					StationPointMouseoverEvents.deactivateStationPoint26Events(); break;
-				case 'StationPoint27':
+				case "StationPoint27":
 					StationPointMouseoverEvents.deactivateStationPoint27Events(); break;
-				case 'StationPoint28':
+				case "StationPoint28":
 					StationPointMouseoverEvents.deactivateStationPoint28Events(); break;
-				case 'StationPoint29':
+				case "StationPoint29":
 					StationPointMouseoverEvents.deactivateStationPoint29Events(); break;
-				case 'StationPoint30':
+				case "StationPoint30":
 					StationPointMouseoverEvents.deactivateStationPoint30Events(); break;
-				case 'StationPoint31':
+				case "StationPoint31":
 					StationPointMouseoverEvents.deactivateStationPoint31Events(); break;
-				case 'StationPoint32':
+				case "StationPoint32":
 					StationPointMouseoverEvents.deactivateStationPoint32Events(); break;
-				case 'StationPoint33':
+				case "StationPoint33":
 					StationPointMouseoverEvents.deactivateStationPoint33Events(); break;
-				case 'StationPoint34':
+				case "StationPoint34":
 					StationPointMouseoverEvents.deactivateStationPoint34Events(); break;
-				case 'StationPoint35':
+				case "StationPoint35":
 					StationPointMouseoverEvents.deactivateStationPoint35Events(); break;
-				case 'StationPoint37':
+				case "StationPoint37":
 					StationPointMouseoverEvents.deactivateStationPoint37Events(); break;
-				case 'StationPoint38':
+				case "StationPoint38":
 					StationPointMouseoverEvents.deactivateStationPoint38Events(); break;
-				case 'StationPoint39':
+				case "StationPoint39":
 					StationPointMouseoverEvents.deactivateStationPoint39Events(); break;
-				case 'StationPoint40':
+				case "StationPoint40":
 					StationPointMouseoverEvents.deactivateStationPoint40Events(); break;
-				case 'StationPoint41':
+				case "StationPoint41":
 					StationPointMouseoverEvents.deactivateStationPoint41Events(); break;
-				case 'StationPoint42':
+				case "StationPoint42":
 					StationPointMouseoverEvents.deactivateStationPoint42Events(); break;
-				case 'StationPoint43':
+				case "StationPoint43":
 					StationPointMouseoverEvents.deactivateStationPoint43Events(); break;
 				default:
 					break;
@@ -991,591 +1023,598 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 		{
 			activateStationPoint2Events : function() {
 				// position station point mode info box in map frame
-				$('#StationPointMode_InfoBox').css({left:"auto",right:"60px"});
+				$("#StationPointMode_InfoBox").css({left:"auto",right:"60px"});
 				// display photo associated with station point
-				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/2-Station-Point-Photo.jpg");
-				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"right"});
+				$("#StationPointMode_InfoBoxImage").attr("src","images/StationPointPhotos/2-Station-Point-Photo.jpg");
+				$("#StationPointMode_InfoBoxImage").css({width:"100%",height:"auto",float:"right"});
 				// display station point label
-				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 2</span> <br> On Grand View Point");
-				$('#StationPointMode_StationPointLabel').css({float: "right", height: "45px"});
+				$("#StationPointMode_StationPointLabel").html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 2</span> <br> On Grand View Point");
+				$("#StationPointMode_StationPointLabel").css({float: "right", height: "45px"});
 			},
 			deactivateStationPoint2Events : function() {
-				$('#Viewshed2PNG').css({display:"none"});
+				$("#Viewshed2PNG").css({display:"none"});
 			},
 			activateStationPoint3Events : function() {
 				// position station point mode info box in map frame
-				$('#StationPointMode_InfoBox').css({left:"auto",right:"60px"});
+				$("#StationPointMode_InfoBox").css({left:"auto",right:"60px"});
 				// display photo associated with station point
-				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/3-Station-Point-Photo.jpg");
-				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"right"});
+				$("#StationPointMode_InfoBoxImage").attr("src","images/StationPointPhotos/3-Station-Point-Photo.jpg");
+				$("#StationPointMode_InfoBoxImage").css({width:"100%",height:"auto",float:"right"});
 				// display station point label
-				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 3</span> <br> Angel's Gate, Wotan's Throne <br> and Vishnu Temple");
-				$('#StationPointMode_StationPointLabel').css({float: "right", height:"55px"});
+				$("#StationPointMode_StationPointLabel").html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 3</span> <br> Angel's Gate, Wotan's Throne <br> and Vishnu Temple");
+				$("#StationPointMode_StationPointLabel").css({float: "right", height:"55px"});
 			},
 			deactivateStationPoint3Events : function() {
-				$('#Viewshed3PNG').css({display:"none"});
+				$("#Viewshed3PNG").css({display:"none"});
 			},
 			activateStationPoint4Events : function() {
 				// position station point mode info box in map frame
-				$('#StationPointMode_InfoBox').css({left:"auto",right:"60px"});
+				$("#StationPointMode_InfoBox").css({left:"auto",right:"60px"});
 				// display photo associated with station point
-				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/4-Station-Point-Photo.jpg");
-				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"right"});
+				$("#StationPointMode_InfoBoxImage").attr("src","images/StationPointPhotos/4-Station-Point-Photo.jpg");
+				$("#StationPointMode_InfoBoxImage").css({width:"100%",height:"auto",float:"right"});
 				// display station point label
-				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 4</span> <br> Up Granite Gorge, from Grand View Trail");
-				$('#StationPointMode_StationPointLabel').css({float: "right", height:"45px"});
+				$("#StationPointMode_StationPointLabel").html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 4</span> <br> Up Granite Gorge, from Grand View Trail");
+				$("#StationPointMode_StationPointLabel").css({float: "right", height:"45px"});
 			},
 			deactivateStationPoint4Events : function() {
-				$('#Viewshed4PNG').css({display:"none"});
+				$("#Viewshed4PNG").css({display:"none"});
 			},
 			activateStationPoint5Events : function() {
 				// position station point mode info box in map frame
-				$('#StationPointMode_InfoBox').css({left:"auto",right:"60px"});
+				$("#StationPointMode_InfoBox").css({left:"auto",right:"60px"});
 				// display photo associated with station point
-				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/5-Station-Point-Photo.jpg");
-				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"right"});
+				$("#StationPointMode_InfoBoxImage").attr("src","images/StationPointPhotos/5-Station-Point-Photo.jpg");
+				$("#StationPointMode_InfoBoxImage").css({width:"100%",height:"auto",float:"right"});
 				// display station point label
-				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 5</span> <br> Down Granite Gorge, from Grand View Trail");
-				$('#StationPointMode_StationPointLabel').css({float: "right", height:"45px"});
+				$("#StationPointMode_StationPointLabel").html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 5</span> <br> Down Granite Gorge, from Grand View Trail");
+				$("#StationPointMode_StationPointLabel").css({float: "right", height:"45px"});
 			},
 			deactivateStationPoint5Events : function() {
-				$('#Viewshed5PNG').css({display:"none"});
+				$("#Viewshed5PNG").css({display:"none"});
 			},
 			activateStationPoint6Events : function() {
 				// position station point mode info box in map frame
-				$('#StationPointMode_InfoBox').css({left:"auto",left:"10px"});
+				$("#StationPointMode_InfoBox").css({left:"auto",left:"10px"});
 				// display photo associated with station point
-				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/6-Station-Point-Photo.jpg");
-				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"left"});
+				$("#StationPointMode_InfoBoxImage").attr("src","images/StationPointPhotos/6-Station-Point-Photo.jpg");
+				$("#StationPointMode_InfoBoxImage").css({width:"100%",height:"auto",float:"left"});
 				// display station point label
-				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 6</span> <br> Up Grand Canyon, from Moran Point");
-				$('#StationPointMode_StationPointLabel').css({float: "left", height:"45px"});
+				$("#StationPointMode_StationPointLabel").html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 6</span> <br> Up Grand Canyon, from Moran Point");
+				$("#StationPointMode_StationPointLabel").css({float: "left", height:"45px"});
 			},
 			deactivateStationPoint6Events : function() {
-				$('#Viewshed6PNG').css({display:"none"});
+				$("#Viewshed6PNG").css({display:"none"});
 			},
 			activateStationPoint7Events : function() {
 				// position station point mode info box in map frame
-				$('#StationPointMode_InfoBox').css({left:"auto",left:"10px"});
+				$("#StationPointMode_InfoBox").css({left:"auto",left:"10px"});
 				// display photo associated with station point
-				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/7-Station-Point-Photo.jpg");
-				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"left"});
+				$("#StationPointMode_InfoBoxImage").attr("src","images/StationPointPhotos/7-Station-Point-Photo.jpg");
+				$("#StationPointMode_InfoBoxImage").css({width:"100%",height:"auto",float:"left"});
 				// display station point label
-				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 7</span> <br> Up Grand Canyon, from Zuni Point");
-				$('#StationPointMode_StationPointLabel').css({float: "left", height:"45px"});
+				$("#StationPointMode_StationPointLabel").html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 7</span> <br> Up Grand Canyon, from Zuni Point");
+				$("#StationPointMode_StationPointLabel").css({float: "left", height:"45px"});
 			},
 			deactivateStationPoint7Events : function() {
-				$('#Viewshed7PNG').css({display:"none"});
+				$("#Viewshed7PNG").css({display:"none"});
 			},
 			activateStationPoint8Events : function() {
 				// position station point mode info box in map frame
-				$('#StationPointMode_InfoBox').css({left:"auto",left:"10px"});
+				$("#StationPointMode_InfoBox").css({left:"auto",left:"10px"});
 				// display photo associated with station point
-				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/8-Station-Point-Photo.jpg");
-				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"left"});
+				$("#StationPointMode_InfoBoxImage").attr("src","images/StationPointPhotos/8-Station-Point-Photo.jpg");
+				$("#StationPointMode_InfoBoxImage").css({width:"100%",height:"auto",float:"left"});
 				// display station point label
-				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 8</span> <br> Up to Marble Gorge and Painted Desert, <br> from Lipan Point");
-				$('#StationPointMode_StationPointLabel').css({float: "left", height:"55px"});
+				$("#StationPointMode_StationPointLabel").html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 8</span> <br> Up to Marble Gorge and Painted Desert, <br> from Lipan Point");
+				$("#StationPointMode_StationPointLabel").css({float: "left", height:"55px"});
 			},
 			deactivateStationPoint8Events : function() {
-				$('#Viewshed8PNG').css({display:"none"});
+				$("#Viewshed8PNG").css({display:"none"});
 			},
 			activateStationPoint9Events : function() {
 				// position station point mode info box in map frame
-				$('#StationPointMode_InfoBox').css({left:"auto",left:"10px"});
+				$("#StationPointMode_InfoBox").css({left:"auto",left:"10px"});
 				// display photo associated with station point
-				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/9-Station-Point-Photo.jpg");
-				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"left"});
+				$("#StationPointMode_InfoBoxImage").attr("src","images/StationPointPhotos/9-Station-Point-Photo.jpg");
+				$("#StationPointMode_InfoBoxImage").css({width:"100%",height:"auto",float:"left"});
 				// display station point label
-				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 9</span> <br> Up to Marble Gorge and Painted Desert, <br> from Desert View");
-				$('#StationPointMode_StationPointLabel').css({float: "left", height:"55px"});
+				$("#StationPointMode_StationPointLabel").html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 9</span> <br> Up to Marble Gorge and Painted Desert, <br> from Desert View");
+				$("#StationPointMode_StationPointLabel").css({float: "left", height:"55px"});
 			},
 			deactivateStationPoint9Events : function() {
-				$('#Viewshed9PNG').css({display:"none"});
+				$("#Viewshed9PNG").css({display:"none"});
 			},
 			activateStationPoint10Events : function() {
 				// position station point mode info box in map frame
-				$('#StationPointMode_InfoBox').css({left:"auto",right:"60px"});
+				$("#StationPointMode_InfoBox").css({left:"auto",right:"60px"});
 				// display photo associated with station point
-				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/10-Station-Point-Photo.jpg");
-				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"right"});
+				$("#StationPointMode_InfoBoxImage").attr("src","images/StationPointPhotos/10-Station-Point-Photo.jpg");
+				$("#StationPointMode_InfoBoxImage").css({width:"100%",height:"auto",float:"right"});
 				// display station point label
-				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 10</span> <br> Down Grand Canyon, from Zuni Point");
-				$('#StationPointMode_StationPointLabel').css({float: "right", height:"45px"});
+				$("#StationPointMode_StationPointLabel").html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 10</span> <br> Down Grand Canyon, from Zuni Point");
+				$("#StationPointMode_StationPointLabel").css({float: "right", height:"45px"});
 			},
 			deactivateStationPoint10Events : function() {
-				$('#Viewshed10PNG').css({display:"none"});
+				$("#Viewshed10PNG").css({display:"none"});
 			},
 			activateStationPoint11Events : function() {
 				// position station point mode info box in map frame
-				$('#StationPointMode_InfoBox').css({left:"auto",right:"60px"});
+				$("#StationPointMode_InfoBox").css({left:"auto",right:"60px"});
 				// display photo associated with station point
-				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/11-Station-Point-Photo.jpg");
-				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"right"});
+				$("#StationPointMode_InfoBoxImage").attr("src","images/StationPointPhotos/11-Station-Point-Photo.jpg");
+				$("#StationPointMode_InfoBoxImage").css({width:"100%",height:"auto",float:"right"});
 				// display station point label
-				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 11</span> <br> Across Grand Canyon, near El Tovar");
-				$('#StationPointMode_StationPointLabel').css({float: "right", height:"45px"});
+				$("#StationPointMode_StationPointLabel").html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 11</span> <br> Across Grand Canyon, near El Tovar");
+				$("#StationPointMode_StationPointLabel").css({float: "right", height:"45px"});
 			},
 			deactivateStationPoint11Events : function() {
-				$('#Viewshed11PNG').css({display:"none"});
+				$("#Viewshed11PNG").css({display:"none"});
 			},
 			activateStationPoint12Events : function() {
 				// position station point mode info box in map frame
-				$('#StationPointMode_InfoBox').css({left:"auto",right:"60px"});
+				$("#StationPointMode_InfoBox").css({left:"auto",right:"60px"});
 				// display photo associated with station point
-				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/12-Station-Point-Photo.jpg");
-				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"right"});
+				$("#StationPointMode_InfoBoxImage").attr("src","images/StationPointPhotos/12-Station-Point-Photo.jpg");
+				$("#StationPointMode_InfoBoxImage").css({width:"100%",height:"auto",float:"right"});
 				// display station point label
-				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 12</span> <br> Descending the Zigzags, Bright Angel Trail");
-				$('#StationPointMode_StationPointLabel').css({float: "right", height:"45px"});
+				$("#StationPointMode_StationPointLabel").html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 12</span> <br> Descending the Zigzags, Bright Angel Trail");
+				$("#StationPointMode_StationPointLabel").css({float: "right", height:"45px"});
 			},
 			deactivateStationPoint12Events : function() {
-				$('#Viewshed12PNG').css({display:"none"});
+				$("#Viewshed12PNG").css({display:"none"});
 			},
 			activateStationPoint13Events : function() {
 				// position station point mode info box in map frame
-				$('#StationPointMode_InfoBox').css({left:"auto",right:"60px"});
+				$("#StationPointMode_InfoBox").css({left:"auto",right:"60px"});
 				// display photo associated with station point
-				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/13-Station-Point-Photo.jpg");
-				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"right"});
+				$("#StationPointMode_InfoBoxImage").attr("src","images/StationPointPhotos/13-Station-Point-Photo.jpg");
+				$("#StationPointMode_InfoBoxImage").css({width:"100%",height:"auto",float:"right"});
 				// display station point label
-				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 13</span> <br> Colorado River and Zoroaster Temple, <br> Foot of Bright Angel Trail");
-				$('#StationPointMode_StationPointLabel').css({float: "right", height:"55px"});
+				$("#StationPointMode_StationPointLabel").html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 13</span> <br> Colorado River and Zoroaster Temple, <br> Foot of Bright Angel Trail");
+				$("#StationPointMode_StationPointLabel").css({float: "right", height:"55px"});
 			},
 			deactivateStationPoint13Events : function() {
-				$('#Viewshed13PNG').css({display:"none"});
+				$("#Viewshed13PNG").css({display:"none"});
 			},
 			activateStationPoint14Events : function() {
-				$('#StationPoint14RolloverIcon').css({display:"block"});
+				$("#StationPoint14RolloverIcon").css({display:"block"});
 				// position station point mode info box in map frame
-				$('#StationPointMode_InfoBox').css({left:"auto",right:"60px"});
+				$("#StationPointMode_InfoBox").css({left:"auto",right:"60px"});
 				// display photo associated with station point
-				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/14-Station-Point-Photo.jpg");
-				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"right"});
+				$("#StationPointMode_InfoBoxImage").attr("src","images/StationPointPhotos/14-Station-Point-Photo.jpg");
+				$("#StationPointMode_InfoBoxImage").css({width:"100%",height:"auto",float:"right"});
 				// display station point label
-				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 14</span> <br> Hopi Indian Buffalo Dance at El Tovar");
-				$('#StationPointMode_StationPointLabel').css({float: "right", height:"45px"});
+				$("#StationPointMode_StationPointLabel").html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 14</span> <br> Hopi Indian Buffalo Dance at El Tovar");
+				$("#StationPointMode_StationPointLabel").css({float: "right", height:"45px"});
 				// display notification box stating that this station point does not have a viewshed
-				$('#StationPointNotificationBox').css({left:"39%",right:"39%"});
+				$("#StationPointNotificationBox").css({left:"39%",right:"39%"});
 			},
 			deactivateStationPoint14Events : function() {
 				// hide notification box
-				$('#StationPointNotificationBox').css({left:"-99999px",right:"auto"});
+				$("#StationPointNotificationBox").css({left:"-99999px",right:"auto"});
 			},
 			activateStationPoint15Events : function() {
-				$('#StationPoint15RolloverIcon').css({display:"block"});
+				$("#StationPoint15RolloverIcon").css({display:"block"});
 				// position station point mode info box in map frame
-				$('#StationPointMode_InfoBox').css({left:"auto",right:"60px"});
+				$("#StationPointMode_InfoBox").css({left:"auto",right:"60px"});
 				// display photo associated with station point
-				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/15-Station-Point-Photo.jpg");
-				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"right"});
+				$("#StationPointMode_InfoBoxImage").attr("src","images/StationPointPhotos/15-Station-Point-Photo.jpg");
+				$("#StationPointMode_InfoBoxImage").css({width:"100%",height:"auto",float:"right"});
 				// display station point label
-				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 15</span> <br> Hopi Indian Eagle Dance at El Tovar");
-				$('#StationPointMode_StationPointLabel').css({float: "right", height:"45px"});
+				$("#StationPointMode_StationPointLabel").html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 15</span> <br> Hopi Indian Eagle Dance at El Tovar");
+				$("#StationPointMode_StationPointLabel").css({float: "right", height:"45px"});
 				// display notification box stating that this station point does not have a viewshed
-				$('#StationPointNotificationBox').css({left:"39%",right:"39%"});
+				$("#StationPointNotificationBox").css({left:"39%",right:"39%"});
 			},
 			deactivateStationPoint15Events : function() {
 				// hide notification box
-				$('#StationPointNotificationBox').css({left:"-99999px",right:"auto"});
+				$("#StationPointNotificationBox").css({left:"-99999px",right:"auto"});
 			},
 			activateStationPoint16Events : function() {
-				$('#StationPoint16RolloverIcon').css({display:"block"});
+				$("#StationPoint16RolloverIcon").css({display:"block"});
 				// position station point mode info box in map frame
-				$('#StationPointMode_InfoBox').css({left:"auto",right:"60px"});
+				$("#StationPointMode_InfoBox").css({left:"auto",right:"60px"});
 				// display photo associated with station point
-				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/16-Station-Point-Photo.jpg");
-				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"right"});
+				$("#StationPointMode_InfoBoxImage").attr("src","images/StationPointPhotos/16-Station-Point-Photo.jpg");
+				$("#StationPointMode_InfoBoxImage").css({width:"100%",height:"auto",float:"right"});
 				// display station point label
-				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 16</span> <br> Hopi Indian War Dance at El Tovar");
-				$('#StationPointMode_StationPointLabel').css({float: "right", height:"45px"});
+				$("#StationPointMode_StationPointLabel").html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 16</span> <br> Hopi Indian War Dance at El Tovar");
+				$("#StationPointMode_StationPointLabel").css({float: "right", height:"45px"});
 				// display notification box stating that this station point does not have a viewshed
-				$('#StationPointNotificationBox').css({left:"39%",right:"39%"});
+				$("#StationPointNotificationBox").css({left:"39%",right:"39%"});
 			},
 			deactivateStationPoint16Events : function() {
 				// hide notification box
-				$('#StationPointNotificationBox').css({left:"-99999px",right:"auto"});
+				$("#StationPointNotificationBox").css({left:"-99999px",right:"auto"});
 			},
 			activateStationPoint17Events : function() {
 				// position station point mode info box in map frame
-				$('#StationPointMode_InfoBox').css({left:"auto",right:"60px"});
+				$("#StationPointMode_InfoBox").css({left:"auto",right:"60px"});
 				// display photo associated with station point
-				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/17-Station-Point-Photo.jpg");
-				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"right"});
+				$("#StationPointMode_InfoBoxImage").attr("src","images/StationPointPhotos/17-Station-Point-Photo.jpg");
+				$("#StationPointMode_InfoBoxImage").css({width:"100%",height:"auto",float:"right"});
 				// display station point label
-				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 17</span> <br> Down Grand Canyon, from Hopi Point");
-				$('#StationPointMode_StationPointLabel').css({float: "right", height:"45px"});
+				$("#StationPointMode_StationPointLabel").html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 17</span> <br> Down Grand Canyon, from Hopi Point");
+				$("#StationPointMode_StationPointLabel").css({float: "right", height:"45px"});
 			},
 			deactivateStationPoint17Events : function() {
-				$('#Viewshed17PNG').css({display:"none"});
+				$("#Viewshed17PNG").css({display:"none"});
 			},
 			activateStationPoint18Events : function() {
 				// position station point mode info box in map frame
-				$('#StationPointMode_InfoBox').css({left:"auto",right:"60px"});
+				$("#StationPointMode_InfoBox").css({left:"auto",right:"60px"});
 				// display photo associated with station point
-				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/18-Station-Point-Photo.jpg");
-				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"right"});
+				$("#StationPointMode_InfoBoxImage").attr("src","images/StationPointPhotos/18-Station-Point-Photo.jpg");
+				$("#StationPointMode_InfoBoxImage").css({width:"100%",height:"auto",float:"right"});
 				// display station point label
-				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 18</span> <br> Eastern Outlook, from Havasupai Point");
-				$('#StationPointMode_StationPointLabel').css({float: "right", height:"45px"});
+				$("#StationPointMode_StationPointLabel").html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 18</span> <br> Eastern Outlook, from Havasupai Point");
+				$("#StationPointMode_StationPointLabel").css({float: "right", height:"45px"});
 			},
 			deactivateStationPoint18Events : function() {
-				$('#Viewshed18PNG').css({display:"none"});
+				$("#Viewshed18PNG").css({display:"none"});
 			},
 			activateStationPoint19Events : function() {
 				// position station point mode info box in map frame
-				$('#StationPointMode_InfoBox').css({left:"auto",right:"60px"});
+				$("#StationPointMode_InfoBox").css({left:"auto",right:"60px"});
 				// display photo associated with station point
-				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/19-Station-Point-Photo.jpg");
-				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"right"});
+				$("#StationPointMode_InfoBoxImage").attr("src","images/StationPointPhotos/19-Station-Point-Photo.jpg");
+				$("#StationPointMode_InfoBoxImage").css({width:"100%",height:"auto",float:"right"});
 				// display station point label
-				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 19</span> <br> Across Grand Scenic Divide, <br> from Havasupai Point");
-				$('#StationPointMode_StationPointLabel').css({float: "right", height:"55px"});
+				$("#StationPointMode_StationPointLabel").html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 19</span> <br> Across Grand Scenic Divide, <br> from Havasupai Point");
+				$("#StationPointMode_StationPointLabel").css({float: "right", height:"55px"});
 			},
 			deactivateStationPoint19Events : function() {
-				$('#Viewshed19PNG').css({display:"none"});
+				$("#Viewshed19PNG").css({display:"none"});
 			},
 			activateStationPoint20Events : function() {
 				// position station point mode info box in map frame
-				$('#StationPointMode_InfoBox').css({left:"auto",right:"60px"});
+				$("#StationPointMode_InfoBox").css({left:"auto",right:"60px"});
 				// display photo associated with station point
-				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/20-Station-Point-Photo.jpg");
-				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"right"});
+				$("#StationPointMode_InfoBoxImage").attr("src","images/StationPointPhotos/20-Station-Point-Photo.jpg");
+				$("#StationPointMode_InfoBoxImage").css({width:"100%",height:"auto",float:"right"});
 				// display station point label
-				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 20</span> <br> Havasupai Point, from Grand Scenic Divide");
-				$('#StationPointMode_StationPointLabel').css({float: "right", height:"45px"});
+				$("#StationPointMode_StationPointLabel").html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 20</span> <br> Havasupai Point, from Grand Scenic Divide");
+				$("#StationPointMode_StationPointLabel").css({float: "right", height:"45px"});
 			},
 			deactivateStationPoint20Events : function() {
-				$('#Viewshed20PNG').css({display:"none"});
+				$("#Viewshed20PNG").css({display:"none"});
 			},
 			activateStationPoint21Events : function() {
 				// position station point mode info box in map frame
-				$('#StationPointMode_InfoBox').css({left:"auto",right:"60px"});
+				$("#StationPointMode_InfoBox").css({left:"auto",right:"60px"});
 				// display photo associated with station point
-				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/21-Station-Point-Photo.jpg");
-				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"right"});
+				$("#StationPointMode_InfoBoxImage").attr("src","images/StationPointPhotos/21-Station-Point-Photo.jpg");
+				$("#StationPointMode_InfoBoxImage").css({width:"100%",height:"auto",float:"right"});
 				// display station point label
-				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 21</span> <br> North Wall of Canyon, <br> from Grand Scenic Divide");
-				$('#StationPointMode_StationPointLabel').css({float: "right", height:"55px"});
+				$("#StationPointMode_StationPointLabel").html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 21</span> <br> North Wall of Canyon, <br> from Grand Scenic Divide");
+				$("#StationPointMode_StationPointLabel").css({float: "right", height:"55px"});
 			},
 			deactivateStationPoint21Events : function() {
-				$('#Viewshed21PNG').css({display:"none"});
+				$("#Viewshed21PNG").css({display:"none"});
 			},
 			activateStationPoint22Events : function() {
 				// position station point mode info box in map frame
-				$('#StationPointMode_InfoBox').css({left:"auto",right:"60px"});
+				$("#StationPointMode_InfoBox").css({left:"auto",right:"60px"});
 				// display photo associated with station point
-				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/22-Station-Point-Photo.jpg");
-				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"right"});
+				$("#StationPointMode_InfoBoxImage").attr("src","images/StationPointPhotos/22-Station-Point-Photo.jpg");
+				$("#StationPointMode_InfoBoxImage").css({width:"100%",height:"auto",float:"right"});
 				// display station point label
-				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 22</span> <br> Up Grand Canyon, from Grand Scenic Divide");
-				$('#StationPointMode_StationPointLabel').css({float: "right", height:"45px"});
+				$("#StationPointMode_StationPointLabel").html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 22</span> <br> Up Grand Canyon, from Grand Scenic Divide");
+				$("#StationPointMode_StationPointLabel").css({float: "right", height:"45px"});
 			},
 			deactivateStationPoint22Events : function() {
-				$('#Viewshed22PNG').css({display:"none"});
+				$("#Viewshed22PNG").css({display:"none"});
 			},
 			activateStationPoint23Events : function() {
 				// position station point mode info box in map frame
-				$('#StationPointMode_InfoBox').css({left:"auto",left:"10px"});
+				$("#StationPointMode_InfoBox").css({left:"auto",left:"10px"});
 				// display photo associated with station point
-				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/23-Station-Point-Photo.jpg");
-				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"left"});
+				$("#StationPointMode_InfoBoxImage").attr("src","images/StationPointPhotos/23-Station-Point-Photo.jpg");
+				$("#StationPointMode_InfoBoxImage").css({width:"100%",height:"auto",float:"left"});
 				// display station point label
-				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 23</span> <br> Bird's-eye View of Grand Canyon, <br> from an Airplane");
-				$('#StationPointMode_StationPointLabel').css({float: "left", height:"55px"});
+				$("#StationPointMode_StationPointLabel").html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 23</span> <br> Bird's-eye View of Grand Canyon, <br> from an Airplane");
+				$("#StationPointMode_StationPointLabel").css({float: "left", height:"55px"});
 			},
 			deactivateStationPoint23Events : function() {
-				$('#Viewshed23PNG').css({display:"none"});
+				$("#Viewshed23PNG").css({display:"none"});
 			},
 			activateStationPoint24Events : function() {
 				// position station point mode info box in map frame
-				$('#StationPointMode_InfoBox').css({left:"auto",left:"10px"});
+				$("#StationPointMode_InfoBox").css({left:"auto",left:"10px"});
 				// display photo associated with station point
-				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/24-Station-Point-Photo.jpg");
-				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"left"});
+				$("#StationPointMode_InfoBoxImage").attr("src","images/StationPointPhotos/24-Station-Point-Photo.jpg");
+				$("#StationPointMode_InfoBoxImage").css({width:"100%",height:"auto",float:"left"});
 				// display station point label
-				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 24</span> <br> Bright Angel Canyon, from Yavapai Point");
-				$('#StationPointMode_StationPointLabel').css({float: "left", height:"45px"});
+				$("#StationPointMode_StationPointLabel").html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 24</span> <br> Bright Angel Canyon, from Yavapai Point");
+				$("#StationPointMode_StationPointLabel").css({float: "left", height:"45px"});
 			},
 			deactivateStationPoint24Events : function() {
-				$('#Viewshed24PNG').css({display:"none"});
+				$("#Viewshed24PNG").css({display:"none"});
 			},
 			activateStationPoint25Events : function() {
-				$('#StationPoint25RolloverIcon').css({display:"block"});
+				$("#StationPoint25RolloverIcon").css({display:"block"});
 				// position station point mode info box in map frame
-				$('#StationPointMode_InfoBox').css({left:"auto",right:"10px"});
+				$("#StationPointMode_InfoBox").css({left:"auto",right:"10px"});
 				// display photo associated with station point
-				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/25-Station-Point-Photo.jpg");
-				$('#StationPointMode_InfoBoxImage').css({width:"auto",height:"100%",float:"right"});
+				$("#StationPointMode_InfoBoxImage").attr("src","images/StationPointPhotos/25-Station-Point-Photo.jpg");
+				$("#StationPointMode_InfoBoxImage").css({width:"auto",height:"100%",float:"right"});
 				// display station point label
-				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 25</span> <br> Starting Down the Kaibab Trail, <br> from Yaki Point");
-				$('#StationPointMode_StationPointLabel').css({float: "right", height:"55px"});
+				$("#StationPointMode_StationPointLabel").html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 25</span> <br> Starting Down the Kaibab Trail, <br> from Yaki Point");
+				$("#StationPointMode_StationPointLabel").css({float: "right", height:"55px"});
 				// display notification box stating that this station point does not have a viewshed
-				$('#StationPointNotificationBox').css({left:"39%",right:"39%"});
+				$("#StationPointNotificationBox").css({left:"39%",right:"39%"});
 			},
 			deactivateStationPoint25Events : function() {
 				// hide notification box
-				$('#StationPointNotificationBox').css({left:"-99999px",right:"auto"});
+				$("#StationPointNotificationBox").css({left:"-99999px",right:"auto"});
 			},
 			activateStationPoint26Events : function() {
 				// position station point mode info box in map frame
-				$('#StationPointMode_InfoBox').css({left:"auto",right:"60px"});
+				$("#StationPointMode_InfoBox").css({left:"auto",right:"60px"});
 				// display photo associated with station point
-				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/26-Station-Point-Photo.jpg");
-				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"right"});
+				$("#StationPointMode_InfoBoxImage").attr("src","images/StationPointPhotos/26-Station-Point-Photo.jpg");
+				$("#StationPointMode_InfoBoxImage").css({width:"100%",height:"auto",float:"right"});
 				// display station point label
-				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 26</span> <br> The Kaibab Suspension Bridge");
-				$('#StationPointMode_StationPointLabel').css({float: "right", height:"45px"});
+				$("#StationPointMode_StationPointLabel").html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 26</span> <br> The Kaibab Suspension Bridge");
+				$("#StationPointMode_StationPointLabel").css({float: "right", height:"45px"});
 			},
 			deactivateStationPoint26Events : function() {
-				$('#Viewshed26PNG').css({display:"none"});
+				$("#Viewshed26PNG").css({display:"none"});
 			},
 			activateStationPoint27Events : function() {
-				$('#StationPoint27RolloverIcon').css({display:"block"});
+				$("#StationPoint27RolloverIcon").css({display:"block"});
 				// position station point mode info box in map frame
-				$('#StationPointMode_InfoBox').css({left:"auto",right:"60px"});
+				$("#StationPointMode_InfoBox").css({left:"auto",right:"60px"});
 				// display photo associated with station point
-				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/27-Station-Point-Photo.jpg");
-				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"right"});
+				$("#StationPointMode_InfoBoxImage").attr("src","images/StationPointPhotos/27-Station-Point-Photo.jpg");
+				$("#StationPointMode_InfoBoxImage").css({width:"100%",height:"auto",float:"right"});
 				// display station point label
-				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 27</span> <br> Tunnel Approach to Bridge");
-				$('#StationPointMode_StationPointLabel').css({float: "right", height:"45px"});
+				$("#StationPointMode_StationPointLabel").html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 27</span> <br> Tunnel Approach to Bridge");
+				$("#StationPointMode_StationPointLabel").css({float: "right", height:"45px"});
 				// display notification box stating that this station point does not have a viewshed
-				$('#StationPointNotificationBox').css({left:"39%",right:"39%"});
+				$("#StationPointNotificationBox").css({left:"39%",right:"39%"});
 			},
 			deactivateStationPoint27Events : function() {
 				// hide notification box
-				$('#StationPointNotificationBox').css({left:"-99999px",right:"auto"});
+				$("#StationPointNotificationBox").css({left:"-99999px",right:"auto"});
 			},
 			activateStationPoint28Events : function() {
 				// position station point mode info box in map frame
-				$('#StationPointMode_InfoBox').css({left:"auto",right:"60px"});
+				$("#StationPointMode_InfoBox").css({left:"auto",right:"60px"});
 				// display photo associated with station point
-				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/28-Station-Point-Photo.jpg");
-				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"right"});
+				$("#StationPointMode_InfoBoxImage").attr("src","images/StationPointPhotos/28-Station-Point-Photo.jpg");
+				$("#StationPointMode_InfoBoxImage").css({width:"100%",height:"auto",float:"right"});
 				// display station point label
-				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 28</span> <br> A Trail Party Crossing Bridge");
-				$('#StationPointMode_StationPointLabel').css({float: "right", height:"45px"});
+				$("#StationPointMode_StationPointLabel").html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 28</span> <br> A Trail Party Crossing Bridge");
+				$("#StationPointMode_StationPointLabel").css({float: "right", height:"45px"});
 			},
 			deactivateStationPoint28Events : function() {
-				$('#Viewshed28PNG').css({display:"none"});
+				$("#Viewshed28PNG").css({display:"none"});
 			},
 			activateStationPoint29Events : function() {
-				$('#StationPoint29RolloverIcon').css({display:"block"});
+				$("#StationPoint29RolloverIcon").css({display:"block"});
 				// position station point mode info box in map frame
-				$('#StationPointMode_InfoBox').css({left:"auto",right:"10px"});
+				$("#StationPointMode_InfoBox").css({left:"auto",right:"10px"});
 				// display photo associated with station point
-				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/29-Station-Point-Photo.jpg");
-				$('#StationPointMode_InfoBoxImage').css({width:"auto",height:"100%",float:"right"});
+				$("#StationPointMode_InfoBoxImage").attr("src","images/StationPointPhotos/29-Station-Point-Photo.jpg");
+				$("#StationPointMode_InfoBoxImage").css({width:"auto",height:"100%",float:"right"});
 				// display station point label
-				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 29</span> <br> Ribbon Falls, Bright Angel Canyon");
-				$('#StationPointMode_StationPointLabel').css({float: "right", height:"45px"});
+				$("#StationPointMode_StationPointLabel").html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 29</span> <br> Ribbon Falls, Bright Angel Canyon");
+				$("#StationPointMode_StationPointLabel").css({float: "right", height:"45px"});
 				// display notification box stating that this station point does not have a viewshed
-				$('#StationPointNotificationBox').css({left:"39%",right:"39%"});
+				$("#StationPointNotificationBox").css({left:"39%",right:"39%"});
 			},
 			deactivateStationPoint29Events : function() {
 				// hide notification box
-				$('#StationPointNotificationBox').css({left:"-99999px",right:"auto"});
+				$("#StationPointNotificationBox").css({left:"-99999px",right:"auto"});
 			},
 			activateStationPoint30Events : function() {
 				// position station point mode info box in map frame
-				$('#StationPointMode_InfoBox').css({left:"auto",right:"10px"});
+				$("#StationPointMode_InfoBox").css({left:"auto",right:"10px"});
 				// display photo associated with station point
-				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/30-Station-Point-Photo.jpg");
-				$('#StationPointMode_InfoBoxImage').css({width:"auto",height:"100%",float:"right"});
+				$("#StationPointMode_InfoBoxImage").attr("src","images/StationPointPhotos/30-Station-Point-Photo.jpg");
+				$("#StationPointMode_InfoBoxImage").css({width:"auto",height:"100%",float:"right"});
 				// display station point label
-				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 30</span> <br> Across to Roaring Springs, from Kaibab Trail");
-				$('#StationPointMode_StationPointLabel').css({float: "right", height:"45px"});
+				$("#StationPointMode_StationPointLabel").html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 30</span> <br> Across to Roaring Springs, from Kaibab Trail");
+				$("#StationPointMode_StationPointLabel").css({float: "right", height:"45px"});
 			},
 			deactivateStationPoint30Events : function() {
-				$('#Viewshed30PNG').css({display:"none"});
+				$("#Viewshed30PNG").css({display:"none"});
 			},
 			activateStationPoint31Events : function() {
-				$('#StationPoint31RolloverIcon').css({display:"block"});
+				$("#StationPoint31RolloverIcon").css({display:"block"});
 				// position station point mode info box in map frame
-				$('#StationPointMode_InfoBox').css({left:"auto",right:"60px"});
+				$("#StationPointMode_InfoBox").css({left:"auto",right:"60px"});
 				// display photo associated with station point
-				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/31-Station-Point-Photo.jpg");
-				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"right"});
+				$("#StationPointMode_InfoBoxImage").attr("src","images/StationPointPhotos/31-Station-Point-Photo.jpg");
+				$("#StationPointMode_InfoBoxImage").css({width:"100%",height:"auto",float:"right"});
 				// display station point label
-				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 31</span> <br> On the Kaibab Trail Above Roaring Springs");
-				$('#StationPointMode_StationPointLabel').css({float: "right", height:"45px"});
+				$("#StationPointMode_StationPointLabel").html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 31</span> <br> On the Kaibab Trail Above Roaring Springs");
+				$("#StationPointMode_StationPointLabel").css({float: "right", height:"45px"});
 				// display notification box stating that this station point does not have a viewshed
-				$('#StationPointNotificationBox').css({left:"39%",right:"39%"});
+				$("#StationPointNotificationBox").css({left:"39%",right:"39%"});
 			},
 			deactivateStationPoint31Events : function() {
 				// hide notification box
-				$('#StationPointNotificationBox').css({left:"-99999px",right:"auto"});
+				$("#StationPointNotificationBox").css({left:"-99999px",right:"auto"});
 			},
 			activateStationPoint32Events : function() {
 				// position station point mode info box in map frame
-				$('#StationPointMode_InfoBox').css({left:"auto",right:"60px"});
+				$("#StationPointMode_InfoBox").css({left:"auto",right:"60px"});
 				// display photo associated with station point
-				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/32-Station-Point-Photo.jpg");
-				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"right"});
+				$("#StationPointMode_InfoBoxImage").attr("src","images/StationPointPhotos/32-Station-Point-Photo.jpg");
+				$("#StationPointMode_InfoBoxImage").css({width:"100%",height:"auto",float:"right"});
 				// display station point label
-				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 32</span> <br> Up Grand Canyon, from Bright Angel Point");
-				$('#StationPointMode_StationPointLabel').css({float: "right", height:"45px"});
+				$("#StationPointMode_StationPointLabel").html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 32</span> <br> Up Grand Canyon, from Bright Angel Point");
+				$("#StationPointMode_StationPointLabel").css({float: "right", height:"45px"});
 			},
 			deactivateStationPoint32Events : function() {
-				$('#Viewshed32PNG').css({display:"none"});
+				$("#Viewshed32PNG").css({display:"none"});
 			},
 			activateStationPoint33Events : function() {
 				// position station point mode info box in map frame
-				$('#StationPointMode_InfoBox').css({left:"auto",right:"60px"});
+				$("#StationPointMode_InfoBox").css({left:"auto",right:"60px"});
 				// display photo associated with station point
-				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/33-Station-Point-Photo.jpg");
-				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"right"});
+				$("#StationPointMode_InfoBoxImage").attr("src","images/StationPointPhotos/33-Station-Point-Photo.jpg");
+				$("#StationPointMode_InfoBoxImage").css({width:"100%",height:"auto",float:"right"});
 				// display station point label
-				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 33</span> <br> Across Oza Butte to South Rim");
-				$('#StationPointMode_StationPointLabel').css({float: "right", height:"45px"});
+				$("#StationPointMode_StationPointLabel").html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 33</span> <br> Across Oza Butte to South Rim");
+				$("#StationPointMode_StationPointLabel").css({float: "right", height:"45px"});
 			},
 			deactivateStationPoint33Events : function() {
-				$('#Viewshed33PNG').css({display:"none"});
+				$("#Viewshed33PNG").css({display:"none"});
 			},
 			activateStationPoint34Events : function() {
-				$('#StationPoint34RolloverIcon').css({display:"block"});
+				$("#StationPoint34RolloverIcon").css({display:"block"});
 				// position station point mode info box in map frame
-				$('#StationPointMode_InfoBox').css({left:"10px",right:"auto"});
+				$("#StationPointMode_InfoBox").css({left:"10px",right:"auto"});
 				// display photo associated with station point
-				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/34-Station-Point-Photo.jpg");
-				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"left"});
+				$("#StationPointMode_InfoBoxImage").attr("src","images/StationPointPhotos/34-Station-Point-Photo.jpg");
+				$("#StationPointMode_InfoBoxImage").css({width:"100%",height:"auto",float:"left"});
 				// display station point label
-				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 34</span> <br> A Grove of Pines in the Kaibab Forest");
-				$('#StationPointMode_StationPointLabel').css({float: "left", height:"45px"});
+				$("#StationPointMode_StationPointLabel").html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 34</span> <br> A Grove of Pines in the Kaibab Forest");
+				$("#StationPointMode_StationPointLabel").css({float: "left", height:"45px"});
 				// display notification box stating that this station point does not have a viewshed
-				$('#StationPointNotificationBox').css({left:"39%",right:"39%"});
+				$("#StationPointNotificationBox").css({left:"39%",right:"39%"});
 			},
 			deactivateStationPoint34Events : function() {
 				// hide notification box
-				$('#StationPointNotificationBox').css({left:"-99999px",right:"auto"});
+				$("#StationPointNotificationBox").css({left:"-99999px",right:"auto"});
 			},
 			activateStationPoint35Events : function() {
 				// position station point mode info box in map frame
-				$('#StationPointMode_InfoBox').css({left:"auto",right:"60px"});
+				$("#StationPointMode_InfoBox").css({left:"auto",right:"60px"});
 				// display photo associated with station point
-				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/35-Station-Point-Photo.jpg");
-				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"right"});
+				$("#StationPointMode_InfoBoxImage").attr("src","images/StationPointPhotos/35-Station-Point-Photo.jpg");
+				$("#StationPointMode_InfoBoxImage").css({width:"100%",height:"auto",float:"right"});
 				// display station point label
-				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 35</span> <br> Across Canyon to Havasupai Point, <br> from Pt. Sublime");
-				$('#StationPointMode_StationPointLabel').css({float: "right", height:"55px"});
+				$("#StationPointMode_StationPointLabel").html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 35</span> <br> Across Canyon to Havasupai Point, <br> from Pt. Sublime");
+				$("#StationPointMode_StationPointLabel").css({float: "right", height:"55px"});
 			},
 			deactivateStationPoint35Events : function() {
-				$('#Viewshed35PNG').css({display:"none"});
+				$("#Viewshed35PNG").css({display:"none"});
 			},
 			activateStationPoint37Events : function() {
 				// position station point mode info box in map frame
-				$('#StationPointMode_InfoBox').css({left:"auto",right:"60px"});
+				$("#StationPointMode_InfoBox").css({left:"auto",right:"60px"});
 				// display photo associated with station point
-				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/37-Station-Point-Photo.jpg");
-				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"right"});
+				$("#StationPointMode_InfoBoxImage").attr("src","images/StationPointPhotos/37-Station-Point-Photo.jpg");
+				$("#StationPointMode_InfoBoxImage").css({width:"100%",height:"auto",float:"right"});
 				// display station point label
-				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 37</span> <br> Up Canyon to Shiva Temple, <br> from Pt. Sublime");
-				$('#StationPointMode_StationPointLabel').css({float: "right", height:"55px"});
+				$("#StationPointMode_StationPointLabel").html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 37</span> <br> Up Canyon to Shiva Temple, <br> from Pt. Sublime");
+				$("#StationPointMode_StationPointLabel").css({float: "right", height:"55px"});
 			},
 			deactivateStationPoint37Events : function() {
-				$('#Viewshed37PNG').css({display:"none"});
+				$("#Viewshed37PNG").css({display:"none"});
 			},
 			activateStationPoint38Events : function() {
 				// position station point mode info box in map frame
-				$('#StationPointMode_InfoBox').css({left:"auto",right:"60px"});
+				$("#StationPointMode_InfoBox").css({left:"auto",right:"60px"});
 				// display photo associated with station point
-				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/38-Station-Point-Photo.jpg");
-				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"right"});
+				$("#StationPointMode_InfoBoxImage").attr("src","images/StationPointPhotos/38-Station-Point-Photo.jpg");
+				$("#StationPointMode_InfoBoxImage").css({width:"100%",height:"auto",float:"right"});
 				// display station point label
-				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 38</span> <br> Down Canyon to Shiva Temple, <br> from Cape Royal");
-				$('#StationPointMode_StationPointLabel').css({float: "right", height:"55px"});
+				$("#StationPointMode_StationPointLabel").html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 38</span> <br> Down Canyon to Shiva Temple, <br> from Cape Royal");
+				$("#StationPointMode_StationPointLabel").css({float: "right", height:"55px"});
 			},
 			deactivateStationPoint38Events : function() {
-				$('#Viewshed38PNG').css({display:"none"});
+				$("#Viewshed38PNG").css({display:"none"});
 			},
 			activateStationPoint39Events : function() {
 				// position station point mode info box in map frame
-				$('#StationPointMode_InfoBox').css({left:"auto",right:"60px"});
+				$("#StationPointMode_InfoBox").css({left:"auto",right:"60px"});
 				// display photo associated with station point
-				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/39-Station-Point-Photo.jpg");
-				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"right"});
+				$("#StationPointMode_InfoBoxImage").attr("src","images/StationPointPhotos/39-Station-Point-Photo.jpg");
+				$("#StationPointMode_InfoBoxImage").css({width:"100%",height:"auto",float:"right"});
 				// display station point label
-				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 39</span> <br> Angel's Window, on Cape Royal");
-				$('#StationPointMode_StationPointLabel').css({float: "right", height:"45px"});
+				$("#StationPointMode_StationPointLabel").html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 39</span> <br> Angel's Window, on Cape Royal");
+				$("#StationPointMode_StationPointLabel").css({float: "right", height:"45px"});
 			},
 			deactivateStationPoint39Events : function() {
-				$('#Viewshed39PNG').css({display:"none"});
+				$("#Viewshed39PNG").css({display:"none"});
 			},
 			activateStationPoint40Events : function() {
 				// position station point mode info box in map frame
-				$('#StationPointMode_InfoBox').css({left:"10px",right:"auto"});
+				$("#StationPointMode_InfoBox").css({left:"10px",right:"auto"});
 				// display photo associated with station point
-				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/40-Station-Point-Photo.jpg");
-				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"left"});
+				$("#StationPointMode_InfoBoxImage").attr("src","images/StationPointPhotos/40-Station-Point-Photo.jpg");
+				$("#StationPointMode_InfoBoxImage").css({width:"100%",height:"auto",float:"left"});
 				// display station point label
-				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 40</span> <br> Across Marble Gorge to Painted Desert, <br> at Pt. Imperial");
-				$('#StationPointMode_StationPointLabel').css({float: "left", height:"55px"});
+				$("#StationPointMode_StationPointLabel").html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 40</span> <br> Across Marble Gorge to Painted Desert, <br> at Pt. Imperial");
+				$("#StationPointMode_StationPointLabel").css({float: "left", height:"55px"});
 			},
 			deactivateStationPoint40Events : function() {
-				$('#Viewshed40PNG').css({display:"none"});
+				$("#Viewshed40PNG").css({display:"none"});
 			},
 			activateStationPoint41Events : function() {
 				// position station point mode info box in map frame
-				$('#StationPointMode_InfoBox').css({left:"10px",right:"auto"});
+				$("#StationPointMode_InfoBox").css({left:"10px",right:"auto"});
 				// display photo associated with station point
-				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/41-Station-Point-Photo.jpg");
-				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"left"});
+				$("#StationPointMode_InfoBoxImage").attr("src","images/StationPointPhotos/41-Station-Point-Photo.jpg");
+				$("#StationPointMode_InfoBoxImage").css({width:"100%",height:"auto",float:"left"});
 				// display station point label
-				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 41</span> <br> Toward Little Colorado River, <br> from Pt. Imperial");
-				$('#StationPointMode_StationPointLabel').css({float: "left", height:"55px"});
+				$("#StationPointMode_StationPointLabel").html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 41</span> <br> Toward Little Colorado River, <br> from Pt. Imperial");
+				$("#StationPointMode_StationPointLabel").css({float: "left", height:"55px"});
 			},
 			deactivateStationPoint41Events : function() {
-				$('#Viewshed41PNG').css({display:"none"});
+				$("#Viewshed41PNG").css({display:"none"});
 			},
 			activateStationPoint42Events : function() {
 				// position station point mode info box in map frame
-				$('#StationPointMode_InfoBox').css({left:"auto",left:"10px"});
+				$("#StationPointMode_InfoBox").css({left:"auto",left:"10px"});
 				// display photo associated with station point
-				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/42-Station-Point-Photo.jpg");
-				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"left"});
+				$("#StationPointMode_InfoBoxImage").attr("src","images/StationPointPhotos/42-Station-Point-Photo.jpg");
+				$("#StationPointMode_InfoBoxImage").css({width:"100%",height:"auto",float:"left"});
 				// display station point label
-				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 42</span> <br> A Storm in the Grand Canyon");
-				$('#StationPointMode_StationPointLabel').css({float: "left", height:"45px"});
+				$("#StationPointMode_StationPointLabel").html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 42</span> <br> A Storm in the Grand Canyon");
+				$("#StationPointMode_StationPointLabel").css({float: "left", height:"45px"});
 			},
 			deactivateStationPoint42Events : function() {
-				$('#Viewshed42PNG').css({display:"none"});
+				$("#Viewshed42PNG").css({display:"none"});
 			},
 			activateStationPoint43Events : function() {
 				// position station point mode info box in map frame
-				$('#StationPointMode_InfoBox').css({left:"auto",left:"10px"});
+				$("#StationPointMode_InfoBox").css({left:"auto",left:"10px"});
 				// display photo associated with station point
-				$('#StationPointMode_InfoBoxImage').attr("src","images/StationPointPhotos/43-Station-Point-Photo.jpg");
-				$('#StationPointMode_InfoBoxImage').css({width:"100%",height:"auto",float:"left"});
+				$("#StationPointMode_InfoBoxImage").attr("src","images/StationPointPhotos/43-Station-Point-Photo.jpg");
+				$("#StationPointMode_InfoBoxImage").css({width:"100%",height:"auto",float:"left"});
 				// display station point label
-				$('#StationPointMode_StationPointLabel').html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 43</span> <br> After the Storm");
-				$('#StationPointMode_StationPointLabel').css({float: "left", height:"45px"});
+				$("#StationPointMode_StationPointLabel").html("<span class='StationPointMode_StationPointLabelTitle'>Station Point 43</span> <br> After the Storm");
+				$("#StationPointMode_StationPointLabel").css({float: "left", height:"45px"});
 			},
 			deactivateStationPoint43Events : function() {
-				$('#Viewshed43PNG').css({display:"none"});
+				$("#Viewshed43PNG").css({display:"none"});
 			}
 		};
 
 		/**
-		 * Displays popup when user clicks on station point
+		 * Displays popup when user clicks on station point. Calls the
+		 * displayCorrespondingStationPointPopup(...) function that executes
+		 * the changes that differ between station points.
 		 */
 		function displayStationPointPopup(station_point_name) {
 			if(is_explore_by_station_point_mode_active) {
+				var current_station_point_number = station_point_name.substring("StationPoint".length).toString();
+				$("#Viewshed"+current_station_point_number+"PNG").css({display: "none"});
+				$("#StationPointPopup").attr("src","images/StationPointPhotos/"+current_station_point_number+"-Station-Point-Photo.jpg");
+
 				$("#StationPointMode_InfoBox").css({left:"auto",right:"-999999px"});
 				$("#StationPointMode_InfoBoxImage").attr("src","");
 				$("#StationPointMode_InfoBoxImage").css({border:"0"});
-				$("#StationPointNotificationBox").css({left:"-99999px",right:"auto"});
+
 				displayCorrespondingStationPointPopup(station_point_name);
+				$("#StationPointNotificationBox").css({left:"-99999px",right:"auto"});
 				$("#StationPointPopupDiv").css({display:"block",zIndex:4000});
 				$("#StationPointPopupLink").attr("target","_blank");
 			}
 		}
 
+		/**
+		 * Called by the displayStationPointPopup(...) function. Executes the
+		 * changes that differ between station points.
+		 */
 		function displayCorrespondingStationPointPopup(station_point_name) {
-			var current_station_point_number = station_point_name.substring("StationPoint".length).toString();
-			$("#Viewshed"+current_station_point_number+"PNG").css({display: "none"});
-			$("#StationPointPopup").attr("src","images/StationPointPhotos/"+current_station_point_number+"-Station-Point-Photo.jpg");
-			
 			switch(station_point_name) {
 				case "StationPoint2":
 					$("#StationPointPopup").css({width:"80%",height:"auto",left:"10%",right:"10%"});
@@ -1787,7 +1826,8 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 			}
 		}
 		/**
-		 
+		 * Returns the top offset needed to vertically center the popup image for
+		 * the current active station point.
 		 */
 		 function getStationPointPopupOffset(active_station_point) {
 		 	// retrieve the station point popup image's aspect ratio
@@ -1809,6 +1849,12 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 		 		return ($("#StationPointPopupDiv").width() - stationpoint_popup_width) / 2;
 		 	}
 		}
+
+		/**
+		 * Returns the aspect ratio of the popup image for the station point
+		 * corresponding to the active_station_point parameter. Aspect ratio
+		 * here defined as (height in pixels)/(width in pixels).
+		 */
 		function getStationPointPopupImageAspectRatio(active_station_point) {
 			switch(active_station_point) {
 		 		case "StationPoint2":
@@ -1898,26 +1944,46 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 		 	}
 		}
 
+		/**
+		 * If the user has clicked on the grayed out background of the station point
+		 * popup itself (and not on the popup image), hide the station point popup
+		 * (along with the popup image, as it is contained in the station point popup).
+		 */
 		function hideStationPointPopup(event) {
 			var clicked_object = document.elementFromPoint(event.clientX,event.clientY);
 			if(clicked_object.id != "StationPointPopup") {
-				$('#StationPointPopupDiv').css({display:"none",zIndex:-1});
+				$("#StationPointPopupDiv").css({display:"none",zIndex:-1});
 			}
 		}
 
+		/**
+		 * Allows ExploreByLocationMode to set private variable's status (i.e. when
+		 * location mode is activated and is_explore_by_station_point_mode_active
+		 * has to be set to false).
+		 */
 		function setExploreByStationPointModeStatus(status) {
 			is_explore_by_station_point_mode_active = status;
 		}
 
+		/**
+		 * Allows ExploreByLocationMode to get private variable's status (i.e. when
+		 * determining whether to respond location mode events).
+		 */
 		function getExploreByStationPointModeStatus() {
 			return is_explore_by_station_point_mode_active;
 		}
 
+		/**
+		 * Displays hint for the station point mode button.
+		 */
 		function displayHint() {
 			$("#station_point_mode_button_hint_container").css({left: "0", right: "0"});
 			$("#Mode_Button_One_Hover").css({display: "block"});
 		}
 
+		/**
+		 * Hides hint for the station point mode button.
+		 */
 		function hideHint() {
 			$("#station_point_mode_button_hint_container").css({left: "-99999px", right: "auto"});
 			$("#Mode_Button_One_Hover").css({display: "none"});	
@@ -1950,7 +2016,7 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 			popup_fade_out_in_progress = false; 
 
 		/**
-		 Called when user clicks on the location mode button.
+		 * Called when user clicks on the location mode button.
 		 */
 		function activateMode()
 		{
@@ -1961,19 +2027,19 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 				setAllStationPointIconsOpacity(0.6);
 				
 				setContentDimensions();
-				$('#Mode_Button_All_On').css({display: "block"});
-				$('#Mode_Button_One_On').css({display: "none"});
+				$("#Mode_Button_All_On").css({display: "block"});
+				$("#Mode_Button_One_On").css({display: "none"});
 				//place StationPointSVGLayer at a lower layer so that the viewshed layers
 				//can be accessed from the top
-				$('#StationPointSVGLayer').css({zIndex:400});
+				$("#StationPointSVGLayer").css({zIndex:400});
 				
-				$('#StationPointMode_InfoBox').css({left:"auto",right:"-99999px",zIndex:-1});
-				$('#LocationMode_InfoBox').css({left:"auto",right:"60px",zIndex:1000});
+				$("#StationPointMode_InfoBox").css({left:"auto",right:"-99999px",zIndex:-1});
+				$("#LocationMode_InfoBox").css({left:"auto",right:"60px",zIndex:1000});
 			}
 		}
 
 		/**
-		 
+		 *
 		 */
 		function checkLocationModeMouseoverEvents()
 		{
@@ -1983,24 +2049,24 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 			active_station_points_arr = findActiveStationPoints(active_station_points_arr);
 			displayActiveStationPointsNames(active_station_points_arr);
 
-			var StationPointIcons = document.getElementsByClassName('StationPointIcon');
+			var StationPointIcons = document.getElementsByClassName("StationPointIcon");
 			if(active_station_points_arr.length > 0) {
 				for(var i = 0; i < StationPointIcons.length; i++) {
 					StationPointIcons[i].style.display = "none";
 				}
 				for(var i = 0; i <= active_station_points_arr.length; i++) {
-					$('#StationPoint'+active_station_points_arr[i]+'Icon').css({display:"block"});
+					$("#StationPoint"+active_station_points_arr[i]+"Icon").css({display:"block"});
 				}
 			} else {
 				for(var i = 0; i < StationPointIcons.length; i++) {
-					$('#'+StationPointIcons[i].id).css({display:"block"});
+					$("#"+StationPointIcons[i].id).css({display:"block"});
 				}
 			}
 			// reset z-index values for all viewsheds
 			setViewshedDivZIndexValues();
 		}
 		/**
-		 
+		 *
 		 */
 		function findActiveStationPoints(active_station_points_arr) {
 			// array of z-indices used in this function to place the current viewshed div (in
@@ -2015,7 +2081,7 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 			var stationpoints_with_viewsheds = ["StationPoint2","StationPoint3","StationPoint4","StationPoint5","StationPoint6","StationPoint7","StationPoint8","StationPoint9","StationPoint10","StationPoint11","StationPoint12","StationPoint13","StationPoint17","StationPoint18","StationPoint19","StationPoint20","StationPoint21","StationPoint22","StationPoint23","StationPoint24","StationPoint26","StationPoint28","StationPoint30","StationPoint32","StationPoint33","StationPoint35","StationPoint37","StationPoint38","StationPoint39","StationPoint40","StationPoint41","StationPoint42","StationPoint43"];
 
 			// array used for access to the Viewshed Div corresopnding to the ith iteration of the for loop below
-			var viewshed_div_names = ['Viewshed2Div','Viewshed3Div','Viewshed4Div','Viewshed5Div','Viewshed6Div','Viewshed7Div','Viewshed8Div','Viewshed9Div','Viewshed10Div','Viewshed11Div','Viewshed12Div','Viewshed13Div','Viewshed17Div','Viewshed18Div','Viewshed19Div','Viewshed20Div','Viewshed21Div','Viewshed22Div','Viewshed23Div','Viewshed24Div','Viewshed26Div','Viewshed28Div','Viewshed30Div','Viewshed32Div','Viewshed33Div','Viewshed35Div','Viewshed37Div','Viewshed38Div','Viewshed39Div','Viewshed40Div','Viewshed41Div','Viewshed42Div','Viewshed43Div'];
+			var viewshed_div_names = ["Viewshed2Div","Viewshed3Div","Viewshed4Div","Viewshed5Div","Viewshed6Div","Viewshed7Div","Viewshed8Div","Viewshed9Div","Viewshed10Div","Viewshed11Div","Viewshed12Div","Viewshed13Div","Viewshed17Div","Viewshed18Div","Viewshed19Div","Viewshed20Div","Viewshed21Div","Viewshed22Div","Viewshed23Div","Viewshed24Div","Viewshed26Div","Viewshed28Div","Viewshed30Div","Viewshed32Div","Viewshed33Div","Viewshed35Div","Viewshed37Div","Viewshed38Div","Viewshed39Div","Viewshed40Div","Viewshed41Div","Viewshed42Div","Viewshed43Div"];
 
 			for(var i = 0; i < 33; i++) {
 				var object_at_cursor = document.elementFromPoint(current_mouse_x_coord,current_mouse_y_coord);
@@ -2035,7 +2101,7 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 			return active_station_points_arr;
 		}
 		/**
-
+		 *
 		 */
 		function displayActiveStationPointsNames(active_station_points_arr)
 		{
@@ -2101,20 +2167,20 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 			}
 		}
 		/**
-		 This function resets z-index values for all viewshed divs to defaults.
+		 * This function resets z-index values for all viewshed divs to defaults.
 		 */
 		function setViewshedDivZIndexValues() {
 			var temp_ind = [];
 			for(var i = 500; i > 466; i--) temp_ind.push(i);
 
-			var ViewshedDivs = document.getElementsByClassName('ViewshedDivs');
+			var ViewshedDivs = document.getElementsByClassName("ViewshedDivs");
 			for(var i = 0; i < ViewshedDivs.length; i++) {
-				$('#'+ViewshedDivs[i].id).css({zIndex:temp_ind[i]});
+				$("#"+ViewshedDivs[i].id).css({zIndex:temp_ind[i]});
 			}
 		}
 
 		/**
-		 Function displays popup when user clicks on viewshed and when location_mode is active.
+		 * Function displays popup when user clicks on viewshed and when location_mode is active.
 		 */
 		function displayLocationModePopup() {
 			// if location mode is active
@@ -2129,7 +2195,7 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 				if(stationpoints_visible.length > 0) {
 					// if a popup already exists, remove the popup to allow the creation of a new one
 					if($("#popup_div").length > 0)
-						$('#popup_div').remove();
+						$("#popup_div").remove();
 					
 					// create new popup div
 					var popup_div = document.createElement("div");
@@ -2155,29 +2221,29 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 					// will be displayed (stationpoints_visible.length == # of links)
 					switch(stationpoints_visible.length) {
 						case 1:
-							popup_div.style.height = '100px'; break;
+							popup_div.style.height = "100px"; break;
 						case 2:
-							popup_div.style.height = '120px'; break;
+							popup_div.style.height = "120px"; break;
 						case 3:
-							popup_div.style.height = '144px'; break;
+							popup_div.style.height = "144px"; break;
 						case 4:
-							popup_div.style.height = '161px'; break;
+							popup_div.style.height = "161px"; break;
 						case 5:
-							popup_div.style.height = '178px'; break;
+							popup_div.style.height = "178px"; break;
 						case 6:
-							popup_div.style.height = '195px'; break;
+							popup_div.style.height = "195px"; break;
 						case 7:
-							popup_div.style.height = '212px'; break;
+							popup_div.style.height = "212px"; break;
 						case 8:
-							popup_div.style.height = '229px'; break;
+							popup_div.style.height = "229px"; break;
 						default:
-							popup_div.style.height = '229px'; break;
+							popup_div.style.height = "229px"; break;
 					}
 						
 					$("#panzoom_parent").append(popup_div);
 					
 					// Destroy popup when user clicks on it
-					$('#exit_button').click(function() {
+					$("#exit_button").click(function() {
 						destroyLocationModePopup();
 					});
 
@@ -2186,161 +2252,161 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 		}
 
 		/**
-		 
+		 *
 		 */
 		function addLinksToLocationModePopup(popup_div,stationpoints_visible) {
 			var stationpoint_link1, stationpoint_link2, stationpoint_link3, stationpoint_link4, stationpoint_link5, stationpoint_link6, stationpoint_link7, stationpoint_link8;
 			var stationpoint_links = [stationpoint_link1, stationpoint_link2, stationpoint_link3, stationpoint_link4, stationpoint_link5, stationpoint_link6, stationpoint_link7, stationpoint_link8];
 			for(var i = 0; i < stationpoints_visible.length; i++) {
-				stationpoint_links[i] = document.createElement('a');
-				stationpoint_links[i].className = 'zoomable_element'; //to identify as a popup element
+				stationpoint_links[i] = document.createElement("a");
+				stationpoint_links[i].className = "zoomable_element"; //to identify as a popup element
 				stationpoint_links[i].style.fontSize = "12px";
-				stationpoint_links[i].target = '_blank'; // make link open up in new tab
+				stationpoint_links[i].target = "_blank"; // make link open up in new tab
 				stationpoint_links[i].href = getLocationModePopupLink(stationpoints_visible[i]);
-				stationpoint_links[i].appendChild(document.createTextNode('Go to Station Point ' + stationpoints_visible[i] + ' Photo Module.'));
-				stationpoint_links[i].appendChild(document.createElement('br'));
+				stationpoint_links[i].appendChild(document.createTextNode("Go to Station Point " + stationpoints_visible[i] + " Photo Module."));
+				stationpoint_links[i].appendChild(document.createElement("br"));
 				popup_div.appendChild(stationpoint_links[i]);
 			}
 		}
 		/**
-
+		 *
 		 */
 		function getLocationModePopupLink(stationpoint_index) {
 			switch(parseInt(stationpoint_index)) {
 				case 2:
-					return 'http://enchantingthedesert.com/2-on-grand-view-point/'; break;
+					return "http://enchantingthedesert.com/2-on-grand-view-point/"; break;
 				case 3:
-					return 'http://enchantingthedesert.com/3-angels-gate-wotans-throne-and-vishnu-temple/'; break;
+					return "http://enchantingthedesert.com/3-angels-gate-wotans-throne-and-vishnu-temple/"; break;
 				case 4:
-					return 'http://enchantingthedesert.com/4-up-granite-gorge/'; break;
+					return "http://enchantingthedesert.com/4-up-granite-gorge/"; break;
 				case 5:
-					return 'http://enchantingthedesert.com/5-down-granite-gorge-from-grand-view-trail/'; break;	
+					return "http://enchantingthedesert.com/5-down-granite-gorge-from-grand-view-trail/"; break;	
 				case 6:
-					return 'http://enchantingthedesert.com/6-up-grand-canyon-from-moran-point/'; break;
+					return "http://enchantingthedesert.com/6-up-grand-canyon-from-moran-point/"; break;
 				case 7:
-					return 'http://enchantingthedesert.com/7-up-grand-canyon-from-zuni-point/'; break;
+					return "http://enchantingthedesert.com/7-up-grand-canyon-from-zuni-point/"; break;
 				case 8:
-					return 'http://enchantingthedesert.com/8-up-to-marble-gorge-and-painted-desert-from-lipan-point/'; break;	
+					return "http://enchantingthedesert.com/8-up-to-marble-gorge-and-painted-desert-from-lipan-point/"; break;	
 				case 9:
-					return 'http://enchantingthedesert.com/9-up-to-marble-gorge-and-painted-desert-from-desert-view/'; break;	
+					return "http://enchantingthedesert.com/9-up-to-marble-gorge-and-painted-desert-from-desert-view/"; break;	
 				case 10:
-					return 'http://enchantingthedesert.com/10-down-grand-canyon-from-zuni-point/'; break;
+					return "http://enchantingthedesert.com/10-down-grand-canyon-from-zuni-point/"; break;
 				case 11:
-					return 'http://enchantingthedesert.com/11-across-grand-canyon-near-el-tovar/'; break;	
+					return "http://enchantingthedesert.com/11-across-grand-canyon-near-el-tovar/"; break;	
 				case 12:
-					return 'http://enchantingthedesert.com/12-descending-the-zigzags-bright-angel-trail/'; break;
+					return "http://enchantingthedesert.com/12-descending-the-zigzags-bright-angel-trail/"; break;
 				case 13:
-					return 'http://enchantingthedesert.com/13-colorado-river-and-zoroaster-temple-foot-of-bright-angel-trail/'; break;
+					return "http://enchantingthedesert.com/13-colorado-river-and-zoroaster-temple-foot-of-bright-angel-trail/"; break;
 				case 14:
-					return 'http://enchantingthedesert.com/14-hopi-indian-buffalo-dance-at-el-tovar/'; break;
+					return "http://enchantingthedesert.com/14-hopi-indian-buffalo-dance-at-el-tovar/"; break;
 				case 15:
-					return 'http://enchantingthedesert.com/15-hopi-indian-eagle-dance-at-el-tovar/'; break;
+					return "http://enchantingthedesert.com/15-hopi-indian-eagle-dance-at-el-tovar/"; break;
 				case 16:
-					return 'http://enchantingthedesert.com/16-hopi-indian-war-dance-at-el-tovar/'; break;
+					return "http://enchantingthedesert.com/16-hopi-indian-war-dance-at-el-tovar/"; break;
 				case 17:
-					return 'http://enchantingthedesert.com/17-down-grand-canyon-from-hopi-point/'; break;
+					return "http://enchantingthedesert.com/17-down-grand-canyon-from-hopi-point/"; break;
 				case 18:
-					return 'http://enchantingthedesert.com/18-eastern-outlook-from-havasupai-point/'; break;
+					return "http://enchantingthedesert.com/18-eastern-outlook-from-havasupai-point/"; break;
 				case 19:
-					return 'http://enchantingthedesert.com/19-across-grand-scenic-divide-from-havasupai-point/'; break;
+					return "http://enchantingthedesert.com/19-across-grand-scenic-divide-from-havasupai-point/"; break;
 				case 20:
-					return 'http://enchantingthedesert.com/20-havasupai-point-from-grand-scenic-divide/'; break;
+					return "http://enchantingthedesert.com/20-havasupai-point-from-grand-scenic-divide/"; break;
 				case 21:
-					return 'http://enchantingthedesert.com/21-north-wall-of-canyon-from-grand-scenic-divide/'; break;
+					return "http://enchantingthedesert.com/21-north-wall-of-canyon-from-grand-scenic-divide/"; break;
 				case 22:
-					return 'http://enchantingthedesert.com/22-up-grand-canyon-from-grand-scenic-divide/'; break;
+					return "http://enchantingthedesert.com/22-up-grand-canyon-from-grand-scenic-divide/"; break;
 				case 23:
-					return 'http://enchantingthedesert.com/23-birds-eye-view-of-grand-canyon-from-an-airplane/'; break;
+					return "http://enchantingthedesert.com/23-birds-eye-view-of-grand-canyon-from-an-airplane/"; break;
 				case 24:
-					return 'http://enchantingthedesert.com/24-bright-angel-canyon-from-yavapai-point/'; break;
+					return "http://enchantingthedesert.com/24-bright-angel-canyon-from-yavapai-point/"; break;
 				case 25:
-					return 'http://enchantingthedesert.com/25-starting-down-the-kaibab-trail-from-yaki-point/'; break;
+					return "http://enchantingthedesert.com/25-starting-down-the-kaibab-trail-from-yaki-point/"; break;
 				case 26:
-					return 'http://enchantingthedesert.com/26-the-kaibab-suspension-bridge/'; break;
+					return "http://enchantingthedesert.com/26-the-kaibab-suspension-bridge/"; break;
 				case 27:
-					return 'http://enchantingthedesert.com/27-tunnel-approach-to-bridge/'; break;
+					return "http://enchantingthedesert.com/27-tunnel-approach-to-bridge/"; break;
 				case 28:
-					return 'http://enchantingthedesert.com/28-a-trail-party-crossing-bridge/'; break;
+					return "http://enchantingthedesert.com/28-a-trail-party-crossing-bridge/"; break;
 				case 29:
-					return 'http://enchantingthedesert.com/29-ribbon-falls-bright-angel-canyon/'; break;
+					return "http://enchantingthedesert.com/29-ribbon-falls-bright-angel-canyon/"; break;
 				case 30:
-					return 'http://enchantingthedesert.com/30-across-to-roaring-springs-from-kaibab-trail/'; break;
+					return "http://enchantingthedesert.com/30-across-to-roaring-springs-from-kaibab-trail/"; break;
 				case 31:
-					return 'http://enchantingthedesert.com/31-on-the-kaibab-trail-above-roaring-springs/'; break;
+					return "http://enchantingthedesert.com/31-on-the-kaibab-trail-above-roaring-springs/"; break;
 				case 32:
-					return 'http://enchantingthedesert.com/32-up-grand-canyon-from-bright-angel-point-2/'; break;
+					return "http://enchantingthedesert.com/32-up-grand-canyon-from-bright-angel-point-2/"; break;
 				case 33:
-					return 'http://enchantingthedesert.com/33-across-oza-butte-to-south-rim/'; break;
+					return "http://enchantingthedesert.com/33-across-oza-butte-to-south-rim/"; break;
 				case 34:
-					return 'http://enchantingthedesert.com/34-a-grove-of-pines-in-the-kaibab-forest/'; break;
+					return "http://enchantingthedesert.com/34-a-grove-of-pines-in-the-kaibab-forest/"; break;
 				case 35:
-					return 'http://enchantingthedesert.com/35-across-canyon-to-havasupai-point-from-pt-sublime/'; break;
+					return "http://enchantingthedesert.com/35-across-canyon-to-havasupai-point-from-pt-sublime/"; break;
 				case 37:
-					return 'http://enchantingthedesert.com/37-up-canyon-to-shiva-temple-from-pt-sublime/'; break;
+					return "http://enchantingthedesert.com/37-up-canyon-to-shiva-temple-from-pt-sublime/"; break;
 				case 38:
-					return 'http://enchantingthedesert.com/38-down-canyon-to-shiva-temple-from-cape-royal/'; break;
+					return "http://enchantingthedesert.com/38-down-canyon-to-shiva-temple-from-cape-royal/"; break;
 				case 39:
-					return 'http://enchantingthedesert.com/39-angels-window-on-cape-royal/'; break;
+					return "http://enchantingthedesert.com/39-angels-window-on-cape-royal/"; break;
 				case 40:
-					return 'http://enchantingthedesert.com/40-across-marble-gorge-to-painted-desert-at-pt-imperial/'; break;
+					return "http://enchantingthedesert.com/40-across-marble-gorge-to-painted-desert-at-pt-imperial/"; break;
 				case 41:
-					return 'http://enchantingthedesert.com/41-toward-little-colorado-river-from-point-imperial/'; break;
+					return "http://enchantingthedesert.com/41-toward-little-colorado-river-from-point-imperial/"; break;
 				case 42:
-					return 'http://enchantingthedesert.com/42-a-storm-in-the-grand-canyon/'; break;
+					return "http://enchantingthedesert.com/42-a-storm-in-the-grand-canyon/"; break;
 				case 43:
-					return 'http://enchantingthedesert.com/43-after-the-storm/'; break;		
+					return "http://enchantingthedesert.com/43-after-the-storm/"; break;		
 				default:
-					return 'http://enchantingthedesert.com/2-on-grand-view-point/'; break;
+					return "http://enchantingthedesert.com/2-on-grand-view-point/"; break;
 			}
 		}
 		/**
-
+		 *
 		 */
 		function addIntroTextToLocationModePopup(popup_div,stationpoints_visible) {
 			// variable to store the sentence in the popup that describes which station points
 			// the user-clicked location are visible from
-			var intro = document.createElement('p'), intro_text = '';
-			intro.className = 'zoomable_element'; //to identify as a popup element
+			var intro = document.createElement("p"), intro_text = "";
+			intro.className = "zoomable_element"; //to identify as a popup element
 			// add the names of the station points to intro_text of the station points
 			// the user-clicked location are visible from
 			if(stationpoints_visible.length != 0) { //if user has clicked on a viewshed
 				if(stationpoints_visible.length == 1) {
 					// if there is only one station point to be included in the sentence
-					intro_text += 'The location you clicked is visible from station point ' + stationpoints_visible[0];
+					intro_text += "The location you clicked is visible from station point " + stationpoints_visible[0];
 				} else {
 					// if there is more than one station point to be included in the sentence
-					intro_text = 'The location you clicked is visible from station points ';
+					intro_text = "The location you clicked is visible from station points ";
 					for(var i = 0; i < stationpoints_visible.length; i++) {
 						if(i == stationpoints_visible.length - 1) {
 							// if this is the last station point to be added to the sentence
-							intro_text += ' and ' + stationpoints_visible[i];
+							intro_text += " and " + stationpoints_visible[i];
 						} else {
 							if(stationpoints_visible.length == 2 && i == 0) {
 								// if there is only two station points, don't add the comma before
-								// the 'and' word
+								// the "and" word
 								intro_text += stationpoints_visible[i];
 							} else {
-								intro_text += stationpoints_visible[i] + ', ';
+								intro_text += stationpoints_visible[i] + ", ";
 							}
 						}
 					}
 				}
-				intro_text += '.';
+				intro_text += ".";
 				intro_text = document.createTextNode(intro_text);
 				intro.appendChild(intro_text);
-				intro.style.cssText = 'font-size: 14px; font-weight: 400; margin-top: 18px; margin-left: 50px; margin-right: 50px; text-align: center;';
+				intro.style.cssText = "font-size: 14px; font-weight: 400; margin-top: 18px; margin-left: 50px; margin-right: 50px; text-align: center;";
 				popup_div.appendChild(intro);
 			}
 		}
 		/**
-		 Function destroys active popup with id 'popup_div' by first executing a fadeout,
-		 then removing the popup_div element
+		 * Function destroys active popup with id "popup_div" by first executing a fadeout,
+		 * then removing the popup_div element
 		 */
 		function destroyLocationModePopup() {
-			$('#popup_div').fadeOut(500);
+			$("#popup_div").fadeOut(500);
 			popup_fade_out_in_progress = true;
 			setTimeout(function(){
-				$('#popup_div').remove();
+				$("#popup_div").remove();
 				popup_fade_out_in_progress = false;
 			},500);
 		}
@@ -2387,10 +2453,10 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 		var is_landmarks_layer_displayed = false;
 
 		/**
-		 This function is called when the user clicks on the 'checkbox' for 'Landmarks'.
-		 As this 'checkbox' is not actually a checkbox object, the internals of determining
-		 what events to trigger following the clicking of the 'checkbox' is determined in this
-		 function.
+		 * This function is called when the user clicks on the "checkbox" for "Landmarks".
+		 * As this "checkbox" is not actually a checkbox object, the internals of determining
+		 * what events to trigger following the clicking of the "checkbox" is determined in this
+		 * function.
 		 */
 		function triggerLandmarksToggleEvent() {
 			if(!is_landmarks_layer_displayed) {
@@ -2400,8 +2466,8 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 			}
 		}
 		/**
-		 This function displays the landmarks and sets the corresponding global variable 
-		 (is_landmarks_layer_displayed) to reflect that its status is "active".
+		 * This function displays the landmarks and sets the corresponding global variable 
+		 * (is_landmarks_layer_displayed) to reflect that its status is "active".
 		 */
 		function activateLandmarksToggle() {
 			is_landmarks_layer_displayed = true;
@@ -2410,8 +2476,8 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 			setAllStationPointIconsOpacity(0.2);
 		}
 		/**
-		 This function hides the landmarks and sets the corresponding global variable 
-		 (is_landmarks_layer_displayed) to reflect that its status is "inactive".
+		 * This function hides the landmarks and sets the corresponding global variable 
+		 * (is_landmarks_layer_displayed) to reflect that its status is "inactive".
 		 */
 		function deactivateLandmarksToggle() {
 			is_landmarks_layer_displayed = false;
@@ -2424,10 +2490,10 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 			}
 		}
 		function displayLandmarksLayer() {
-			$('#LandmarksLayer').css({left:"0", right:"auto"});
+			$("#LandmarksLayer").css({left:"0", right:"auto"});
 		}
 		function hideLandmarksLayer() {
-			$('#LandmarksLayer').css({left:"-99999px", right:"auto"});
+			$("#LandmarksLayer").css({left:"-99999px", right:"auto"});
 		}
 		function displayHint() {
 			$("#landmarks_toggle_checkbox_hint_container").css({left: "0", right: "0"});
@@ -2463,10 +2529,10 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 		var is_viewshed_angles_layer_displayed = false;
 
 		/**
-		 This function is called when the user clicks on the 'checkbox' for 'View Angles'.
-		 As this 'checkbox' is not actually a checkbox object, the internals of determining
-		 what events to trigger following the clicking of the 'checkbox' is determined in this
-		 function.
+		 * This function is called when the user clicks on the "checkbox" for "View Angles".
+		 * As this "checkbox" is not actually a checkbox object, the internals of determining
+		 * what events to trigger following the clicking of the "checkbox" is determined in this
+		 * function.
 		 */
 		function triggerViewshedAnglesToggleEvent() {
 			if(!is_viewshed_angles_layer_displayed) {
@@ -2476,28 +2542,28 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 			}
 		}
 		/**
-		 This function displays the view angles and sets the corresponding global variable 
-		 (is_viewshed_angles_layer_displayed) to reflect that its status is 'active'.
+		 * This function displays the view angles and sets the corresponding global variable 
+		 * (is_viewshed_angles_layer_displayed) to reflect that its status is "active".
 		 */
 		function activateViewshedAnglesToggle() {
 			is_viewshed_angles_layer_displayed = true;
 			displayViewshedAnglesLayer();
-			document.getElementById('viewshedangles_checkbox_unchecked').style.opacity = 0;
+			document.getElementById("viewshedangles_checkbox_unchecked").style.opacity = 0;
 		}
 		/**
-		 This function hides the view angles and sets the corresponding global variable 
-		 (is_viewshed_angles_layer_displayed) to reflect that its status is 'inactive'.
+		 * This function hides the view angles and sets the corresponding global variable 
+		 * (is_viewshed_angles_layer_displayed) to reflect that its status is "inactive".
 		 */
 		function deactivateViewshedAnglesToggle() {
 			is_viewshed_angles_layer_displayed = false;
 			hideViewshedAnglesLayer();
-			document.getElementById('viewshedangles_checkbox_unchecked').style.opacity = 1;
+			document.getElementById("viewshedangles_checkbox_unchecked").style.opacity = 1;
 		}
 		function displayViewshedAnglesLayer() {
-			$('#ViewshedAnglesLayer').css({left: "0", right: "auto"});
+			$("#ViewshedAnglesLayer").css({left: "0", right: "auto"});
 		}
 		function hideViewshedAnglesLayer() {
-			$('#ViewshedAnglesLayer').css({left: "-99999px", right: "auto"});
+			$("#ViewshedAnglesLayer").css({left: "-99999px", right: "auto"});
 		}
 		function displayHint() {
 			$("#viewshedangles_toggle_checkbox_hint_container").css({left: "0", right: "0"});
@@ -2533,23 +2599,23 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 	}
 
 	/**
-
+	 *
 	 */
 	function setLoadingScreenDimensions() {
 	 	var div_dimensions = getWindowAdjustedDivDimensions(),
 	 		div_width = div_dimensions[0],
 			div_height = div_dimensions[1];
 
-		$('#loading_screen').height(div_height);
-		$('#loading_screen').width(div_width);
+		$("#loading_screen").height(div_height);
+		$("#loading_screen").width(div_width);
 
 		var offset_to_center_loading_screen_vertically = ($(window).height() - div_height) / 2;
-		$('#loading_screen').css({top: offset_to_center_loading_screen_vertically, bottom: "auto"});
+		$("#loading_screen").css({top: offset_to_center_loading_screen_vertically, bottom: "auto"});
 	 }
 
 	/**
-	 This function resizes a selection of html objects to fit to the size of the browser
-	 window.
+	 * This function resizes a selection of html objects to fit to the size of the browser
+	 * window.
 	 */
 	function setContentDimensions() {
 		var div_dimensions = getWindowAdjustedDivDimensions(),
@@ -2558,44 +2624,44 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 
 		
 		// set new dimensions of divs
-		$('#loading_screen').height(div_height);
-		$('#loading_screen').width(div_width);
-		$('#map_content_wrapper').height(div_height);
-		$('#map_content_wrapper').width(div_width);
-		$('#focal').height(div_height);
-		$('#focal').width(div_width);
-		$('#container').height(div_height);
-		$('#container').width(div_width);
-		$('#panzoom_parent').height(div_height);
-		$('#panzoom_parent').width(div_width);
-		$('#panzoom').height(div_height);
-		$('#panzoom').width(div_width);
-		$('#StationPointIconsSVGLayer').height(div_height);
-		$('#StationPointIconsSVGLayer').width(div_width);
-		$('#StationPointSVGLayerName').height(div_height);
-		$('#StationPointSVGLayerName').width(div_width);
-		$('#StationPointPopupDiv').height(div_height);
-		$('#StationPointPopupDiv').width(div_width);
+		$("#loading_screen").height(div_height);
+		$("#loading_screen").width(div_width);
+		$("#map_content_wrapper").height(div_height);
+		$("#map_content_wrapper").width(div_width);
+		$("#focal").height(div_height);
+		$("#focal").width(div_width);
+		$("#container").height(div_height);
+		$("#container").width(div_width);
+		$("#panzoom_parent").height(div_height);
+		$("#panzoom_parent").width(div_width);
+		$("#panzoom").height(div_height);
+		$("#panzoom").width(div_width);
+		$("#StationPointIconsSVGLayer").height(div_height);
+		$("#StationPointIconsSVGLayer").width(div_width);
+		$("#StationPointSVGLayerName").height(div_height);
+		$("#StationPointSVGLayerName").width(div_width);
+		$("#StationPointPopupDiv").height(div_height);
+		$("#StationPointPopupDiv").width(div_width);
 
-		var ViewshedSVGs = document.getElementsByClassName('ViewshedSVG'); // get all viewshed SVGs
+		var ViewshedSVGs = document.getElementsByClassName("ViewshedSVG"); // get all viewshed SVGs
 		for(var i = 0; i < ViewshedSVGs.length; i++) {
-			ViewshedSVGs[i].style.width = div_width+'px';
-			ViewshedSVGs[i].style.height = div_height+'px';
+			ViewshedSVGs[i].style.width = div_width+"px";
+			ViewshedSVGs[i].style.height = div_height+"px";
 		}
 
-		var ViewshedPNGs = document.getElementsByClassName('ViewshedPNG'); // get all viewshed PNGs
+		var ViewshedPNGs = document.getElementsByClassName("ViewshedPNG"); // get all viewshed PNGs
 		for(var i = 0; i < ViewshedPNGs.length; i++) {
-			ViewshedPNGs[i].style.width = div_width+'px';
-			ViewshedPNGs[i].style.height = div_height+'px';
+			ViewshedPNGs[i].style.width = div_width+"px";
+			ViewshedPNGs[i].style.height = div_height+"px";
 		}
 
 		var offset_to_center_map_viewport_vertically = ($(window).height() - div_height) / 2;
-		$('#loading_screen').css({top: offset_to_center_map_viewport_vertically, bottom: "auto"});
-		$('#map_content_wrapper').css({top: offset_to_center_map_viewport_vertically, bottom: "auto"});
+		$("#loading_screen").css({top: offset_to_center_map_viewport_vertically, bottom: "auto"});
+		$("#map_content_wrapper").css({top: offset_to_center_map_viewport_vertically, bottom: "auto"});
 	}
 
 	/**
-
+	 *
 	 */
 	 function getWindowAdjustedDivDimensions() {
 	 	var height = $(window).height(),
@@ -2641,7 +2707,7 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 	 }
 
 	/**
-	 
+	 *
 	 */
 	function setAllStationPointIconsOpacity(dimmed_opacity) {
 		$(".StationPointIcon").css({opacity: dimmed_opacity, zIndex: "3"});
