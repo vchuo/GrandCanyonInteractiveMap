@@ -2039,7 +2039,11 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 		}
 
 		/**
-		 *
+		 * Called by the trackMouseCoordsAndCheckForExploreByLocationModeEvents(...)
+		 * function for all mousemove events if location mode is activated. Finds
+		 * all active station points and displays the rollover icons for them. A station
+		 * point is deemed active if the location the user's cursor is pointing to on the
+		 * map can be seen from the photo corresponding to the station point.
 		 */
 		function checkLocationModeMouseoverEvents()
 		{
@@ -2066,7 +2070,31 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 			setViewshedDivZIndexValues();
 		}
 		/**
+		 * Helper function called by the checkLocationModeMouseoverEvents() function.
+		 * Returns an array containing all of the active station points. A station
+		 * point is deemed active if the location the user's cursor is pointing to on the
+		 * map can be seen from the photo corresponding to the station point. Since the
+		 * viewshed of a photo represents what can be seen in a photo, to find all the
+		 * active station points, this function iteratively switches the various viewshed
+		 * divs to be at the top z-index layer (each viewshed div is positioned at a different
+		 * z-index) to use the elementFromPoint(...) function to determine whether the
+		 * user's cursor is pointing to the viewshed corresponding to a Viewshed Div.
 		 *
+		 * For example, Viewshed2Div is the container div that contains the SVGs for
+		 * viewshed 2. Currently, Viewshed2Div is placed at the top z-index layer, so
+		 * we could determine whether the user's cursor is pointing to any of the SVGs
+		 * corresponding to viewshed 2, and therefore determine whether station point 2
+		 * is an active station point. However, we cannot determine this information for
+		 * any of the other viewsheds yet because Viewshed3Div, Viewshed4Div, ..., are all
+		 * at lower z-index layers and therefore the SVGs corresponding to their viewsheds
+		 * cannot be detected using the elementFromPoint(...) function. Hence, the function
+		 * below, iteratively changes the z-index of the Viewshed Div currently at the top
+		 * z-index layer to a lower z-index layer so as to access the Viewshed Divs below
+		 * it. Using this method, we can then determine all of the photos from which the
+		 * location the user's cursor is pointing to on the map can be seen. Indeed, this
+		 * method is not very scalable if we are talking about thousands of viewsheds, but
+		 * as this project will only be limited to 33 viewsheds, this method is feasible
+		 * and works well in practice.
 		 */
 		function findActiveStationPoints(active_station_points_arr) {
 			// array of z-indices used in this function to place the current viewshed div (in
@@ -2101,7 +2129,8 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 			return active_station_points_arr;
 		}
 		/**
-		 *
+		 * Iterates through the array containing all of the active station points
+		 * and displays their names in the information box for location mode.
 		 */
 		function displayActiveStationPointsNames(active_station_points_arr)
 		{
@@ -2180,7 +2209,7 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 		}
 
 		/**
-		 * Function displays popup when user clicks on viewshed and when location_mode is active.
+		 * Function displays popup when user clicks on viewshed and when location mode is active.
 		 */
 		function displayLocationModePopup() {
 			// if location mode is active
@@ -2252,7 +2281,8 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 		}
 
 		/**
-		 *
+		 * Called by the displayLocationModePopup() function to add the links
+		 * of all of the current active station points to the popup.
 		 */
 		function addLinksToLocationModePopup(popup_div,stationpoints_visible) {
 			var stationpoint_link1, stationpoint_link2, stationpoint_link3, stationpoint_link4, stationpoint_link5, stationpoint_link6, stationpoint_link7, stationpoint_link8;
@@ -2269,7 +2299,9 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 			}
 		}
 		/**
-		 *
+		 * Returns the link corresponding to a station point given its index
+		 * number. For example, Station Point 2's index is simply 2. Links are
+		 * to the photo modules created as part of the parent project.
 		 */
 		function getLocationModePopupLink(stationpoint_index) {
 			switch(parseInt(stationpoint_index)) {
@@ -2360,7 +2392,8 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 			}
 		}
 		/**
-		 *
+		 * Called by the displayLocationModePopup() function. Adds text content to the
+		 * popup based on the number of station points active (visible).
 		 */
 		function addIntroTextToLocationModePopup(popup_div,stationpoints_visible) {
 			// variable to store the sentence in the popup that describes which station points
@@ -2411,19 +2444,34 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 			},500);
 		}
 
+		/**
+		 * Allows ExploreByStationPointMode to set private variable's status (i.e. when
+		 * station point mode is activated and is_explore_by_location_mode_active
+		 * has to be set to false).
+		 */
 		function setExploreByLocationModeStatus(status) {
 			is_explore_by_location_mode_active = status;
 		}
 
+		/**
+		 * Allows ExploreByStationPointMode to get private variable's status (i.e. when
+		 * determining whether to respond station point mode events).
+		 */
 		function getExploreByLocationModeStatus() {
 			return is_explore_by_location_mode_active;
 		}
 
+		/**
+		 * Displays hint for the location mode button.
+		 */
 		function displayHint() {
 			$("#location_mode_button_hint_container").css({left: "0", right: "0"});
 			$("#Mode_Button_All_Hover").css({display: "block"});
 		}
 
+		/**
+		 * Hides hint for the location mode button.
+		 */
 		function hideHint() {
 			$("#location_mode_button_hint_container").css({left: "-99999px", right: "auto"});
 			$("#Mode_Button_All_Hover").css({display: "none"});
