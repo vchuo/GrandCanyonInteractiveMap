@@ -2196,6 +2196,18 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 				}
 			}
 		}
+		/**
+		 * Positions the LocationMode_InfoBox either at the top-left corner
+		 * or at the top-right corner of the map depending on which station
+		 * points are active. Some active station points may benefit more
+		 * from having the LocationMode_InfoBox being placed at a specific
+		 * corner of the map because, for example, their viewsheds may
+		 * cross over to the top-right corner of the map and if the
+		 * LocationMode_InfoBox were positioned at the top-right corner, it
+		 * may obstruct the user from fully investigating the viewsheds;
+		 * hence, in this case, the LocationMode_InfoBox could be positioned
+		 * at the top-left corner of the map.
+		 */
 		function positionLocationModeInfoBox(active_station_points_arr) {
 			// array of station points that would benefit from having the
 			// LocationMode_InfoBox positioned on the left side of the map
@@ -2216,7 +2228,13 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 				$("#LocationMode_InfoBox").css({left:"auto",right:"60px"});
 			}
 		}
-
+		/**
+		 * Returns true if at least one of the items in station_points_arr
+		 * is found in active_station_points_arr. Used by the 
+		 * positionLocationModeInfoBox(...) function to determine whether to 
+		 * position the LocationMode_InfoBox on the left or the right side
+		 * of the map.
+		 */
 		function atLeastOneInputItemInActiveStationPointsArr(station_points_arr, active_station_points_arr) {
 			for(var i = 0; i < station_points_arr.length; i++) {
 				if($.inArray(station_points_arr[i], active_station_points_arr) != -1) {
