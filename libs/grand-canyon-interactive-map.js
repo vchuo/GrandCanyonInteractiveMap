@@ -2052,6 +2052,7 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 
 			active_station_points_arr = findActiveStationPoints(active_station_points_arr);
 			displayActiveStationPointsNames(active_station_points_arr);
+			positionLocationModeInfoBox(active_station_points_arr);
 
 			var StationPointIcons = document.getElementsByClassName("StationPointIcon");
 			if(active_station_points_arr.length > 0) {
@@ -2195,6 +2196,36 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 				}
 			}
 		}
+		function positionLocationModeInfoBox(active_station_points_arr) {
+			// array of station points that would benefit from having the
+			// LocationMode_InfoBox positioned on the left side of the map
+			// i.e. viewsheds may be covered by the info box
+			var station_points_right_arr = [
+				"2", "6", "7", "8", "9", "23", "30", "40", "41", "42", "43"],
+			// array of station points that would benefit from having the
+			// LocationMode_InfoBox positioned on the right side of the map;
+			// i.e. viewsheds may be covered by the info box
+				station_points_left_arr = [
+				"10", "11", "12", "17", "18", "19", "20", "21", "22", "35", "37"];
+			if(atLeastOneInputItemInActiveStationPointsArr(station_points_right_arr, 
+				active_station_points_arr)) {
+				$("#LocationMode_InfoBox").css({left:"20px",right:"auto"});
+			}
+			if(atLeastOneInputItemInActiveStationPointsArr(station_points_left_arr, 
+				active_station_points_arr)) {
+				$("#LocationMode_InfoBox").css({left:"auto",right:"60px"});
+			}
+		}
+
+		function atLeastOneInputItemInActiveStationPointsArr(station_points_arr, active_station_points_arr) {
+			for(var i = 0; i < station_points_arr.length; i++) {
+				if($.inArray(station_points_arr[i], active_station_points_arr) != -1) {
+					return true;
+				}
+			}
+			return false;
+		}
+
 		/**
 		 * This function resets z-index values for all viewshed divs to defaults.
 		 */
