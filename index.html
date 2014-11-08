@@ -17,7 +17,9 @@
 		<!-- Display Loading Screen -->
 		<script src="libs/grand-canyon-interactive-map-dimensions.js"></script>
 		<script type="text/javascript">
-			VernonChuo.GrandCanyonInteractiveMapDimensions.displayLoadingScreenForInitialPageLoad();
+			if(VernonChuo.GrandCanyonInteractiveMapDimensions.isNotAMobileDevice()) {
+				VernonChuo.GrandCanyonInteractiveMapDimensions.displayLoadingScreenForInitialPageLoad();
+			}
 		</script>
 		
 		<div id="map_content_wrapper">

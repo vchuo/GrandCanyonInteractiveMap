@@ -5,7 +5,14 @@ VernonChuo.GrandCanyonInteractiveMapDimensions = function() {
 	var MAP_WIDTH = 2700,
 
 	// constant for the height (in pixels) of the basemap image used
-		MAP_HEIGHT = 2066;
+		MAP_HEIGHT = 2066,
+
+	// constants for the minimum screen width/height (in pixels)
+	// under which the application is not displayed and a relevant
+	// message is displayed to prompt the user to use a device with
+	// a larger screen to view this application
+		MIN_SCREEN_WIDTH = 1000,
+		MIN_SCREEN_HEIGHT = 600;
 
 	/**
 	 * Sets loading screen dimensions and displays it.
@@ -116,10 +123,19 @@ VernonChuo.GrandCanyonInteractiveMapDimensions = function() {
 		return [div_width,div_height];
 	}
 
+	/**
+	 * Returns true if the screen size of the user's device is larger
+	 * than a set threshold; false otherwise.
+	 */
+	function isNotAMobileDevice() {
+		return (screen.width > MIN_SCREEN_WIDTH && screen.height > MIN_SCREEN_HEIGHT);
+	}
+
 	var public_objects =
 	{
 		displayLoadingScreenForInitialPageLoad : displayLoadingScreenForInitialPageLoad,
-		setContentDimensions : setContentDimensions
+		setContentDimensions : setContentDimensions,
+		isNotAMobileDevice : isNotAMobileDevice
 	};
 
 	return public_objects;

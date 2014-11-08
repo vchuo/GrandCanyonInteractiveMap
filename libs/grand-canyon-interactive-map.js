@@ -14,14 +14,7 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 		MAP_WIDTH = 2700,
 
 	// constant for the height (in pixels) of the basemap image used
-		MAP_HEIGHT = 2066,
-
-	// constants for the minimum screen width/height (in pixels)
-	// under which the application is not displayed and a relevant
-	// message is displayed to prompt the user to use a device with
-	// a larger screen to view this application
-		MIN_SCREEN_WIDTH = 1000,
-		MIN_SCREEN_HEIGHT = 600;
+		MAP_HEIGHT = 2066;
 
 	var init = function()
 	{
@@ -30,7 +23,7 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 		 */
 		function execute() {
 			// only load map if device size meets minimum requirements
-			if(isNotAMobileDevice()) {
+			if(VernonChuo.GrandCanyonInteractiveMapDimensions.isNotAMobileDevice()) {
 				GrandCanyonInteractiveMapSVGCode.appendHTMLForStationPointAndViewshedSVGs();
 				
 				// resizes all content divs to fit window size
@@ -46,8 +39,6 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 				ExploreByStationPointMode.activateMode();
 				displayMapElementAfterLoadingIsComplete();
 				EventHandlers.attachAllEventHandlers();
-			} else {
-				hideLoadingScreen();
 			}
 		}
 		
@@ -2806,14 +2797,6 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 			// if map is displayed in its entirety, hide warning popup
 			document.getElementById("window_size_warning_popup").style.display = "none";
 		}
-	}
-
-	/**
-	 * Returns true if the screen size of the user's device is larger
-	 * than a set threshold; false otherwise.
-	 */
-	function isNotAMobileDevice() {
-		return (screen.width > MIN_SCREEN_WIDTH && screen.height > MIN_SCREEN_HEIGHT);
 	}
 	
 	var public_objects =
