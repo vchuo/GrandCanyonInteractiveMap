@@ -35,6 +35,7 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 				
 				// resizes all content divs to fit window size
 				VernonChuo.GrandCanyonInteractiveMapDimensions.setContentDimensions();
+				checkWindowSize();
 				
 				hideAllViewshedPNGs();
 				hideAllRolloverIcons();
@@ -370,6 +371,7 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 			// temporarily violate containment of the panzoom element
 			panzoom.panzoom("reset");
 			VernonChuo.GrandCanyonInteractiveMapDimensions.setContentDimensions();
+			checkWindowSize();
 			// window is resized so to maintain containment of the map within the
 			// map viewport, dimensions of the panzoom element must be recalculated
 			panzoom.panzoom("resetDimensions");
@@ -2781,6 +2783,29 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 	 */
 	function setAllStationPointIconsOpacity(opacity) {
 		$(".StationPointIcon").css({opacity: opacity, zIndex: "3"});
+	}
+
+	function checkWindowSize() {
+		var height = window.innerHeight,
+			width = window.innerWidth,
+			MIN_WINDOW_HEIGHT = 574,
+			MIN_WINDOW_WIDTH = 750;
+
+		if(height < MIN_WINDOW_HEIGHT || width < MIN_WINDOW_WIDTH) {
+			// display warning popup indicating that the map is not 
+			// displayed in its entirety
+			if(height < MIN_WINDOW_HEIGHT && width < MIN_WINDOW_WIDTH) {
+				document.getElementById("window_size_warning_popup").innerHTML = "Please expand your window to view this map in its entirety.";
+			} else if (height < MIN_WINDOW_HEIGHT) {
+				document.getElementById("window_size_warning_popup").innerHTML = "Please expand your window vertically to view this map in its entirety.";
+			} else if (width < MIN_WINDOW_WIDTH) {
+				document.getElementById("window_size_warning_popup").innerHTML = "Please expand your window horizontally to view this map in its entirety.";
+			}
+			document.getElementById("window_size_warning_popup").style.display = "block";
+		} else {
+			// if map is displayed in its entirety, hide warning popup
+			document.getElementById("window_size_warning_popup").style.display = "none";
+		}
 	}
 
 	/**

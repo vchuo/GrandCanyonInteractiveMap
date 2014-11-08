@@ -91,25 +91,15 @@ VernonChuo.GrandCanyonInteractiveMapDimensions = function() {
 			MIN_WINDOW_HEIGHT = 574,
 			MIN_WINDOW_WIDTH = 750;
 
-		if(height < MIN_WINDOW_HEIGHT || width < MIN_WINDOW_WIDTH) {
-			// restrict map from resizing to a size smaller than its
-			// minimum-allowed size, and display warning popup indicating
-			// that the map is not displayed in its entirety
-			if(height < MIN_WINDOW_HEIGHT && width < MIN_WINDOW_WIDTH) {
-				document.getElementById("window_size_warning_popup").innerHTML = "Please expand your window to view this map in its entirety.";
-				height = MIN_WINDOW_HEIGHT;
-				width = MIN_WINDOW_WIDTH;
-			} else if (height < MIN_WINDOW_HEIGHT) {
-				document.getElementById("window_size_warning_popup").innerHTML = "Please expand your window vertically to view this map in its entirety.";
-				height = MIN_WINDOW_HEIGHT;
-			} else if (width < MIN_WINDOW_WIDTH) {
-				document.getElementById("window_size_warning_popup").innerHTML = "Please expand your window horizontally to view this map in its entirety.";
-				width = MIN_WINDOW_WIDTH;
-			}
-			document.getElementById("window_size_warning_popup").style.display = "block";
-		} else {
-			// if map is displayed in its entirety, hide warning popup
-			document.getElementById("window_size_warning_popup").style.display = "none";
+		// restrict map from resizing to a size smaller than its
+		// minimum-allowed size
+		if(height < MIN_WINDOW_HEIGHT && width < MIN_WINDOW_WIDTH) {
+			height = MIN_WINDOW_HEIGHT;
+			width = MIN_WINDOW_WIDTH;
+		} else if (height < MIN_WINDOW_HEIGHT) {
+			height = MIN_WINDOW_HEIGHT;
+		} else if (width < MIN_WINDOW_WIDTH) {
+			width = MIN_WINDOW_WIDTH;
 		}
 		
 		// calculates new dimensions of divs to fit window size while
