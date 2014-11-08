@@ -384,7 +384,7 @@ body:after {
 	background-color: rgba(255,255,255,0.7);
 	border-radius: 10px;
 	padding-top: 12px; padding-bottom: 5px;
-	margin: 0px;
+	margin: 0;
 	font-size: 11px;
 }
 .StationPointMode_StationPointLabelTitle {
@@ -407,7 +407,7 @@ body:after {
 #LocationMode_InfoBoxIntro {
 	width: 100%;
 	height: 35px;
-	margin-bottom: 10px; margin-top: 0px;
+	margin-bottom: 10px; margin-top: 0;
 	font-weight: bold;
 }
 #LocationMode_StationPointLabelsDiv {
@@ -423,7 +423,7 @@ body:after {
 #container {
 	position: relative;
 	width: 100%;
-	top: 0px; left: 0px;
+	top: 0; left: 0;
 	z-index: 2;
 }
 #panzoom_parent {
@@ -434,14 +434,14 @@ body:after {
 }
 #basemap {
 	position: absolute;
-	top: 0px; left: 0px;
+	top: 0; left: 0;
 	width: 100%;
 	z-index: 3;
 }
 #panzoom {
 	position: absolute;
 	margin: 0 auto;
-	top: 0px; left: 0px;
+	top: 0; left: 0;
 	z-index: 3;
 }
 
@@ -449,12 +449,12 @@ body:after {
 .ViewshedDivs {
 	width: 100%;
 	position: absolute;
-	top: 0px; left: 0px;
+	top: 0; left: 0;
 	opacity: 0;
 }
 .ViewshedPNG {
 	position: absolute;
-	top: 0px; left: 0px;
+	top: 0; left: 0;
 	width: 100%;
 	display: none;
 	z-index: 10;
@@ -464,7 +464,7 @@ body:after {
 #StationPointSVGLayer {
 	width: 100%;
 	position: absolute;
-	top: 0px; left: 0px;
+	top: 0; left: 0;
 	z-index: 501;
 }
 
@@ -472,21 +472,21 @@ body:after {
 #StationPointIconsDiv {
 	width: 100%;
 	position: absolute;
-	top: 0px; left: 0px;
+	top: 0; left: 0;
 	z-index: 150;
 }
 
 #LandmarksLayer {
 	position: absolute;
 	width: 100%;
-	top: 0px; left: -99999px;
+	top: 0; left: -99999px;
 	display: block;
 	z-index: 3;
 }
 #ViewshedAnglesLayer {
 	position: absolute;
 	width: 100%;
-	top: 0px; left: -99999px;
+	top: 0; left: -99999px;
 	display: block;
 	z-index: 3;
 }
@@ -499,7 +499,7 @@ body:after {
 }
 #loading_screen {
 	position: absolute;
-	left: 0px; right: 0px;
+	left: 0; right: 0;
 	width: 100%;
 	background-color: #F0F0F0;
 	margin: 0 auto;
@@ -523,7 +523,7 @@ body:after {
 footer {
 	position: absolute;
 	width: 180px;
-	right: 0px; bottom: 0px;
+	right: 0; bottom: 0;
 	background-color: rgba(255,255,255,0.9);
 	text-align: center;
 	padding: 6px;

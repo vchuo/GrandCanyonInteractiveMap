@@ -29,18 +29,12 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 		 * Initializes and loads map when document is ready.
 		 */
 		function execute() {
-			hideMapElementWhileLoading();
-
 			// only load map if device size meets minimum requirements
-			if(screen.width > MIN_SCREEN_WIDTH && screen.height > MIN_SCREEN_WIDTH) {
-				// resizes loading screen to fit window size
-				setLoadingScreenDimensions();
-				displayLoadingScreen();
-
+			if(isNotAMobileDevice()) {
 				GrandCanyonInteractiveMapSVGCode.appendHTMLForStationPointAndViewshedSVGs();
 				
 				// resizes all content divs to fit window size
-				setContentDimensions();
+				VernonChuo.GrandCanyonInteractiveMapDimensions.setContentDimensions();
 				
 				hideAllViewshedPNGs();
 				hideAllRolloverIcons();
@@ -51,14 +45,9 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 				ExploreByStationPointMode.activateMode();
 				displayMapElementAfterLoadingIsComplete();
 				EventHandlers.attachAllEventHandlers();
+			} else {
+				hideLoadingScreen();
 			}
-		}
-
-		/**
-		 * Helper function called when map is initially loaded.
-		 */
-		function hideMapElementWhileLoading() {
-			$("#map_content_wrapper").css({left: "-99999px"});
 		}
 		
 		/**
@@ -369,8 +358,9 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 		 * It resets the zoom level of the map back to the minimum zoom level (there
 		 * is a bug with the map not being contained inside its own viewport if the
 		 * map is resized to a zoom level that is not its minimum zoom level) and calls
-		 * the setContentDimensions() helper function which helps resize all the content
-		 * divs of the map element accordingly.
+		 * the VernonChuo.GrandCanyonInteractiveMapDimensions.setContentDimensions()
+		 * helper function which helps resize all the content divs of the map element
+		 * accordingly.
 		 */
 		function resizePageContents() {
 			displayLoadingScreen();
@@ -379,7 +369,7 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 			// resets panzoom element back to default settings because window resize may
 			// temporarily violate containment of the panzoom element
 			panzoom.panzoom("reset");
-			setContentDimensions();
+			VernonChuo.GrandCanyonInteractiveMapDimensions.setContentDimensions();
 			// window is resized so to maintain containment of the map within the
 			// map viewport, dimensions of the panzoom element must be recalculated
 			panzoom.panzoom("resetDimensions");
@@ -791,7 +781,7 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 				is_explore_by_station_point_mode_active = true;
 				ExploreByLocationMode.setExploreByLocationModeStatus(false);
 				setAllStationPointIconsOpacity(1);
-				setContentDimensions();
+				VernonChuo.GrandCanyonInteractiveMapDimensions.setContentDimensions();
 				// pulls up relevant png
 				$("#Mode_Button_One_On").css({display: "block"});
 				$("#Mode_Button_All_On").css({display: "none"});
@@ -2055,7 +2045,7 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 				ExploreByStationPointMode.setExploreByStationPointModeStatus(false);
 				setAllStationPointIconsOpacity(0.6);
 				
-				setContentDimensions();
+				VernonChuo.GrandCanyonInteractiveMapDimensions.setContentDimensions();
 				$("#Mode_Button_All_On").css({display: "block"});
 				$("#Mode_Button_One_On").css({display: "none"});
 				//place StationPointSVGLayer at a lower layer so that the viewshed layers
@@ -2782,116 +2772,6 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 	}
 
 	/**
-	 * Sets the dimensions of the loading screen and positions it so that it
-	 * is either centered vertically. Horizontal centering is achieved using css.
-	 */
-	function setLoadingScreenDimensions() {
-	 	var div_dimensions = getWindowAdjustedDivDimensions(),
-	 		div_width = div_dimensions[0],
-			div_height = div_dimensions[1];
-
-		$("#loading_screen").height(div_height);
-		$("#loading_screen").width(div_width);
-
-		var offset_to_center_loading_screen_vertically = ($(window).height() - div_height) / 2;
-		$("#loading_screen").css({top: offset_to_center_loading_screen_vertically, bottom: "auto"});
-	 }
-
-	/**
-	 * This function resizes a set of html objects to fit to the size of the browser
-	 * window.
-	 */
-	function setContentDimensions() {
-		var div_dimensions = getWindowAdjustedDivDimensions(),
-			div_width = div_dimensions[0],
-			div_height = div_dimensions[1];
-
-		
-		// set new dimensions of divs
-		$("#loading_screen").height(div_height);
-		$("#loading_screen").width(div_width);
-		$("#map_content_wrapper").height(div_height);
-		$("#map_content_wrapper").width(div_width);
-		$("#focal").height(div_height);
-		$("#focal").width(div_width);
-		$("#container").height(div_height);
-		$("#container").width(div_width);
-		$("#panzoom_parent").height(div_height);
-		$("#panzoom_parent").width(div_width);
-		$("#panzoom").height(div_height);
-		$("#panzoom").width(div_width);
-		$("#StationPointIconsSVGLayer").height(div_height);
-		$("#StationPointIconsSVGLayer").width(div_width);
-		$("#StationPointSVGLayerName").height(div_height);
-		$("#StationPointSVGLayerName").width(div_width);
-		$("#StationPointPopupDiv").height(div_height);
-		$("#StationPointPopupDiv").width(div_width);
-
-		var ViewshedSVGs = document.getElementsByClassName("ViewshedSVG"); // get all viewshed SVGs
-		for(var i = 0; i < ViewshedSVGs.length; i++) {
-			ViewshedSVGs[i].style.width = div_width+"px";
-			ViewshedSVGs[i].style.height = div_height+"px";
-		}
-
-		var ViewshedPNGs = document.getElementsByClassName("ViewshedPNG"); // get all viewshed PNGs
-		for(var i = 0; i < ViewshedPNGs.length; i++) {
-			ViewshedPNGs[i].style.width = div_width+"px";
-			ViewshedPNGs[i].style.height = div_height+"px";
-		}
-
-		var offset_to_center_map_viewport_vertically = ($(window).height() - div_height) / 2;
-		$("#loading_screen").css({top: offset_to_center_map_viewport_vertically, bottom: "auto"});
-		$("#map_content_wrapper").css({top: offset_to_center_map_viewport_vertically, bottom: "auto"});
-	}
-
-	/**
-	 * Returns the width and height that all divs need to have to be
-	 * centered in the window.
-	 */
-	 function getWindowAdjustedDivDimensions() {
-	 	var height = $(window).height(),
-			width = $(window).width(),
-			div_height,
-			div_width,
-			MIN_WINDOW_HEIGHT = 574,
-			MIN_WINDOW_WIDTH = 750;
-
-		if(height < MIN_WINDOW_HEIGHT || width < MIN_WINDOW_WIDTH) {
-			// restrict map from resizing to a size smaller than its
-			// minimum-allowed size, and display warning popup indicating
-			// that the map is not displayed in its entirety
-			if(height < MIN_WINDOW_HEIGHT && width < MIN_WINDOW_WIDTH) {
-				$("#window_size_warning_popup").html("Please expand your window to view this map in its entirety.");
-				height = MIN_WINDOW_HEIGHT;
-				width = MIN_WINDOW_WIDTH;
-			} else if (height < MIN_WINDOW_HEIGHT) {
-				$("#window_size_warning_popup").html("Please expand your window vertically to view this map in its entirety.");
-				height = MIN_WINDOW_HEIGHT;
-			} else if (width < MIN_WINDOW_WIDTH) {
-				$("#window_size_warning_popup").html("Please expand your window horizontally to view this map in its entirety.");
-				width = MIN_WINDOW_WIDTH;
-			}
-			$("#window_size_warning_popup").css({display: "block"});
-		} else {
-			// if map is displayed in its entirety, hide warning popup
-			$("#window_size_warning_popup").css({display: "none"});
-		}
-		
-		// calculates new dimensions of divs to fit window size while
-		// maintaining aspect ratio; aspect ratio is determined
-		// by original basemap image size
-		if(width/height > MAP_WIDTH/MAP_HEIGHT) {
-			div_height = height;
-			div_width = div_height*MAP_WIDTH/MAP_HEIGHT;
-		} else {
-			div_width = width;
-			div_height = div_width*MAP_HEIGHT/MAP_WIDTH;
-		}
-
-		return [div_width,div_height];
-	 }
-
-	/**
 	 * Called when changing the active mode (Station Point Mode or
 	 * Location Mode), when displaying/hiding a toggled layer
 	 * (Landmarks Layer or Viewshed Angles Layer) or when
@@ -2901,6 +2781,14 @@ VernonChuo.GrandCanyonInteractiveMap = function()
 	 */
 	function setAllStationPointIconsOpacity(opacity) {
 		$(".StationPointIcon").css({opacity: opacity, zIndex: "3"});
+	}
+
+	/**
+	 * Returns true if the screen size of the user's device is larger
+	 * than a set threshold; false otherwise.
+	 */
+	function isNotAMobileDevice() {
+		return (screen.width > MIN_SCREEN_WIDTH && screen.height > MIN_SCREEN_HEIGHT);
 	}
 	
 	var public_objects =

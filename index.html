@@ -8,6 +8,12 @@
 	</head>
 
 	<body>
+		<div id="loading_screen">
+			<img id="loading_gif" src="images/Loading-Icon.gif" alt=""/>
+		</div>
+		
+		<div id="screen_size_warning_popup">Unfortunately, this interactive map is not configured<br> to run on smaller-sized screens.</div>
+		
 		<div id="map_content_wrapper">
   
 		    <div id="focal" oncontextmenu="return false">
@@ -17,6 +23,12 @@
 					<div id="panzoom_parent">
 
 						<div id="window_size_warning_popup"></div>
+
+						<!-- Display Loading Screen -->
+						<script src="libs/grand-canyon-interactive-map-dimensions.js"></script>
+						<script type="text/javascript">
+							VernonChuo.GrandCanyonInteractiveMapDimensions.displayLoadingScreenForInitialPageLoad();
+						</script>
 
 						<div id="introduction_popup_container">
 							<div id="introduction_popup">
@@ -570,12 +582,6 @@
 			</div>
 		</div>
 
-		<div id="loading_screen">
-			<img id="loading_gif" src="images/Loading-Icon.gif" alt=""/>
-		</div>
-		
-		<div id="screen_size_warning_popup">Unfortunately, this interactive map is not configured<br> to run on smaller-sized screens.</div>
-
 		<footer>
 			Made by <a href="http://www.vernonchuo.com" target="_blank">Vernon Chuo</a>
 			| <a href="http://www.github.com/vchuo/GrandCanyonInteractiveMap" target="_blank">Github</a>
@@ -585,7 +591,7 @@
 		<script src="libs/jquery.panzoom.js"></script>
 		<script src="libs/jquery.mousewheel.js"></script>
 		<script src="libs/load-deferred-svg-code.js"></script>
-		<script src="libs/grand-canyon-interactive-map.js"></script>	
+		<script src="libs/grand-canyon-interactive-map.js"></script>
 	</body>
   
 </html>
