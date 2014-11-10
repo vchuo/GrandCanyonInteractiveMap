@@ -11,8 +11,8 @@ VernonChuo.GrandCanyonInteractiveMapDimensions = function() {
 	// under which the application is not displayed and a relevant
 	// message is displayed to prompt the user to use a device with
 	// a larger screen to view this application
-		MIN_SCREEN_WIDTH = 1000,
-		MIN_SCREEN_HEIGHT = 600;
+		MIN_SCREEN_WIDTH = 1024,
+		MIN_SCREEN_HEIGHT = 768;
 
 	/**
 	 * Sets loading screen dimensions and displays it.
